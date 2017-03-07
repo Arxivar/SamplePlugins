@@ -1,0 +1,27 @@
+<div>
+    <div class="ibox-content ibox-heading" style="padding-bottom: 20px;">
+        <h3>Oggi {{todayString}}</h3>
+        <small><i class="fa fa-watch"></i> Sono le ore <span class="label label-warning-light">{{nowHoursString}}</span>. Hai <span class="label label-warning-light">{{events.length}} appuntamenti</span> schedulati oggi.</small>
+    </div>
+    <div class="ibox-content inspinia-timeline" style="display: block;">
+
+        <div class="timeline-item" ng-repeat="item in events">
+            <div class="row">
+                <div class="col-xs-3 date">
+                    <i class="fa fa-file-text"></i>
+                    {{item.hoursString}}
+                    <br>
+                    <small class="text-navy">{{item.hoursAgo}}</small>
+                </div>
+                <div class="col-xs-7 content no-top-border">
+                    <p class="m-b-xs"><strong>{{item.title}}</strong></p>
+
+                    <p>
+                        {{item.notes}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="Scripts/plugins/CalendarWidget/CalendarWidget.css">

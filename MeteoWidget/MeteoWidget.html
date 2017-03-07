@@ -1,0 +1,60 @@
+<div class="arx-meteowidget">
+    <div>
+        <form>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Digita qua la tua città." ng-model="selectedCity" />
+                <span class="input-group-btn">
+                    <input type="submit" class="btn btn-primary" ng-click="showMeteo()" value="Mostra meteo" >
+                    </input>
+
+                <span uib-dropdown>
+                    <button type="button" class="btn btn-primary" uib-dropdown-toggle >
+                        <i class="fa fa-paint-brush"></i> <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li ng-repeat="color in colors" ng-click="selectColor(color)">
+                        <a>
+                            <span ng-style="{'background-color': color.value}" style="padding: 7px; margin-right: 1em;">&nbsp;</span> {{color.name}}
+                        </a>
+                    </li>
+                </ul>
+                </span>
+                <span>
+            </div>
+        </form>
+    </div>
+    <div class="weather-wrapper hide">
+        <img src="" class="weather-icon" alt="Weather Icon" />
+        <p>
+        	<strong>Luogo</strong>
+        	<br />
+        	<span class="weather-place"></span>
+        </p>
+        <p>
+        	<strong>Temperatura</strong>
+            <br />
+            <span class="weather-temperature"></span> (<span class="weather-min-temperature"></span> - <span class="weather-max-temperature"></span>)
+        </p>
+        <p>
+        	<strong>Descrizione</strong>
+            <br />
+            <span class="weather-description" class="capitalize"></span>
+        </p>
+        <p>
+        	<strong>Umidità</strong>
+            <br />
+            <span class="weather-humidity"></span>
+        </p>
+        <!-- <p><strong>Velocità del vento</strong>
+        <br /><span class="weather-wind-speed"></span></p>
+
+        <p><strong>Il sole sorge alle:</strong>
+        <br /><span class="weather-sunrise"></span></p>
+
+        <p><strong>Il sole cala alle:</strong>
+        <br /><span class="weather-sunset"></span></p>
+    -->
+    </div>
+</div>
+<link rel="stylesheet" href="./Scripts/plugins/MeteoWidget/MeteoWidget.css">
+<script type="text/javascript" src="./Scripts/plugins/MeteoWidget/openWeather.min.js"></script>
