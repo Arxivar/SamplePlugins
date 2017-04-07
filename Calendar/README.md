@@ -19,7 +19,7 @@ Once you add the plugin to your installation you need to configure it appropriat
 
 ## ARXivar configuration
 
-The Calendar plugin requires the creation of a specific DocumentType class on the first level of DocumentTypes' ARXivar tree.
+The Calendar plugin requires the creation of a specific DocumentType class on the first level of DocumentTypes' ARXivar tree. You will need to set the DocumentType's identifier in the plugin's configuration.
 
 _(The class name is not important)_
 
