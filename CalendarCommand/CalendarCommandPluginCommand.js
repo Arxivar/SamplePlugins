@@ -60,7 +60,7 @@ angular.module('arxivar.plugins').factory('CalendarCommand', ['$q', '$uibModal',
                         '<div class="row" style="margin-top: 5px;"><div class="col-md-2"><strong>Note: </strong><span>{{event.notes}}</span></div><div class="col-md-12"><arx-textarea model="notes" id=camponote name=note obbligatorio=false errors="errori" showError=false time=true num-max-char=1000 num-max-row=3 show=true change=null /></div></div>' +
                         '</div>' +
                         '<div class="modal-footer"><button class="btn btn-primary" type="button" ng-click="confirm()"><span translate="Ok" /></button></div></div>',
-                    controller: ['$scope', '$uibModalInstance', 'downloadFileService', 'moment', 'arxivarHttp', function ($scope, $uibModalInstance, downloadFileService, moment, arxivarHttp) {
+                    controller: ['$scope', '$uibModalInstance', 'mediatorService', 'moment', 'arxivarHttp', function ($scope, $uibModalInstance, mediatorService, moment, arxivarHttp) {
 
                         //$scope.event = calEvent;
                         //$scope.event.startFormat = moment($scope.event.start).format('DD/MM/YYYY HH:mm:ss');
@@ -118,7 +118,16 @@ angular.module('arxivar.plugins').factory('CalendarCommand', ['$q', '$uibModal',
                                         notes: data.notes
                                     }
 
-                                    arxivarHttp.update('profiles/' + docnumbers[0], profile).then(function() {
+                                    arxivarHttp.update('profiles/' + docnumbers[0], profile)
+                                    .then(function() {
+                                        mediatorService.publish('updateGridItems', 'CalendarCommand', {
+                                            mode: 'entireRow',
+                                            storedData: {
+                                                data: [{
+                                                    DOCNUMBER: profile.id
+                                                }]
+                                            }
+                                        });
                                         $uibModalInstance.close();
                                     });
                                 });
