@@ -1,5 +1,5 @@
-angular.module('arxivar.plugins.directives').directive('calendarwidgetdirective', ['$http', '$log', 'CalendarWidget', 'pluginService', '_', 'notify', 'arxivarConfig', 'resourceService', 'userIdentityService', 'arxivarHttp', '$q', '$uibModal', '$interval',
-function($http, $log, CalendarWidget, pluginService, _, notify, arxivarConfig, resourceService, userIdentityService, arxivarHttp, $q, $uibModal, $interval) {
+angular.module('arxivar.plugins.directives').directive('calendarwidgetdirective', ['$http', '$log', 'CalendarWidget', 'pluginService', '_', 'notify', 'arxivarConfig', 'resourceService', 'userIdentityService', 'arxivarHttp', '$q', '$uibModal', '$interval', 'downloadFileService',
+    function($http, $log, CalendarWidget, pluginService, _, notify, arxivarConfig, resourceService, userIdentityService, arxivarHttp, $q, $uibModal, $interval, downloadFileService) {
         return {
             restrict: 'E',
             scope: {
@@ -7,7 +7,7 @@ function($http, $log, CalendarWidget, pluginService, _, notify, arxivarConfig, r
                 desktopId: '=?'
             },
             templateUrl: './Scripts/plugins/CalendarWidget/CalendarWidget.html',
-            link: function(scope, element) {
+            link: function(scope) {
 
                 var classe = CalendarWidget.plugin.customSettings[6].value;
                 var nomeCampoUtente = CalendarWidget.plugin.customSettings[0].value;;
@@ -79,11 +79,11 @@ function($http, $log, CalendarWidget, pluginService, _, notify, arxivarConfig, r
                                     model.searchModel.fields.push(additional);
                                 });
                                 arxivarHttp.getPost('searches', {
-                                    searchFilterDto: model.searchModel,
-                                    selectFilterDto: model.selectModel,
-                                    maxItems: 0,
-                                    daAAndOr: 0
-                                })
+                                        searchFilterDto: model.searchModel,
+                                        selectFilterDto: model.selectModel,
+                                        maxItems: 0,
+                                        daAAndOr: 0
+                                    })
                                     .success(function(data) {
                                         deferred.resolve(data);
                                     });
@@ -96,48 +96,52 @@ function($http, $log, CalendarWidget, pluginService, _, notify, arxivarConfig, r
                 var init = function() {
                     resourceService.query('users').then(function(users) {
                         scope.users = users;
-						var end = moment().hours(23).minutes(59).format();
-                        executeSearch(_.map(scope.users, function(ut) { return ut.user; }), moment().hours(0).minutes(0).format(), end).then(function(data) {
+                        var end = moment().hours(23).minutes(59).format();
+                        executeSearch(_.map(scope.users, function(ut) {
+                            return ut.user; }), moment().hours(0).minutes(0).format(), end).then(function(data) {
 
-                                var result = [];
+                            var result = [];
 
-                                _.forEach(data, function(row) {
-                                    var colonnaUtente = _.find(row.columns, { 'id': nomeCampoUtente });
+                            _.forEach(data, function(row) {
+                                var colonnaUtente = _.find(row.columns, { 'id': nomeCampoUtente });
 
-                                    var start = new moment(_.find(row.columns, { 'id': nomeCampoDa }).value);
+                                var start = new moment(_.find(row.columns, { 'id': nomeCampoDa }).value);
 
-                                    var valueOraInizio = _.find(row.columns, { 'id': nomeCampoDaOra }).value;
-									valueOraInizio = String('0000' + valueOraInizio).slice(-4);
-                                    start.hour(parseInt(valueOraInizio.substring(0, 2)));
-                                    start.minute(parseInt(valueOraInizio.substring(2)));
+                                var valueOraInizio = _.find(row.columns, { 'id': nomeCampoDaOra }).value;
+                                valueOraInizio = String('0000' + valueOraInizio).slice(-4);
+                                start.hour(parseInt(valueOraInizio.substring(0, 2)));
+                                start.minute(parseInt(valueOraInizio.substring(2)));
 
-                                    var end = new moment(_.find(row.columns, { 'id': nomeCampoA }).value);
+                                var end = new moment(_.find(row.columns, { 'id': nomeCampoA }).value);
 
-                                    var valueOraFine = _.find(row.columns, { 'id': nomeCampoAOra }).value;
-									valueOraFine = String('0000' + valueOraFine).slice(-4);
-                                    end.hour(parseInt(valueOraFine.substring(0, 2)));
-                                    end.minute(parseInt(valueOraFine.substring(2)));
+                                var valueOraFine = _.find(row.columns, { 'id': nomeCampoAOra }).value;
+                                valueOraFine = String('0000' + valueOraFine).slice(-4);
+                                end.hour(parseInt(valueOraFine.substring(0, 2)));
+                                end.minute(parseInt(valueOraFine.substring(2)));
 
-                                    result.push({
-                                        title: _.find(row.columns, { 'id': nomeCampoOggetto }).value,
-                                        start: start.format(),
-                                        end: end.format(),
-                                        notes: _.find(row.columns, { 'id': nomeCampoNote }).value,
-                                        docNumber: _.find(row.columns, { 'id': nomeCampoNumber }).value,
-                                        hoursString: start.format('H:mm'),
-                                        hoursAgo: moment().diff(start, 'hours') === 0 ? '' : moment().diff(start, 'hours') + ' ore fa'
+                                result.push({
+                                    title: _.find(row.columns, { 'id': nomeCampoOggetto }).value,
+                                    start: start.format(),
+                                    end: end.format(),
+                                    notes: _.find(row.columns, { 'id': nomeCampoNote }).value,
+                                    docNumber: _.find(row.columns, { 'id': nomeCampoNumber }).value,
+                                    hoursString: start.format('H:mm'),
+                                    hoursAgo: moment().diff(start, 'hours') === 0 ? '' : moment().diff(start, 'hours') + ' ore fa'
 
                                 });
 
-                                });
+                            });
 
-                                scope.events = result;
-                            }
-                        );
+                            scope.events = result;
+                        });
                     });
                 };
 
-                //'#'+Math.floor(Math.random()*16777215).toString(16);
+                scope.downloadDocument = function(calendarEvent) {
+                    if (_.has(calendarEvent, 'docNumber') && !_.isNil(calendarEvent.docNumber)) {
+                        downloadFileService.downloadFile(calendarEvent.docNumber);
+                    }
+                };
 
 
                 init();
