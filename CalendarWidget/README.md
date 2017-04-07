@@ -22,7 +22,7 @@ Once you've added the plugin to your installation, you will need to configure it
 > :exclamation: **This configuration part is common with Calendar and CalendarCommand plugin. Therefore, if you have already configured one of these plugins skip this section**
 
 
-The Calendar widget plugin requires the creation of a specific DocumentType class on the first level of DocumentTypes ARXivar tree.
+The Calendar widget plugin requires the creation of a specific DocumentType class on the first level of DocumentTypes ARXivar tree. You will need to set the DocumentType's identifier in the plugin's configuration.
 
 _(The class name is not important)_
 
