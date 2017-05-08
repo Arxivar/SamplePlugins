@@ -53,7 +53,7 @@ function($http,$interval,$log, $state, RssFeedReader, pluginService,_,feedServic
 
       var init = function() {
         scope.feedTitle = RssFeedReader.plugin.customSettings[1].value;
-        if (scope.desktopId && scope.instanceId) {
+        if (!_.isNil(scope.desktopId) && !_.isNil(scope.instanceId)) {
           clientSettingsService.getWidgetSettings(RssFeedReader.plugin.id, scope.instanceId, scope.desktopId).then(function(settings) {
             if (settings && settings.settings) {
               scope.feedUrl = _.find(settings.settings, {'name': 'feedUrl'}).value;
