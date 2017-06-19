@@ -1,6 +1,6 @@
 .arx-testtask {}
 
-.invoice-box {
+.invoice {
     max-width: 800px;
     margin: auto;
     padding: 30px;
@@ -10,60 +10,74 @@
     line-height: 24px;
     font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
     color: #555;
+	display: flex;
+	flex-direction: column;
+}
+.information,
+.title{
+	display: flex;
+	justify-content: space-between;
+	margin:10px;
+}
+.table,
+.map{
+	display: flex;
+	justify-content: center;
+	margin:10px;
 }
 #map{
 	width: 500px;
 	height: 300px;
 }
-.invoice-box table {
+.invoice table {
     width: 100%;
     line-height: inherit;
     text-align: left;
 }
 
-.invoice-box table td {
+.invoice table td {
     padding: 5px;
     vertical-align: top;
 }
 
-.invoice-box table tr td:nth-child(2) {
+.invoice table tr td:nth-child(2) {
     text-align: right;
 }
 
-.invoice-box table tr.top table td {
+.invoice table tr.top table td {
     padding-bottom: 20px;
 }
 
-.invoice-box table tr.top table td.title {
+.invoice table tr.top table td.title {
     font-size: 45px;
     line-height: 45px;
     color: #333;
 	background-color: white;
 }
 
-.invoice-box table tr.information table td {
+.invoice table tr.information table td {
     padding-bottom: 40px;
 }
 
-.invoice-box table tr.heading td {
+.invoice table tr.heading td {
     background: #eee;
     border-bottom: 1px solid #ddd;
     font-weight: bold;
 }
 
-.invoice-box table tr.details td {
+.invoice table tr.details td {
     padding-bottom: 20px;
 }
 
-.invoice-box table tr.item td {
+.invoice table tr.item td {
     border-bottom: 1px solid #eee;
 }
 
-.invoice-box table tr.item.last td {
+.invoice table tr.item.last td {
     border-bottom: none;
 }
 
-.invoice-box table tr.total td:nth-child(2) {
+.invoice table tr.total td:nth-child(2) {
     border-top: 2px solid #eee;
     font-weight: bold;
 }

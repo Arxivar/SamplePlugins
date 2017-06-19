@@ -6,86 +6,65 @@
 	</head>
 
 	<body>
-		<div class="invoice-box">
-			<table cellpadding="0" cellspacing="0">
-				<tr class="top">
-					<td colspan="2">
-						<table>
-							<tr>
-								<td class="title">
-									<img src="https://www.arxivar.it/download/resources/loghi/Logo-ARXivar_orizzontale-nero.png" style="width:100%; max-width:300px;">
-								</td>
+		<div class="invoice">
+			<div class="title">
+				<div>
+					<img src="https://www.arxivar.it/download/resources/loghi/Logo-ARXivar_orizzontale-nero.png" style="width:100%; max-width:300px;">
+				</div>
+				<div>
+					Fattura #: {{numerofattura}}<br> Data: {{datafattura}}<br> Scadenza: {{datascadenza}}
+				</div>
+			</div>
+			<div class="information">
+				<div>
+					{{ragionesociale}}
+				</div>
+				<div>
+					{{indirizzo}}
+				</div>
+			</div>
+			<div class="map">
+				<div id="map"></div>
+			</div>
+			<div class="table">
+				<table>
+					<tr class="heading">
+						<td>
+							Item
+						</td>
 
-								<td>
-									Fattura #: {{numerofattura}}<br> Data: {{datafattura}}<br> Scadenza: {{datascadenza}}
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-
-				<tr class="information">
-					<td colspan="2">
-						<table>
-							<tr>
-								<td>
-									{{ragionesociale}}
-								</td>
-								<td>
-									{{indirizzo}}
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<table>
-							<tr>
-								<td colspan="2">
-									<div id="map"></div>
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-
-				<tr class="heading">
-					<td>
-						Item
-					</td>
-
-					<td>
-						Price
-						<select ng-model="currency" ng-init="currency='EUR'">
+						<td>
+							Price
+							<select ng-model="currency" ng-init="currency='EUR'">
 							<option value="EUR" >€</option>
 							<option value="USD">$</option>
 							<option value="JPY">¥</option>
 							<option value="GBP">£</option>
 							<option value="RUB">₽</option>
 						</select>
-					</td>
-				</tr>
+						</td>
+					</tr>
 
-				<tr class="item">
-					<td>
-						Customer service
-					</td>
+					<tr class="item">
+						<td>
+							Customer service
+						</td>
 
-					<td>
-						{{importoView}}  {{currencyToSymbol[currency]}}
-					</td>
-				</tr>
+						<td>
+							{{importoView}} {{currencyToSymbol[currency]}}
+						</td>
+					</tr>
 
 
-				<tr class="total">
-					<td></td>
+					<tr class="total">
+						<td></td>
 
-					<td>
-						Totale: {{importoView}} {{currencyToSymbol[currency]}}
-					</td>
-				</tr>
-			</table>
+						<td>
+							Totale: {{importoView}} {{currencyToSymbol[currency]}}
+						</td>
+					</tr>
+				</table>
+			</div>
 		</div>
 	</body>
 

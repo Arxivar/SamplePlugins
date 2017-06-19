@@ -10,6 +10,7 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 			},
 			templateUrl: './Scripts/plugins/TaskInvoiceWidget/TaskInvoiceWidget.html',
 			link: function(scope, element, attrs, ctrls) {
+				//get custom fields from cinfiguration
 				var _getCustomField = function() {
 					return {
 						ragionesociale: _.find(TaskInvoiceWidget.plugin.customSettings, { name: 'Ragione_sociale_field' }).value,
@@ -27,8 +28,10 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 					dateTimeVariables,
 					doubleVariables,
 					tableVariables, }) => {
-					var fields = _getCustomField();
+
 					scope.variables = _.concat(booleanVariables, stringVariables, comboVariables, dateTimeVariables, doubleVariables, tableVariables);
+					//set scope variables
+					var fields = _getCustomField();
 					scope.ragionesociale = _.find(scope.variables, { name: fields.ragionesociale }).displayValue;
 					scope.indirizzo = _.find(scope.variables, { name: fields.indirizzo }).displayValue;
 					scope.numerofattura = _.find(scope.variables, { name: fields.numerofattura }).displayValue;
@@ -37,9 +40,7 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 					scope.datafattura = moment(_.find(scope.variables, { name: fields.datafattura }).value).format('L');
 					scope.datascadenza = moment(_.find(scope.variables, { name: fields.datascadenza }).value).format('L');
 
-
-					var xmlhttp = new XMLHttpRequest();
-
+					//converting addresses string into geographic coordinates
 					var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + scope.indirizzo;
 					$.get(url, function(response) {
 						function initMap(lat, lng) {
@@ -60,7 +61,8 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 						}
 					});
 				};
-				$.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyC341o4aabs3DDquZfq6BCUihpmD6pgPKo', function() {
+				//initalize the widget
+				var init = function() {
 					var $mainContainer = $(element).find('div.arx-' + TaskInvoiceWidget.plugin.name.toLowerCase());
 					if ($mainContainer.length > 0) {
 						$mainContainer.addClass(scope.instanceId);
@@ -79,16 +81,14 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 						scope.variables = [];
 						scope.variablesModel = {};
 					}
-				});
-				var convert = function(data) {
-					$timeout(function() {
-						if (scope.importo !== undefined) {
-							const newRate = scope.currency === 'EUR' ? 1 : data.rates[scope.currency];
-							scope.importoView = (newRate * scope.importo).toFixed(2);
-
-						}
-					});
 				};
+				// download google maps lib
+				$.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyC341o4aabs3DDquZfq6BCUihpmD6pgPKo', function() {
+					//run the init after download
+					init();
+				});
+
+				//currency to symbol map
 				scope.currencyToSymbol = {
 					EUR: '€',
 					USD: '$',
@@ -96,8 +96,25 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 					GBP: '£',
 					RUB: '₽',
 				};
-				scope.$watch('currency', function() {
-					$.getJSON('http://api.fixer.io/latest?base=EUR', convert);
+				//get conversion rates from EUR
+				var _rate;
+				$.getJSON('http://api.fixer.io/latest?base=EUR', function(data) {
+					_rate = data.rates;
+				});
+				var convert = function() {
+					$timeout(function() {
+						if (scope.importo !== undefined && _rate !== undefined) {
+							const newRate = scope.currency === 'EUR' ? 1 : _rate[scope.currency];
+							scope.importoView = (newRate * scope.importo).toFixed(2);
+						}
+					});
+				};
+
+				//on change currency run convert
+				scope.$watch('currency', function(newVal, oldVal) {
+					if (newVal !== oldVal) {
+						convert();
+					}
 				});
 
 			}
