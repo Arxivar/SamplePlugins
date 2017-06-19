@@ -57,6 +57,13 @@
 
 					<td>
 						Price
+						<select ng-model="currency" ng-init="currency='EUR'">
+							<option value="EUR" >€</option>
+							<option value="USD">$</option>
+							<option value="JPY">¥</option>
+							<option value="GBP">£</option>
+							<option value="RUB">₽</option>
+						</select>
 					</td>
 				</tr>
 
@@ -66,7 +73,7 @@
 					</td>
 
 					<td>
-						{{importo}}
+						{{importoView}}  {{currencyToSymbol[currency]}}
 					</td>
 				</tr>
 
@@ -75,7 +82,7 @@
 					<td></td>
 
 					<td>
-						Totale: {{importo}}
+						Totale: {{importoView}} {{currencyToSymbol[currency]}}
 					</td>
 				</tr>
 			</table>

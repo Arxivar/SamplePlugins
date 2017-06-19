@@ -1,7 +1,7 @@
 
 angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirective', [
-	'TaskInvoiceWidget', 'pluginService', 'taskVariablesService', 'taskOperationsService', '_', 'moment',
-	function(TaskInvoiceWidget, pluginService, taskVariablesService, taskOperationsService, _, moment) {
+	'TaskInvoiceWidget', 'pluginService', 'taskVariablesService', 'taskOperationsService', '_', 'moment', '$timeout',
+	function(TaskInvoiceWidget, pluginService, taskVariablesService, taskOperationsService, _, moment, $timeout) {
 
 		return {
 			restrict: 'E',
@@ -23,6 +23,7 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 					scope.indirizzo = _.find(scope.variables, { name: 'Indirizzo' }).displayValue;
 					scope.numerofattura = _.find(scope.variables, { name: 'Numero fattura' }).displayValue;
 					scope.importo = _.find(scope.variables, { name: 'Importo' }).value;
+					scope.importoView = scope.importo;
 					scope.datafattura = moment(_.find(scope.variables, { name: 'Data fattura' }).value).format('L');
 					scope.datascadenza = moment(_.find(scope.variables, { name: 'Data scadenza' }).value).format('L');
 
@@ -72,7 +73,27 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 						scope.variablesModel = {};
 					}
 				});
+				var convert = function(data) {
+					$timeout(() => {
+						const newRate = scope.currency === 'EUR' ? 1 : data.rates[scope.currency];
+						scope.importoView = (newRate * scope.importo).toFixed(2);
+					});
+				};
+				scope.currencyToSymbol = {
+					EUR: '€',
+					USD: '$',
+					JPY: '¥',
+					GBP: '£',
+					RUB: '₽',
+				};
+				scope.$watch('currency', (newVal, oldVal) => {
+
+					$.getJSON('http://api.fixer.io/latest?base=EUR', convert);
+
+
+				});
 
 			}
 		};
 	}]);
+
