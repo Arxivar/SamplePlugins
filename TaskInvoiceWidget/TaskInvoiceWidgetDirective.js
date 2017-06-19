@@ -10,22 +10,32 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 			},
 			templateUrl: './Scripts/plugins/TaskInvoiceWidget/TaskInvoiceWidget.html',
 			link: function(scope, element, attrs, ctrls) {
-
-				const _settVariables = ({
+				var _getCustomField = function() {
+					return {
+						ragionesociale: _.find(TaskInvoiceWidget.plugin.customSettings, { name: 'Ragione_sociale_field' }).value,
+						indirizzo: _.find(TaskInvoiceWidget.plugin.customSettings, { name: 'Indirizzo_field' }).value,
+						numerofattura: _.find(TaskInvoiceWidget.plugin.customSettings, { name: 'Numero_fattura_field' }).value,
+						importo: _.find(TaskInvoiceWidget.plugin.customSettings, { name: 'Importo_field' }).value,
+						datafattura: _.find(TaskInvoiceWidget.plugin.customSettings, { name: 'Data_fattura_field' }).value,
+						datascadenza: _.find(TaskInvoiceWidget.plugin.customSettings, { name: 'Data_scadenza_field' }).value,
+					};
+				};
+				var _settVariables = ({
 					booleanVariables,
 					stringVariables,
 					comboVariables,
 					dateTimeVariables,
 					doubleVariables,
 					tableVariables, }) => {
+					var fields = _getCustomField();
 					scope.variables = _.concat(booleanVariables, stringVariables, comboVariables, dateTimeVariables, doubleVariables, tableVariables);
-					scope.ragionesociale = _.find(scope.variables, { name: 'Ragione sociale' }).displayValue;
-					scope.indirizzo = _.find(scope.variables, { name: 'Indirizzo' }).displayValue;
-					scope.numerofattura = _.find(scope.variables, { name: 'Numero fattura' }).displayValue;
-					scope.importo = _.find(scope.variables, { name: 'Importo' }).value;
+					scope.ragionesociale = _.find(scope.variables, { name: fields.ragionesociale }).displayValue;
+					scope.indirizzo = _.find(scope.variables, { name: fields.indirizzo }).displayValue;
+					scope.numerofattura = _.find(scope.variables, { name: fields.numerofattura }).displayValue;
+					scope.importo = _.find(scope.variables, { name: fields.importo }).value;
 					scope.importoView = scope.importo;
-					scope.datafattura = moment(_.find(scope.variables, { name: 'Data fattura' }).value).format('L');
-					scope.datascadenza = moment(_.find(scope.variables, { name: 'Data scadenza' }).value).format('L');
+					scope.datafattura = moment(_.find(scope.variables, { name: fields.datafattura }).value).format('L');
+					scope.datascadenza = moment(_.find(scope.variables, { name: fields.datascadenza }).value).format('L');
 
 
 					var xmlhttp = new XMLHttpRequest();

@@ -13,13 +13,18 @@ angular.module('arxivar.plugins').factory('TaskInvoiceWidget', ['PluginWidgetTas
 		// OPTIONAL settings. These objects require the following properties: name, description, defaultValue and type.
 		// Allowed types are: string, number, boolean or date (Date type is a string UTC ISO 8601 (https://it.wikipedia.org/wiki/ISO_8601) format
 		var customSettings = [
-			//{name: '', description: '', defaultValue:'', type: 'string'},
+			{ name: 'Ragione_sociale_field', description: 'Ragione_sociale', defaultValue: 'Ragione_sociale', type: 'string' },
+			{ name: 'Indirizzo_field', description: 'Indirizzo', defaultValue: 'Indirizzo', type: 'string' },
+			{ name: 'Numero_fattura_field', description: 'Numero_fattura', defaultValue: 'Numero_fattura', type: 'string' },
+			{ name: 'Importo_field', description: 'Importo', defaultValue: 'Importo', type: 'string' },
+			{ name: 'Data_fattura_field', description: 'Data_fattura', defaultValue: 'Data_fattura', type: 'string' },
+			{ name: 'Data_scadenza_field', description: 'Data_scadenza', defaultValue: 'Data_scadenza', type: 'string' },
 		];
 
 		// OPTIONAL settings for specific users. These objects require the following properties: name, description, defaultValue and type.
 		// Allowed types are: string, number, boolean or date (Date type is a string UTC ISO 8601 (https://it.wikipedia.org/wiki/ISO_8601) format
 		var userSettings = [
-			//{name: '', description: '', defaultValue:'', type: 'string'},
+
 		];
 
 		var myPlugin = new PluginWidgetTask(requiredSettings, customSettings, userSettings);
