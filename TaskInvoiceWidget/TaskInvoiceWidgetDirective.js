@@ -31,7 +31,7 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 					var xmlhttp = new XMLHttpRequest();
 
 					var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + scope.indirizzo;
-					xmlhttp.onreadystatechange = function() {
+					$.get(url, function(response) {
 						function initMap(lat, lng) {
 							if (lat !== undefined) {
 								var myLatLng = { lat: lat, lng: lng };
@@ -45,13 +45,10 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 								});
 							}
 						}
-						if (this.readyState === 4 && this.status === 200) {
-							var response = JSON.parse(this.responseText);
+						if (response.status === 'OK') {
 							initMap(response.results[0].geometry.location.lat, response.results[0].geometry.location.lng);
 						}
-					};
-					xmlhttp.open('GET', url, true);
-					xmlhttp.send();
+					});
 				};
 				$.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyC341o4aabs3DDquZfq6BCUihpmD6pgPKo', function() {
 					var $mainContainer = $(element).find('div.arx-' + TaskInvoiceWidget.plugin.name.toLowerCase());
@@ -61,7 +58,7 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 					if (!_.isNil(scope.taskDto.id)) {
 						if (_.isNil(this.operationVariables)) {
 							taskOperationsService.getTaskOperations(scope.taskDto.id)
-								.then((operations) => {
+								.then(function(operations) {
 									scope.operationVariables = operations.taskWorkVariablesOperation;
 									_settVariables(operations.taskWorkVariablesOperation.processVariablesFields);
 
@@ -74,9 +71,12 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 					}
 				});
 				var convert = function(data) {
-					$timeout(() => {
-						const newRate = scope.currency === 'EUR' ? 1 : data.rates[scope.currency];
-						scope.importoView = (newRate * scope.importo).toFixed(2);
+					$timeout(function() {
+						if (scope.importo !== undefined) {
+							const newRate = scope.currency === 'EUR' ? 1 : data.rates[scope.currency];
+							scope.importoView = (newRate * scope.importo).toFixed(2);
+
+						}
 					});
 				};
 				scope.currencyToSymbol = {
@@ -86,11 +86,8 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 					GBP: '£',
 					RUB: '₽',
 				};
-				scope.$watch('currency', (newVal, oldVal) => {
-
+				scope.$watch('currency', function() {
 					$.getJSON('http://api.fixer.io/latest?base=EUR', convert);
-
-
 				});
 
 			}
