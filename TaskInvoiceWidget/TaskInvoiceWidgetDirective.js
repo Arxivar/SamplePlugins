@@ -68,7 +68,7 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 						$mainContainer.addClass(scope.instanceId);
 					}
 					if (!_.isNil(scope.taskDto.id)) {
-						if (_.isNil(this.operationVariables)) {
+						if (_.isNil(scope.operationVariables)) {
 							taskOperationsService.getTaskOperations(scope.taskDto.id)
 								.then(function(operations) {
 									scope.operationVariables = operations.taskWorkVariablesOperation;
