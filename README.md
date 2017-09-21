@@ -18,6 +18,7 @@ This repository contains these plugins:
   - [Calendar widget plugin](CalendarWidget/README.md)
   - [Meteo widget plugin](MeteoWidget/README.md)
   - [RSS feed reader widget plugin](RssFeedReader/README.md)
+  - [Task invoice widget plugin (task plugin)](TaskInvoiceWidget/README.md)
 
 You can either download the .zip file or clone the repo.
 
