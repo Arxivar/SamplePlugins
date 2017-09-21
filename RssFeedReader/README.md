@@ -1,4 +1,5 @@
-[![N|Solid](https://www.arxivar.it/images/stories/arxivar/logo_b.png)](http://www.arxivar.it/)
+[![Arxivar](http://www.arxivar.it/download/resources/loghi/Logo-ARXivar_orizzontale-nero.png)](http://www.arxivar.it/)
+
 # Rss feed reader widget plugin
 
 > Rss feed reader widget implementation for ArxivarNext.

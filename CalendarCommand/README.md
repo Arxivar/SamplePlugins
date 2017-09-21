@@ -1,4 +1,5 @@
-[![N|Solid](https://www.arxivar.it/images/stories/arxivar/logo_b.png)](http://www.arxivar.it/)
+[![Arxivar](http://www.arxivar.it/download/resources/loghi/Logo-ARXivar_orizzontale-nero.png)](http://www.arxivar.it/)
+
 # Calendar command plugin
 
 > Sample calendar conversion command implementation for ArxivarNext (this command plugin allows you to convert an ARXivar profile to a calendar appointment)
