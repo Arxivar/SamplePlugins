@@ -33,14 +33,14 @@ angular.module('arxivar.plugins').factory('CalendarCommand', ['$q', '$uibModal',
     var myPlugin = new PluginCommand(requiredSettings, customSettings, userSettings);
 	
     // This function is a promise with asyncronous logic to determine if this plugin can run. Input parameters: array of docnumbers.
-    myPlugin.canRun = function(docnumbers) {
-        return $q.when(docnumbers.length === 1);
+    myPlugin.canRun = function(params) {
+        return params.hasOwnProperty('docnumbers') ? $q.when(params.docnumbers.length >= 1) : $q.resolve(false);
     };
 	
     // This function is a promise with asyncronous run logic. Input parameters: array of docnumbers.
-    myPlugin.run = function (docnumbers) {
+    myPlugin.run = function (params) {
         var thisPlugin = myPlugin;
-        myPlugin.canRun(docnumbers).then(function (canRun) {
+        myPlugin.canRun(params).then(function (canRun) {
             if (canRun) {
 
                 var classe = thisPlugin.customSettings[6].value;
@@ -72,7 +72,7 @@ angular.module('arxivar.plugins').factory('CalendarCommand', ['$q', '$uibModal',
 
                         $scope.confirm = function() {
                             //[Route("Additional/{tipoUno}/{tipoDue}/{tipoTre}/{aoo?}")]
-                            arxivarHttp.get('profiles/' + docnumbers[0] + '/schema/false').then(function(data) {
+                            arxivarHttp.get('profiles/' + params.docnumbers[0] + '/schema/false').then(function(data) {
 
                                 //Cambio la classe
                                 _.find(data.fields, { 'className': 'DocumentTypeFieldDTO' }).value = classe;
@@ -111,14 +111,14 @@ angular.module('arxivar.plugins').factory('CalendarCommand', ['$q', '$uibModal',
                                     //Devo fare la put
         
                                     var profile = {
-                                        id: docnumbers[0],
+                                        id: params.docnumbers[0],
                                         fields: data.fields,
                                         authorityData: data.authorityData,
                                         attachments: data.attachments,
                                         notes: data.notes
                                     }
 
-                                    arxivarHttp.update('profiles/' + docnumbers[0], profile)
+                                    arxivarHttp.update('profiles/' + params.docnumbers[0], profile)
                                     .then(function() {
                                         mediatorService.publish('updateGridItems', 'CalendarCommand', {
                                             mode: 'entireRow',
