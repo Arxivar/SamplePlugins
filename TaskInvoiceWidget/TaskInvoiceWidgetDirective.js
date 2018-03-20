@@ -21,13 +21,15 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 						datascadenza: _.find(TaskInvoiceWidget.plugin.customSettings, { name: 'Data_scadenza_field' }).value,
 					};
 				};
-				var _settVariables = ({
-					booleanVariables,
-					stringVariables,
-					comboVariables,
-					dateTimeVariables,
-					doubleVariables,
-					tableVariables, }) => {
+				var _settVariables = function(varibles) {
+
+					const booleanVariables = varibles.booleanVariables;
+					const stringVariables = varibles.stringVariables;
+					const comboVariables = varibles.comboVariables;
+					const dateTimeVariables = varibles.dateTimeVariables;
+					const doubleVariables = varibles.doubleVariables;
+					const tableVariables = varibles.tableVariables;
+
 
 					scope.variables = _.concat(booleanVariables, stringVariables, comboVariables, dateTimeVariables, doubleVariables, tableVariables);
 					//set scope variables
