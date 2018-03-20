@@ -23,12 +23,12 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 				};
 				var _settVariables = function(varibles) {
 
-					const booleanVariables = varibles.booleanVariables;
-					const stringVariables = varibles.stringVariables;
-					const comboVariables = varibles.comboVariables;
-					const dateTimeVariables = varibles.dateTimeVariables;
-					const doubleVariables = varibles.doubleVariables;
-					const tableVariables = varibles.tableVariables;
+					var booleanVariables = varibles.booleanVariables;
+					var stringVariables = varibles.stringVariables;
+					var comboVariables = varibles.comboVariables;
+					var dateTimeVariables = varibles.dateTimeVariables;
+					var doubleVariables = varibles.doubleVariables;
+					var tableVariables = varibles.tableVariables;
 
 
 					scope.variables = _.concat(booleanVariables, stringVariables, comboVariables, dateTimeVariables, doubleVariables, tableVariables);
