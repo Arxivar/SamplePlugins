@@ -181,7 +181,7 @@ angular.module('arxivar.plugins.controller').controller('CalendarCtrl', ['$scope
                         '<strong>Note: </strong><span>{{event.notes}}</span><br/>' +
                         '<button class="btn btn-primary" type="button" ng-click="download()"><span translate="Documento" /></button></div>' +
                         '<div class="modal-footer"><button class="btn btn-primary" type="button" ng-click="confirm()"><span translate="Ok" /></button></div></div>',
-                    controller: ['$scope', '$uibModalInstance', 'downloadFileService', 'moment', function($scope, $uibModalInstance, downloadFileService, moment) {
+                    controller: ['$scope', '$uibModalInstance', 'documentsService', 'moment', function($scope, $uibModalInstance, documentsService, moment) {
 
                         $scope.event = {
                             title: calEvent.title, 
@@ -191,7 +191,7 @@ angular.module('arxivar.plugins.controller').controller('CalendarCtrl', ['$scope
                         };
 
                         $scope.download = function() {
-                            downloadFileService.downloadFile(calEvent.docNumber);
+                            documentsService.getForProfile(calEvent.docNumber).then(documentsService.downloadStream);
                         };
 
                         $scope.confirm = function() {

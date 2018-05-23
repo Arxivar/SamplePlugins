@@ -1,5 +1,5 @@
-angular.module('arxivar.plugins.directives').directive('calendarwidgetdirective', ['$http', '$log', 'CalendarWidget', 'pluginService', '_', 'notify', 'arxivarConfig', 'resourceService', 'userIdentityService', 'arxivarHttp', '$q', '$uibModal', '$interval', 'downloadFileService',
-    function($http, $log, CalendarWidget, pluginService, _, notify, arxivarConfig, resourceService, userIdentityService, arxivarHttp, $q, $uibModal, $interval, downloadFileService) {
+angular.module('arxivar.plugins.directives').directive('calendarwidgetdirective', ['$http', '$log', 'CalendarWidget', 'pluginService', '_', 'notify', 'arxivarConfig', 'resourceService', 'userIdentityService', 'arxivarHttp', '$q', '$uibModal', '$interval', 'documentsService',
+    function($http, $log, CalendarWidget, pluginService, _, notify, arxivarConfig, resourceService, userIdentityService, arxivarHttp, $q, $uibModal, $interval, documentsService) {
         return {
             restrict: 'E',
             scope: {
@@ -139,7 +139,7 @@ angular.module('arxivar.plugins.directives').directive('calendarwidgetdirective'
 
                 scope.downloadDocument = function(calendarEvent) {
                     if (_.has(calendarEvent, 'docNumber') && !_.isNil(calendarEvent.docNumber)) {
-                        downloadFileService.downloadFile(calendarEvent.docNumber);
+                        documentsService.getForProfile(calendarEvent.docNumber).then(documentsService.downloadStream)
                     }
                 };
 
