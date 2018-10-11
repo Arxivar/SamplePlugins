@@ -1,7 +1,6 @@
-
 angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirective', [
-	'TaskInvoiceWidget', 'pluginService', 'taskVariablesService', 'taskOperationsService', '_', 'moment', '$timeout',
-	function(TaskInvoiceWidget, pluginService, taskVariablesService, taskOperationsService, _, moment, $timeout) {
+	'TaskInvoiceWidget', 'pluginService', 'taskVariablesService', 'taskOperationsService', '_', 'moment', '$timeout','$sce',
+	function (TaskInvoiceWidget, pluginService, taskVariablesService, taskOperationsService, _, moment, $timeout, $sce) {
 
 		return {
 			restrict: 'E',
@@ -9,19 +8,31 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 				taskDto: '=?'
 			},
 			templateUrl: './Scripts/plugins/TaskInvoiceWidget/TaskInvoiceWidget.html',
-			link: function(scope, element, attrs, ctrls) {
+			link: function (scope, element, attrs, ctrls) {
 				//get custom fields from cinfiguration
-				var _getCustomField = function() {
+				var _getCustomField = function () {
 					return {
-						ragionesociale: _.find(TaskInvoiceWidget.plugin.customSettings, { name: 'Ragione_sociale_field' }).value,
-						indirizzo: _.find(TaskInvoiceWidget.plugin.customSettings, { name: 'Indirizzo_field' }).value,
-						numerofattura: _.find(TaskInvoiceWidget.plugin.customSettings, { name: 'Numero_fattura_field' }).value,
-						importo: _.find(TaskInvoiceWidget.plugin.customSettings, { name: 'Importo_field' }).value,
-						datafattura: _.find(TaskInvoiceWidget.plugin.customSettings, { name: 'Data_fattura_field' }).value,
-						datascadenza: _.find(TaskInvoiceWidget.plugin.customSettings, { name: 'Data_scadenza_field' }).value,
+						ragionesociale: _.find(TaskInvoiceWidget.plugin.customSettings, {
+							name: 'Ragione_sociale_field'
+						}).value,
+						indirizzo: _.find(TaskInvoiceWidget.plugin.customSettings, {
+							name: 'Indirizzo_field'
+						}).value,
+						numerofattura: _.find(TaskInvoiceWidget.plugin.customSettings, {
+							name: 'Numero_fattura_field'
+						}).value,
+						importo: _.find(TaskInvoiceWidget.plugin.customSettings, {
+							name: 'Importo_field'
+						}).value,
+						datafattura: _.find(TaskInvoiceWidget.plugin.customSettings, {
+							name: 'Data_fattura_field'
+						}).value,
+						datascadenza: _.find(TaskInvoiceWidget.plugin.customSettings, {
+							name: 'Data_scadenza_field'
+						}).value,
 					};
 				};
-				var _settVariables = function(varibles) {
+				var _settVariables = function (varibles) {
 
 					var booleanVariables = varibles.booleanVariables;
 					var stringVariables = varibles.stringVariables;
@@ -34,37 +45,32 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 					scope.variables = _.concat(booleanVariables, stringVariables, comboVariables, dateTimeVariables, doubleVariables, tableVariables);
 					//set scope variables
 					var fields = _getCustomField();
-					scope.ragionesociale = _.find(scope.variables, { name: fields.ragionesociale }).displayValue;
-					scope.indirizzo = _.find(scope.variables, { name: fields.indirizzo }).displayValue;
-					scope.numerofattura = _.find(scope.variables, { name: fields.numerofattura }).displayValue;
-					scope.importo = _.find(scope.variables, { name: fields.importo }).value;
+					scope.ragionesociale = _.find(scope.variables, {
+						name: fields.ragionesociale
+					}).displayValue;
+					scope.indirizzo = _.find(scope.variables, {
+						name: fields.indirizzo
+					}).displayValue;
+					scope.numerofattura = _.find(scope.variables, {
+						name: fields.numerofattura
+					}).displayValue;
+					scope.importo = _.find(scope.variables, {
+						name: fields.importo
+					}).value;
 					scope.importoView = scope.importo;
-					scope.datafattura = moment(_.find(scope.variables, { name: fields.datafattura }).value).format('L');
-					scope.datascadenza = moment(_.find(scope.variables, { name: fields.datascadenza }).value).format('L');
+					scope.datafattura = moment(_.find(scope.variables, {
+						name: fields.datafattura
+					}).value).format('L');
+					scope.datascadenza = moment(_.find(scope.variables, {
+						name: fields.datascadenza
+					}).value).format('L');
 
-					//converting addresses string into geographic coordinates
-					var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + scope.indirizzo;
-					$.get(url, function(response) {
-						function initMap(lat, lng) {
-							if (lat !== undefined) {
-								var myLatLng = { lat: lat, lng: lng };
-								var map = new google.maps.Map(document.getElementById('map'), {
-									zoom: 15,
-									center: myLatLng
-								});
-								var marker = new google.maps.Marker({
-									position: myLatLng,
-									map: map,
-								});
-							}
-						}
-						if (response.status === 'OK') {
-							initMap(response.results[0].geometry.location.lat, response.results[0].geometry.location.lng);
-						}
-					});
 				};
+				scope.getUrl = () => {
+					return $sce.trustAsResourceUrl('https://www.google.com/maps?q=' + scope.indirizzo + '&output=embed');
+				}
 				//initalize the widget
-				var init = function() {
+				var init = function () {
 					var $mainContainer = $(element).find('div.arx-' + TaskInvoiceWidget.plugin.name.toLowerCase());
 					if ($mainContainer.length > 0) {
 						$mainContainer.addClass(scope.instanceId);
@@ -72,7 +78,7 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 					if (!_.isNil(scope.taskDto.id)) {
 						if (_.isNil(scope.operationVariables)) {
 							taskOperationsService.getTaskOperations(scope.taskDto.id)
-								.then(function(operations) {
+								.then(function (operations) {
 									scope.operationVariables = operations.taskWorkVariablesOperation;
 									_settVariables(operations.taskWorkVariablesOperation.processVariablesFields);
 
@@ -84,11 +90,6 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 						scope.variablesModel = {};
 					}
 				};
-				// download google maps lib
-				$.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyC341o4aabs3DDquZfq6BCUihpmD6pgPKo', function() {
-					//run the init after download
-					init();
-				});
 
 				//currency to symbol map
 				scope.currencyToSymbol = {
@@ -99,27 +100,35 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
 					RUB: '₽',
 				};
 				//get conversion rates from EUR
-				var _rate;
-				$.getJSON('http://api.fixer.io/latest?base=EUR', function(data) {
-					_rate = data.rates;
+				var _rate = {};
+				var q1 = 'EUR_USD,EUR_JPY'
+				var q2 = 'EUR_GBP,EUR_RUB'
+				
+				$.getJSON('https://free.currencyconverterapi.com/api/v6/convert?q=' + q1, function (data) {
+					_rate = _.assign(_rate,data.results);
 				});
-				var convert = function() {
-					$timeout(function() {
+				$.getJSON('https://free.currencyconverterapi.com/api/v6/convert?q=' + q2, function (data) {
+					_rate = _.assign(_rate,data.results);
+				});
+
+				var convert = function () {
+					$timeout(function () {
 						if (scope.importo !== undefined && _rate !== undefined) {
-							const newRate = scope.currency === 'EUR' ? 1 : _rate[scope.currency];
+							const newRate = scope.currency === 'EUR' ? 1 : _rate['EUR_'+scope.currency].val;
 							scope.importoView = (newRate * scope.importo).toFixed(2);
 						}
 					});
 				};
 
 				//on change currency run convert
-				scope.$watch('currency', function(newVal, oldVal) {
+				scope.$watch('currency', function (newVal, oldVal) {
 					if (newVal !== oldVal) {
 						convert();
 					}
 				});
+				init();
 
 			}
 		};
-	}]);
-
+	}
+]);

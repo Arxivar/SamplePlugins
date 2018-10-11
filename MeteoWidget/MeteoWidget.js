@@ -6,8 +6,9 @@ angular.module('arxivar.plugins').factory('MeteoWidget', ['PluginWidget', functi
         label: 'Meteo informations', // User Interface label (type: string)
         description: 'Meteo informations widget', // Plugin description (type: string)
         author: 'Abletech srl', // Plugin author (type: string)
-        minVersion: '0.0.1' // Minimun portal version this plugin supports. (type: string, format example: 0.0.1)
-    };
+        minVersion: '0.0.1', // Minimun portal version this plugin supports. (type: string, format example: 0.0.1)
+		icon: 'fa fa-sun'
+	};
 
     // OPTIONAL settings. These objects require the following properties: name, description, defaultValue and type.
   // Allowed types are: string, number, boolean or date (Date type is a string UTC ISO 8601 (https://it.wikipedia.org/wiki/ISO_8601) format

@@ -7,7 +7,8 @@ angular.module('arxivar.plugins').factory('TaskInvoiceWidget', ['PluginWidgetTas
 			label: 'TaskInvoiceWidget label', // User Interface label (type: string)
 			description: 'Task Invoice Widget', // Plugin description (type: string)
 			author: 'Able Tech', // Plugin author (type: string)
-			minVersion: '0.0.1' // Minimun portal version this plugin supports. (type: string, format example: 0.0.1)
+			minVersion: '0.0.1', // Minimun portal version this plugin supports. (type: string, format example: 0.0.1)
+			icon: 'fa fa-bookmark'
 		};
 
 		// OPTIONAL settings. These objects require the following properties: name, description, defaultValue and type.
@@ -18,7 +19,7 @@ angular.module('arxivar.plugins').factory('TaskInvoiceWidget', ['PluginWidgetTas
 			{ name: 'Numero_fattura_field', description: 'Numero_fattura', defaultValue: 'Numero_fattura', type: 'string' },
 			{ name: 'Importo_field', description: 'Importo', defaultValue: 'Importo', type: 'string' },
 			{ name: 'Data_fattura_field', description: 'Data_fattura', defaultValue: 'Data_fattura', type: 'string' },
-			{ name: 'Data_scadenza_field', description: 'Data_scadenza', defaultValue: 'Data_scadenza', type: 'string' },
+			{ name: 'Data_scadenza_field', description: 'Data_scadenza', defaultValue: 'Data_scadenza', type: 'string' }
 		];
 
 		// OPTIONAL settings for specific users. These objects require the following properties: name, description, defaultValue and type.
