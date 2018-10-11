@@ -1,6 +1,6 @@
-.arx-testtask {}
 
-.invoice {
+
+.arx-testtask .invoice {
     max-width: 800px;
     margin: auto;
     padding: 30px;
@@ -13,71 +13,75 @@
 	display: flex;
 	flex-direction: column;
 }
-.information,
-.title{
+.arx-testtask .information,
+.arx-testtask.title{
 	display: flex;
 	justify-content: space-between;
 	margin:10px;
 }
-.table,
-.map{
+.arx-testtask .table,
+.arx-testtask .map{
 	display: flex;
 	justify-content: center;
 	margin:10px;
 }
-#map{
-	width: 500px;
+.arx-testtask .map .frame{
+	width: 100%;
+	height: 100%;
+}
+.arx-testtask #map{
+	width: 100%;
 	height: 300px;
 }
-.invoice table {
+.arx-testtask .invoice table {
     width: 100%;
     line-height: inherit;
     text-align: left;
 }
 
-.invoice table td {
+.arx-testtask .invoice table td {
     padding: 5px;
     vertical-align: top;
 }
 
-.invoice table tr td:nth-child(2) {
+.arx-testtask .invoice table tr td:nth-child(2) {
     text-align: right;
 }
 
-.invoice table tr.top table td {
+.arx-testtask .invoice table tr.top table td {
     padding-bottom: 20px;
 }
 
-.invoice table tr.top table td.title {
+.arx-testtask .invoice table tr.top table td.title {
     font-size: 45px;
     line-height: 45px;
     color: #333;
 	background-color: white;
 }
 
-.invoice table tr.information table td {
+.arx-testtask .invoice table tr.information table td {
     padding-bottom: 40px;
 }
 
-.invoice table tr.heading td {
+.arx-testtask .invoice table tr.heading td {
     background: #eee;
     border-bottom: 1px solid #ddd;
     font-weight: bold;
 }
 
-.invoice table tr.details td {
+.arx-testtask .invoice table tr.details td {
     padding-bottom: 20px;
 }
 
-.invoice table tr.item td {
+.arx-testtask .invoice table tr.item td {
     border-bottom: 1px solid #eee;
 }
 
-.invoice table tr.item.last td {
+.arx-testtask .invoice table tr.item.last td {
     border-bottom: none;
 }
 
-.invoice table tr.total td:nth-child(2) {
+.arx-testtask .invoice table tr.total td:nth-child(2) {
     border-top: 2px solid #eee;
     font-weight: bold;
 }

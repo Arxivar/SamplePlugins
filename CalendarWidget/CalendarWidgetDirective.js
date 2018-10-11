@@ -1,5 +1,7 @@
-angular.module('arxivar.plugins.directives').directive('calendarwidgetdirective', ['$http', '$log', 'CalendarWidget', 'pluginService', '_', 'notify', 'arxivarConfig', 'resourceService', 'userIdentityService', 'arxivarHttp', '$q', '$uibModal', '$interval', 'documentsService',
-    function($http, $log, CalendarWidget, pluginService, _, notify, arxivarConfig, resourceService, userIdentityService, arxivarHttp, $q, $uibModal, $interval, documentsService) {
+angular.module('arxivar.plugins.directives')
+	.directive('calendarwidgetdirective', [
+	'$http', '$log', 'CalendarWidget', 'pluginService', '_', 'notify', 'arxivarConfig', 'resourceService', 'userIdentityService', 'arxivarHttp', '$q', '$uibModal', '$interval', 'documentsService', 'moment',
+    function($http, $log, CalendarWidget, pluginService, _, notify, arxivarConfig, resourceService, userIdentityService, arxivarHttp, $q, $uibModal, $interval, documentsService, moment) {
         return {
             restrict: 'E',
             scope: {

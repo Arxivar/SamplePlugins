@@ -6,7 +6,8 @@ angular.module('arxivar.plugins').factory('RssFeedReader', ['PluginWidget', func
     label: 'ARXivar Rss feed reader', // User Interface label (type: string)
     description: 'ARXivar Rss feed reader', // Plugin description (type: string)
     author: 'Abletech srl', // Plugin author (type: string)
-    minVersion: '0.0.1' // Minimun portal version this plugin supports. (type: string, format example: 0.0.1)
+    minVersion: '0.0.1', // Minimun portal version this plugin supports. (type: string, format example: 0.0.1)
+	icon: 'fa fa-rss-square'
   };
 
   // OPTIONAL settings. These objects require the following properties: name, description, defaultValue and type.

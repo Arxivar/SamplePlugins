@@ -24,7 +24,10 @@
 				</div>
 			</div>
 			<div class="map">
-				<div id="map"></div>
+
+				<div  id="map" ng-if="indirizzo">
+					<iframe class="frame" ng-src="{{getUrl()}}"></iframe>					
+				</div>
 			</div>
 			<div class="table">
 				<table>
@@ -36,12 +39,12 @@
 						<td>
 							Price
 							<select ng-model="currency" ng-init="currency='EUR'">
-							<option value="EUR" >€</option>
-							<option value="USD">$</option>
-							<option value="JPY">¥</option>
-							<option value="GBP">£</option>
-							<option value="RUB">₽</option>
-						</select>
+								<option value="EUR">€</option>
+								<option value="USD">$</option>
+								<option value="JPY">¥</option>
+								<option value="GBP">£</option>
+								<option value="RUB">₽</option>
+							</select>
 						</td>
 					</tr>
 

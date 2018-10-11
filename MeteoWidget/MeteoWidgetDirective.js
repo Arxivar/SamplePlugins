@@ -12,14 +12,14 @@ angular.module('arxivar.plugins.directives').directive('meteowidgetdirective', [
                 $mainContainer.addClass(scope.instanceId);
             }
             var searchWeather = function(city) {
-                if ($('.weather-temperature').openWeather === undefined) {
+                if ($(element.find('.weather-temperature')).openWeather === undefined) {
                     setTimeout(function() {
                         searchWeather(city);
                     }, 1000);
                     return;
                 }
 
-                angular.element(element).find('.weather-temperature').openWeather({
+                $(element.find('.weather-temperature')).openWeather({
                     key: 'bad12547ee402ec2989c3b890d292c18',
                     city: city,
                     descriptionTarget: $mainContainer.find('.weather-description'),
