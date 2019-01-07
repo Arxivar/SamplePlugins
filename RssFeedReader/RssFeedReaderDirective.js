@@ -1,4 +1,4 @@
-angular.module('arxivar.plugins.directives').directive('rssfeedreaderdirective', ['$http', '$interval', '$log', '$state', 'RssFeedReader', 'pluginService', '_', 'feedService', 'clientSettingsService', 'moment', 
+angular.module('arxivar.plugins.directives').directive('rssfeedreaderdirective', ['$http', '$interval', '$log', '$state', 'RssFeedReader', 'pluginService', '_', 'feedService', 'clientSettingsService', 'moment',
   function($http, $interval, $log, $state, RssFeedReader, pluginService, _, feedService, clientSettingsService, moment) {
     return {
       restrict: 'E',
@@ -25,7 +25,7 @@ angular.module('arxivar.plugins.directives').directive('rssfeedreaderdirective',
         var loadFeeds = function() {
           scope.isLoading = true;
           feedService.parseFeeds(scope.feedUrl)
-            .then(function(items) {              
+            .then(function(items) {
                 // scope.feedItems = response.responseData.feed.entries;
                 scope.feedItems = items;
 				_.forEach(items, function(item){
@@ -39,12 +39,12 @@ angular.module('arxivar.plugins.directives').directive('rssfeedreaderdirective',
                 if (items && items.length > 0) {
                   //se la chiamata va a buon fine salvo i settings
                   setUserSettings();
-                }              
-            }).error(function(error) {
+				}
+				scope.isLoading = false;
+            }).catch(function(error) {
               $log.error(error);
-            }).then(function() {
               scope.isLoading = false;
-            });
+            })
           return;
         };
 
@@ -86,12 +86,12 @@ angular.module('arxivar.plugins').factory('feedService', ['$http', '$q', functio
 	jQueryScript.setAttribute('src','https://cdn.jsdelivr.net/npm/rss-parser@3.1.2/dist/rss-parser.min.js');
 	document.head.appendChild(jQueryScript);
 
-	var _parseFeeds = function(url) {		
+	var _parseFeeds = function(url) {
 		var CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
 		var parser = new RSSParser();
 		var defer = $q.defer()
 		parser.parseURL(CORS_PROXY + url, function(err, feed) {
-		  defer.resolve(feed.items);		
+		  defer.resolve(feed.items);
 		})
 		return defer.promise;
 	};
