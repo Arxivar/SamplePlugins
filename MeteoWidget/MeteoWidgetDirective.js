@@ -21,7 +21,7 @@ angular.module('arxivar.plugins.directives').directive('meteowidgetdirective', [
 
                 $(element.find('.weather-temperature')).openWeather({
                     key: 'bad12547ee402ec2989c3b890d292c18',
-                    city: city,
+                    city: encodeURIComponent(city),
                     descriptionTarget: $mainContainer.find('.weather-description'),
                     windSpeedTarget: $mainContainer.find('.weather-wind-speed'),
                     minTemperatureTarget: $mainContainer.find('.weather-min-temperature'),
