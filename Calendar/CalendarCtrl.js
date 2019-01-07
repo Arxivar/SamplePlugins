@@ -1,5 +1,12 @@
+// cdn fullcalendar
+var jQueryScript = document.createElement('script');
+jQueryScript.setAttribute('src','https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/fullcalendar.min.js');
+document.head.appendChild(jQueryScript);
+
 angular.module('arxivar.plugins.controller').controller('CalendarCtrl', ['$scope', 'Calendar', 'notify', 'arxivarConfig', 'toaster', 'resourceService', 'userIdentityService', '_', '$window', 'arxivarHttp', '$q', '$uibModal', function($scope, Calendar, notify, arxivarConfig, toaster, resourceService, userIdentityService, _, $window, arxivarHttp, $q, $uibModal) {
-    var w = angular.element($window);
+
+
+	var w = angular.element($window);
     var getHeight = function() {
         return w.height() > 760 ? w.height() - 250 : 520;
     };
@@ -166,8 +173,8 @@ angular.module('arxivar.plugins.controller').controller('CalendarCtrl', ['$scope
             },
             resources: function(callback) {
                 var resurces = _.map(_.filter($scope.users, { 'selected': true }), function(user) {
-                    return { 
-                        id: user.user.toString(), title: user.description }; 
+                    return {
+                        id: user.user.toString(), title: user.description };
                     });
                 callback(resurces);
             },
@@ -184,9 +191,9 @@ angular.module('arxivar.plugins.controller').controller('CalendarCtrl', ['$scope
                     controller: ['$scope', '$uibModalInstance', 'documentsService', 'moment', function($scope, $uibModalInstance, documentsService, moment) {
 
                         $scope.event = {
-                            title: calEvent.title, 
-                            start: moment(calEvent.start).format('L HH:mm'), 
-                            end: moment(calEvent.end).format('L HH:mm'), 
+                            title: calEvent.title,
+                            start: moment(calEvent.start).format('L HH:mm'),
+                            end: moment(calEvent.end).format('L HH:mm'),
                             notes: calEvent.notes
                         };
 
@@ -201,7 +208,13 @@ angular.module('arxivar.plugins.controller').controller('CalendarCtrl', ['$scope
                     }]
                 });
             }
-        });
+		});
+
+
+		$scope.$watch('users', function() {
+			$('#calendar').fullCalendar('refetchResources');
+			$('#calendar').fullCalendar('refetchEvents');
+		}, true);
     };
 
     resourceService.query('users').then(function(users) {
@@ -217,10 +230,6 @@ angular.module('arxivar.plugins.controller').controller('CalendarCtrl', ['$scope
         });
     });
 
-    $scope.$watch('users', function() {
-        $('#calendar').fullCalendar('refetchResources');
-        $('#calendar').fullCalendar('refetchEvents');
-    }, true);
 
 
 }]);

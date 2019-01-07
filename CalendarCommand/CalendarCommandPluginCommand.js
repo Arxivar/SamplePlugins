@@ -1,5 +1,5 @@
 angular.module('arxivar.plugins').factory('CalendarCommand', ['$q', '$uibModal', 'PluginCommand',  function($q, $uibModal, PluginCommand) {
-	
+
     // MANDATORY settings in order for the plugin to work.
     var requiredSettings = {
         id: '086ef2a8-99de-4360-83b4-8c867a10b340',  // Unique plugin identifier (type: string)
@@ -8,9 +8,10 @@ angular.module('arxivar.plugins').factory('CalendarCommand', ['$q', '$uibModal',
         description: 'Command for convert a profile to a Calendar item', // Plugin description (type: string)
         author: 'Abletech srl', // Plugin author (type: string)
         minVersion: '0.0.1', // Minimun portal version this plugin supports. (type: string, format example: 0.0.1)
-        requireRefresh: true // If this plugin requires grid data refresh (type boolean. Default: false)
+		requireRefresh: true, // If this plugin requires grid data refresh (type boolean. Default: false)
+		icon: 'fas fa-calendar-day'
     };
-	
+
     // OPTIONAL settings. These objects require the following properties: name, description, defaultValue and type.
     // Allowed types are: string, number, boolean or date (Date type is a string UTC ISO 8601 (https://it.wikipedia.org/wiki/ISO_8601) format
     var customSettings = [
@@ -23,20 +24,20 @@ angular.module('arxivar.plugins').factory('CalendarCommand', ['$q', '$uibModal',
         { name: 'classe', description: 'Classe calendari', defaultValue: '24', type: 'string' },
         //{name: '', description: '', defaultValue:'', type: 'string'},
     ];
-	
+
     // OPTIONAL settings for specific users. These objects require the following properties: name, description, defaultValue and type.
     // Allowed types are: string, number, boolean or date (Date type is a string UTC ISO 8601 (https://it.wikipedia.org/wiki/ISO_8601) format
     var userSettings = [
 	//{name: '', description: '', defaultValue:'', type: 'string'},
     ];
-	
+
     var myPlugin = new PluginCommand(requiredSettings, customSettings, userSettings);
-	
+
     // This function is a promise with asyncronous logic to determine if this plugin can run. Input parameters: array of docnumbers.
     myPlugin.canRun = function(params) {
         return params.hasOwnProperty('docnumbers') ? $q.when(params.docnumbers.length >= 1) : $q.resolve(false);
     };
-	
+
     // This function is a promise with asyncronous run logic. Input parameters: array of docnumbers.
     myPlugin.run = function (params) {
         var thisPlugin = myPlugin;
@@ -81,7 +82,7 @@ angular.module('arxivar.plugins').factory('CalendarCommand', ['$q', '$uibModal',
                                     return field.isAdditional;
                                 })
                                 //Ricevo i nuovi aggiuntivi per la classe dei calendari in modo da valo
-		                        
+
                                 arxivarHttp.get('profiles/Additional/' + classe + '/0/0').then(function(additionals) {
 
                                     _.forEach(additionals, function(additional) {
@@ -109,7 +110,7 @@ angular.module('arxivar.plugins').factory('CalendarCommand', ['$q', '$uibModal',
                                     });
 
                                     //Devo fare la put
-        
+
                                     var profile = {
                                         id: params.docnumbers[0],
                                         fields: data.fields,
@@ -132,7 +133,7 @@ angular.module('arxivar.plugins').factory('CalendarCommand', ['$q', '$uibModal',
                                     });
                                 });
 
-		                            
+
                             });
                         };
 
@@ -140,7 +141,7 @@ angular.module('arxivar.plugins').factory('CalendarCommand', ['$q', '$uibModal',
                 });
 
 
-				
+
             }
         });
     };

@@ -6,7 +6,8 @@ angular.module('arxivar.plugins').factory('Calendar', ['PluginRoute', function(P
         label: 'Calendar', // User Interface label (type: string)
         description: 'Plugin demo for ARXivar calendar ', // Plugin description (type: string)
         author: 'Abletech srl', // Plugin author (type: string)
-        minVersion: '0.0.1' // Minimun portal version this plugin supports. (type: string, format example: 0.0.1)
+		minVersion: '0.0.1', // Minimun portal version this plugin supports. (type: string, format example: 0.0.1)
+		icon: 'fas fa-calendar-day'
     };
 
     // OPTIONAL settings. These objects require the following properties: name, description, defaultValue and type.
@@ -27,7 +28,7 @@ angular.module('arxivar.plugins').factory('Calendar', ['PluginRoute', function(P
 	var userSettings = [
 	//{name: '', description: '', defaultValue:'', type: 'string'},
 	];
-	
+
     var myPlugin = new PluginRoute(requiredSettings, customSettings, userSettings);
     return { plugin: myPlugin };
 }]);
