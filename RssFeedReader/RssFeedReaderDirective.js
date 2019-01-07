@@ -1,5 +1,5 @@
-angular.module('arxivar.plugins.directives').directive('rssfeedreaderdirective', ['$http', '$interval', '$log', '$state', 'RssFeedReader', 'pluginService', '_', 'feedService', 'clientSettingsService',
-  function($http, $interval, $log, $state, RssFeedReader, pluginService, _, feedService, clientSettingsService) {
+angular.module('arxivar.plugins.directives').directive('rssfeedreaderdirective', ['$http', '$interval', '$log', '$state', 'RssFeedReader', 'pluginService', '_', 'feedService', 'clientSettingsService', 'moment', 
+  function($http, $interval, $log, $state, RssFeedReader, pluginService, _, feedService, clientSettingsService, moment) {
     return {
       restrict: 'E',
       scope: {
@@ -22,21 +22,24 @@ angular.module('arxivar.plugins.directives').directive('rssfeedreaderdirective',
           clientSettingsService.setWidgetSettings(RssFeedReader.plugin.id, scope.instanceId, scope.desktopId, userSettings);
         };
 
-        var loadFeeds = function(saveUrl) {
+        var loadFeeds = function() {
           scope.isLoading = true;
           feedService.parseFeeds(scope.feedUrl)
-            .success(function(response) {
-              if (_.has(response.query.results, 'rss')) {
+            .then(function(items) {              
                 // scope.feedItems = response.responseData.feed.entries;
-                scope.feedItems = response.query.results.rss.channel.item;
+                scope.feedItems = items;
+				_.forEach(items, function(item){
+					item.formattedPubDate = item.pubDate;
+					var valueDate = moment(new Date(item.pubDate));
+					if (valueDate.isValid()) {
+						item.formattedPubDate = valueDate.format('L LTS');
+					}
+				});
 
-                if (saveUrl) {
+                if (items && items.length > 0) {
                   //se la chiamata va a buon fine salvo i settings
                   setUserSettings();
-                }
-              } else {
-                loadFeeds(scope.feedUrl);
-              }
+                }              
             }).error(function(error) {
               $log.error(error);
             }).then(function() {
@@ -49,7 +52,7 @@ angular.module('arxivar.plugins.directives').directive('rssfeedreaderdirective',
 
         var refreshFeeds = function() {
           $interval(function() {
-            loadFeeds(false);
+            loadFeeds();
           }, 60000);
         };
 
@@ -61,11 +64,11 @@ angular.module('arxivar.plugins.directives').directive('rssfeedreaderdirective',
               if (settings && settings.settings) {
                 scope.feedUrl = _.find(settings.settings, { 'name': 'feedUrl' }).value;
               }
-              loadFeeds(false);
+              loadFeeds();
               refreshFeeds();
             }).catch(function() {
               scope.feedUrl = RssFeedReader.plugin.customSettings[0].value;
-              loadFeeds(false);
+              loadFeeds();
               refreshFeeds();
             });
           };
@@ -78,11 +81,21 @@ angular.module('arxivar.plugins.directives').directive('rssfeedreaderdirective',
   }
 ]);
 
-angular.module('arxivar.plugins').factory('feedService', ['$http', function($http) {
-  var _parseFeeds = function(url) {
-    return $http.jsonp('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20\'' + encodeURIComponent(url) + '\'&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=JSON_CALLBACK');
-  };
-  return {
-    parseFeeds: _parseFeeds
-  };
-}]);
+angular.module('arxivar.plugins').factory('feedService', ['$http', '$q', function($http, $q) {
+	var jQueryScript = document.createElement('script');
+	jQueryScript.setAttribute('src','https://cdn.jsdelivr.net/npm/rss-parser@3.1.2/dist/rss-parser.min.js');
+	document.head.appendChild(jQueryScript);
+
+	var _parseFeeds = function(url) {		
+		var CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
+		var parser = new RSSParser();
+		var defer = $q.defer()
+		parser.parseURL(CORS_PROXY + url, function(err, feed) {
+		  defer.resolve(feed.items);		
+		})
+		return defer.promise;
+	};
+	return {
+	  parseFeeds: _parseFeeds
+	};
+  }]);

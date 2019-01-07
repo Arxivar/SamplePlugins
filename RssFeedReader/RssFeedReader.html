@@ -1,3 +1,4 @@
+
 <div class="arx-arxivarinfo">
   <form>
     <div class="input-group" ng-show="showConfig">
@@ -26,15 +27,15 @@
                   <i class="fa fa-external-link fa-lg"></i>
                 </a>
               </h4>
-              <p class="small text-left">{{feed.publishedDate}}</p>
+              <p class="small text-left">{{feed.formattedPubDate}}</p>
             </h4>
           </div>
           <div id="collapse{{$index + instanceId}}" class="panel-collapse collapse">
             <div class="panel-body">
-              <div ng-bind-html="feed.description"></div>
+              <div ng-bind-html="feed.content"></div>
             </div>
             <div class="panel-footer">
-              <h3 class="small">{{feed.author}}</h3>
+              <h3 class="small">{{feed.creator}}</h3>
             </div>
           </div>
         </div>

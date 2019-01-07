@@ -13,7 +13,7 @@ angular.module('arxivar.plugins').factory('RssFeedReader', ['PluginWidget', func
   // OPTIONAL settings. These objects require the following properties: name, description, defaultValue and type.
   // Allowed types are: string, number, boolean or date (Date type is a string UTC ISO 8601 (https://it.wikipedia.org/wiki/ISO_8601) format
   var customSettings = [
-    {name: 'feedUrl', description: 'Url rss feed', defaultValue: 'http://www.arxivar.it/azienda/news?format=feed&type=rss', type: 'string'},
+    {name: 'feedUrl', description: 'Url rss feed', defaultValue: 'http://www.arxivar.it/it/component/obrss/news', type: 'string'},
     {name: 'feedTitle', description: 'Feed rss title', defaultValue: 'News from Able Tech', type: 'string'}
   ];
 
