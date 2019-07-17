@@ -213,7 +213,7 @@ angular.module('arxivar.plugins.controller').controller('CalendarCtrl', [
                             '<strong>Note: </strong><span>{{event.notes}}</span><br/>' +
                             '<button class="btn btn-primary" type="button" ng-click="download()"><span translate="Documento" /></button></div>' +
                             '<div class="modal-footer"><button class="btn btn-primary" type="button" ng-click="confirm()"><span translate="Ok" /></button></div></div>',
-                        controller: ['$scope', '$uibModalInstance', 'documentsService', 'moment', function($scope, $uibModalInstance, documentsService, moment) {
+                        controller: ['$scope', '$uibModalInstance', 'documentsService', 'moment', function($scope, $uibModalInstance, documentsService) {
 
                             $scope.event = {
                                 title: calEvent.title,
