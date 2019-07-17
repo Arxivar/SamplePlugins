@@ -7,8 +7,8 @@ document.head.appendChild(jQueryScript);
 document.head.appendChild(jQueryScriptLocale);
 
 angular.module('arxivar.plugins.controller').controller('CalendarCtrl', [
-    '$scope', 'Calendar', 'arxivarResourceService', 'arxivarUserServiceCreator', '_', '$window', '$q', '$uibModal', 'moment',
-    function($scope, Calendar, arxivarResourceService, arxivarUserServiceCreator, _, $window, $q, $uibModal, moment) {
+    '$scope', 'Calendar', 'arxivarResourceService', 'arxivarUserServiceCreator', '_', '$window', '$q', '$uibModal', 'moment', 'arxivarDocumentsService', 'arxivarRouteService',
+    function($scope, Calendar, arxivarResourceService, arxivarUserServiceCreator, _, $window, $q, $uibModal, moment, arxivarDocumentsService, arxivarRouteService) {
 
 
         var w = angular.element($window);
@@ -210,11 +210,12 @@ angular.module('arxivar.plugins.controller').controller('CalendarCtrl', [
                             '<strong>Oggetto: </strong><span>{{event.title}}</span><br/>' +
                             '<strong>Da: </strong><span>{{event.start}}</span><br/>' +
                             '<strong>A: </strong><span>{{event.end}}</span><br/>' +
-                            '<strong>Note: </strong><span>{{event.notes}}</span><br/>' +
+                            '<strong>Url profilo: </strong><a href="{{url}}" target="_blank" ><span>{{url}}</span></a><br/>' +
+                            '<strong>Note:  </strong><span>{{event.notes}}</span><br/>' +
                             '<button class="btn btn-primary" type="button" ng-click="download()"><span translate="Documento" /></button></div>' +
                             '<div class="modal-footer"><button class="btn btn-primary" type="button" ng-click="confirm()"><span translate="Ok" /></button></div></div>',
-                        controller: ['$scope', '$uibModalInstance', 'documentsService', 'moment', function($scope, $uibModalInstance, documentsService) {
-
+                        controller: ['$scope', '$uibModalInstance', function($scope, $uibModalInstance) {
+                            $scope.url = arxivarRouteService.getURLProfileReadonly(calEvent.docNumber);
                             $scope.event = {
                                 title: calEvent.title,
                                 start: calEvent.start.format('L HH:mm'),
@@ -223,7 +224,7 @@ angular.module('arxivar.plugins.controller').controller('CalendarCtrl', [
                             };
 
                             $scope.download = function() {
-                                documentsService.getForProfile(calEvent.docNumber).then(documentsService.downloadStream);
+                                arxivarDocumentsService.getDocumentByDocnumber(calEvent.docNumber);
                             };
 
                             $scope.confirm = function() {
