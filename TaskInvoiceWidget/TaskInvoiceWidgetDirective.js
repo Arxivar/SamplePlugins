@@ -101,20 +101,14 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
                 };
                 //get conversion rates from EUR
                 var _rate = {};
-                var q1 = 'EUR_USD,EUR_JPY';
-                var q2 = 'EUR_GBP,EUR_RUB';
-
-                $.getJSON('https://free.currencyconverterapi.com/api/v6/convert?q=' + q1, function(data) {
-                    _rate = _.assign(_rate, data.results);
-                });
-                $.getJSON('https://free.currencyconverterapi.com/api/v6/convert?q=' + q2, function(data) {
-                    _rate = _.assign(_rate, data.results);
+                $.getJSON('https://api.exchangeratesapi.io/latest?base=EUR', function(data) {
+                    _rate = _.assign(_rate, data.rates);
                 });
 
                 var convert = function() {
                     $timeout(function() {
                         if (scope.importo !== undefined && _rate !== undefined) {
-                            var newRate = scope.currency === 'EUR' ? 1 : _rate['EUR_' + scope.currency].val;
+                            var newRate = scope.currency === 'EUR' ? 1 : _rate[scope.currency];
                             scope.importoView = (newRate * scope.importo).toFixed(2);
                         }
                     });
