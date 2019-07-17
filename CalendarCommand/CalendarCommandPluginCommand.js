@@ -17,43 +17,43 @@ angular.module('arxivar.plugins').factory('CalendarCommand', ['$q', '$uibModal',
     var customSettings = [{
             name: 'nomeCampoUtente',
             description: 'Campo aggiuntivo utente appuntamento',
-            defaultValue: 'COMBO28_24',
+            defaultValue: 'COMBO195_47',
             type: 'string'
         },
         {
             name: 'nomeCampoDa',
             description: 'Campo aggiuntivo data inizio',
-            defaultValue: 'DATA29_24',
+            defaultValue: 'DATA196_47',
             type: 'string'
         },
         {
             name: 'nomeCampoA',
             description: 'Campo aggiuntivo data fine',
-            defaultValue: 'DATA30_24',
+            defaultValue: 'DATA197_47',
             type: 'string'
         },
         {
             name: 'nomeCampoDaOra',
             description: 'Campo aggiuntivo ora inizio',
-            defaultValue: 'NUMERIC32_24',
+            defaultValue: 'NUMERIC198_47',
             type: 'string'
         },
         {
             name: 'nomeCampoAOra',
             description: 'Campo aggiuntivo ora fine',
-            defaultValue: 'NUMERIC33_24',
+            defaultValue: 'NUMERIC199_47',
             type: 'string'
         },
         {
             name: 'nomeCampoNote',
             description: 'Campo aggiuntivo note appuntamento',
-            defaultValue: 'TESTO31_24',
+            defaultValue: 'TESTO200_47',
             type: 'string'
         },
         {
             name: 'classe',
             description: 'Classe calendari',
-            defaultValue: '24',
+            defaultValue: '47',
             type: 'string'
         },
         //{name: '', description: '', defaultValue:'', type: 'string'},
@@ -95,8 +95,8 @@ angular.module('arxivar.plugins').factory('CalendarCommand', ['$q', '$uibModal',
                         '<div class="row" style="margin-top: 5px;"><div class="col-md-2"><strong>Note: </strong><span>{{event.notes}}</span></div><div class="col-md-12"><arx-textarea model="notes" id=camponote name=note obbligatorio=false errors="errori" showError=false time=true num-max-char=1000 num-max-row=3 show=true change=null /></div></div>' +
                         '</div>' +
                         '<div class="modal-footer"><button class="btn btn-primary" type="button" ng-click="confirm()"><span translate="Ok" /></button></div></div>',
-                    controller: ['$scope', '$uibModalInstance', 'mediatorService', 'moment', 'arxivarRouteService', '_',
-                        function($scope, $uibModalInstance, mediatorService, moment, arxivarRouteService, _) {
+                    controller: ['$scope', '$uibModalInstance', 'mediatorService', 'moment', 'arxivarResourceService', '_',
+                        function($scope, $uibModalInstance, mediatorService, moment, arxivarResourceService, _) {
 
                             //$scope.event = calEvent;
                             //$scope.event.startFormat = moment($scope.event.start).format('DD/MM/YYYY HH:mm:ss');
@@ -108,7 +108,7 @@ angular.module('arxivar.plugins').factory('CalendarCommand', ['$q', '$uibModal',
 
                             $scope.confirm = function() {
                                 //[Route("Additional/{tipoUno}/{tipoDue}/{tipoTre}/{aoo?}")]
-                                arxivarRouteService.get('profiles/' + params.docnumbers[0] + '/schema/false').then(function(data) {
+                                arxivarResourceService.get('profiles/' + params.docnumbers[0] + '/schema/false').then(function(data) {
 
                                     //Cambio la classe
                                     _.find(data.fields, {
@@ -120,7 +120,7 @@ angular.module('arxivar.plugins').factory('CalendarCommand', ['$q', '$uibModal',
                                     });
                                     //Ricevo i nuovi aggiuntivi per la classe dei calendari in modo da valo
 
-                                    arxivarRouteService.get('profiles/Additional/' + classe + '/0/0').then(function(additionals) {
+                                    arxivarResourceService.get('profiles/Additional/' + classe + '/0/0').then(function(additionals) {
 
                                         _.forEach(additionals, function(additional) {
                                             if (additional.name === nomeCampoDa) {
@@ -156,7 +156,7 @@ angular.module('arxivar.plugins').factory('CalendarCommand', ['$q', '$uibModal',
                                             notes: data.notes
                                         };
 
-                                        arxivarRouteService.update('profiles/' + params.docnumbers[0], profile)
+                                        arxivarResourceService.update('profiles/' + params.docnumbers[0], profile)
                                             .then(function() {
                                                 mediatorService.publish('updateGridItems', 'CalendarCommand', {
                                                     mode: 'entireRow',

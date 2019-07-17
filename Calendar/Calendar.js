@@ -15,43 +15,43 @@ angular.module('arxivar.plugins').factory('Calendar', ['PluginRoute', function(P
     var customSettings = [{
             name: 'nomeCampoUtente',
             description: 'Campo aggiuntivo utente appuntamento',
-            defaultValue: 'COMBO28_24',
+            defaultValue: 'COMBO195_47',
             type: 'string'
         },
         {
             name: 'nomeCampoDa',
             description: 'Campo aggiuntivo data inizio',
-            defaultValue: 'DATA29_24',
+            defaultValue: 'DATA196_47',
             type: 'string'
         },
         {
             name: 'nomeCampoA',
             description: 'Campo aggiuntivo data fine',
-            defaultValue: 'DATA30_24',
+            defaultValue: 'DATA197_47',
             type: 'string'
         },
         {
             name: 'nomeCampoDaOra',
             description: 'Campo aggiuntivo ora inizio',
-            defaultValue: 'NUMERIC32_24',
+            defaultValue: 'NUMERIC198_47',
             type: 'string'
         },
         {
             name: 'nomeCampoAOra',
             description: 'Campo aggiuntivo ora fine',
-            defaultValue: 'NUMERIC33_24',
+            defaultValue: 'NUMERIC199_47',
             type: 'string'
         },
         {
             name: 'nomeCampoNote',
             description: 'Campo aggiuntivo note appuntamento',
-            defaultValue: 'TESTO31_24',
+            defaultValue: 'TESTO200_47',
             type: 'string'
         },
         {
             name: 'classe',
             description: 'Classe calendari',
-            defaultValue: '24',
+            defaultValue: '47',
             type: 'string'
         },
         //{name: '', description: '', defaultValue:'', type: 'string'},

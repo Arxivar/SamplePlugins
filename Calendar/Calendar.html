@@ -1,33 +1,24 @@
-<div class="arx-calendar">
-<div class="wrapper wrapper-content">
-    <div class="row arxivar-container-rowControl">
-        <div class="col-md-12">
+
             <div class="arx-calendar">
                 <h3>
                     <i class="fa fa-calendar"> </i> <span>Calendario</span>
-                </h3> <div class="ibox float-e-margins">
-                    <div class="ibox-content">
-                        <div id="container" style="display: flex">
-                            <div class="feed-activity-list" style="min-width: 150px;margin-right: 10px;margin-top: 0px;">
+                </h3> 
+                        <div id="container" class="arx-calendar__container">
+                            <div class="arx-calendar__user-list">
                                 <div style="margin-bottom: 20px;">
                                     <span class="fa fa-user fa-2x"></span><h2 style="display: inline">Utenti</h2>
                                 </div>
-                                <div class="feed-element" ng-repeat="user in users" style="padding-bottom: 2px;margin-top: 2px;">
-                                    <input icheck type="checkbox" ng-model="user.selected" />
-                                    <span>{{user.completeName}}</span>
-                                    <div style="display: inline-block; height: 10px; width: 5px;background-color: {{user.color}};margin-bottom: -3px;"></div>
-                                </div>
+								<div style="height:100%; overflow: auto;">
+									<div class="arx-calendar__user-element" ng-repeat="user in users" style="padding-bottom: 2px;margin-top: 2px;">
+										<input class="arx-calendar__user-check" icheck type="checkbox" ng-model="user.selected" />
+										<span class="arx-calendar__user-name" >{{user.completeName}}</span>
+										<div style="display: inline-block; height: 10px; width: 5px;background-color: {{user.color}};margin-bottom: -3px;"></div>
+									</div>
+								</div>
                             </div>
                             <div id="calendar"></div>
                         </div>
 
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/fullcalendar.min.css" />
 <link rel="stylesheet" href="Scripts/plugins/Calendar/Calendar.css" />

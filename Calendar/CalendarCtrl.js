@@ -1,11 +1,14 @@
 // cdn fullcalendar
 var jQueryScript = document.createElement('script');
-jQueryScript.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/fullcalendar.min.js');
+jQueryScript.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.js');
+var jQueryScriptLocale = document.createElement('script');
+jQueryScriptLocale.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/locale-all.js');
 document.head.appendChild(jQueryScript);
+document.head.appendChild(jQueryScriptLocale);
 
 angular.module('arxivar.plugins.controller').controller('CalendarCtrl', [
-    '$scope', 'Calendar', 'arxivarResourceService', 'arxivarUserServiceCreator', '_', '$window', '$q', '$uibModal',
-    function($scope, Calendar, arxivarResourceService, arxivarUserServiceCreator, _, $window, $q, $uibModal) {
+    '$scope', 'Calendar', 'arxivarResourceService', 'arxivarUserServiceCreator', '_', '$window', '$q', '$uibModal', 'moment',
+    function($scope, Calendar, arxivarResourceService, arxivarUserServiceCreator, _, $window, $q, $uibModal, moment) {
 
 
         var w = angular.element($window);
@@ -26,19 +29,16 @@ angular.module('arxivar.plugins.controller').controller('CalendarCtrl', [
         var campiSelect = [nomeCampoUtente, nomeCampoDa, nomeCampoA, nomeCampoDaOra, nomeCampoAOra, nomeCampoNote, nomeCampoOggetto, nomeCampoNumber];
 
         var executeSearch = function(users) {
-
-            var deferred = $q.defer();
-
-            $q.all([arxivarResourceService.get('searches'), arxivarResourceService.get('searches/select/' + classe)])
+            var model = {};
+            return $q.all([arxivarResourceService.get('searches'), arxivarResourceService.get('searches/select/' + classe)])
                 .then(function(values) {
-                    return {
+                    model = {
                         searchModel: values[0],
                         selectModel: {
                             fields: values[1].fields,
                             maxItems: values[1].maxItems
                         }
                     };
-                }).then(function(model) {
 
                     //Preparo la search
                     var classeField = _.find(model.searchModel.fields, function(field) {
@@ -62,28 +62,25 @@ angular.module('arxivar.plugins.controller').controller('CalendarCtrl', [
                         }
                     });
 
-                    arxivarResourceService.get('searches/Additional/' + classe + '/' + 0 + '/' + 0).then(function(additionals) {
-                        _.forEach(additionals, function(additional) {
-                            if (additional.name === nomeCampoUtente) {
-                                additional.operator = 1;
-                                additional.multiple = users.join(';');
-                            }
-                            model.searchModel.fields.push(additional);
-                        });
-                        arxivarResourceService.getPost('searches', {
-                                searchFilterDto: model.searchModel,
-                                selectFilterDto: model.selectModel,
-                                maxItems: 0,
-                                daAAndOr: 0
-                            })
-                            .then(function(data) {
-                                deferred.resolve(data);
-                            });
+                    return arxivarResourceService.get('searches/Additional/' + classe + '/' + 0 + '/' + 0);
+                })
+                .then(function(additionals) {
+                    _.forEach(additionals, function(additional) {
+                        if (additional.name === nomeCampoUtente) {
+                            additional.operator = 1;
+                            additional.multiple = users.join(';');
+                        }
+                        model.searchModel.fields.push(additional);
+                    });
+                    return arxivarResourceService.getPost('searches', {
+                        searchFilterDto: model.searchModel,
+                        selectFilterDto: model.selectModel,
+                        maxItems: 0,
+                        daAAndOr: 0
                     });
                 });
-
-            return deferred.promise;
         };
+
 
         var getEvents = function(callback) {
 
@@ -94,7 +91,8 @@ angular.module('arxivar.plugins.controller').controller('CalendarCtrl', [
                     return false;
                 }
             }), 'user');
-            executeSearch(selectedUsers).then(function(data) {
+            executeSearch(selectedUsers).then(function(response) {
+                var data = response.data;
 
                 var result = [];
 
@@ -110,7 +108,7 @@ angular.module('arxivar.plugins.controller').controller('CalendarCtrl', [
                                 'id': nomeCampoUtente
                             });
                             if (colonnaUtente.value === user.user.toString()) {
-                                var start = new moment(_.find(row.columns, {
+                                var start = moment(_.find(row.columns, {
                                     'id': nomeCampoDa
                                 }).value);
                                 var startTime = _.find(row.columns, {
@@ -120,7 +118,7 @@ angular.module('arxivar.plugins.controller').controller('CalendarCtrl', [
                                 start.hour(parseInt(startTime.substring(0, 2)));
                                 start.minute(parseInt(startTime.substring(2)));
 
-                                var end = new moment(_.find(row.columns, {
+                                var end = moment(_.find(row.columns, {
                                     'id': nomeCampoA
                                 }).value);
                                 var endTime = _.find(row.columns, {
@@ -190,6 +188,7 @@ angular.module('arxivar.plugins.controller').controller('CalendarCtrl', [
                     center: 'basicWeek,month,agendaWeek,agendaDay,timelineMonth',
                     right: 'today prevYear,prev,next,nextYear'
                 },
+                locale: moment.locale(),
                 events: function(start, end, timezone, callback) {
                     getEvents(callback);
                 },
@@ -218,8 +217,8 @@ angular.module('arxivar.plugins.controller').controller('CalendarCtrl', [
 
                             $scope.event = {
                                 title: calEvent.title,
-                                start: moment(calEvent.start).format('L HH:mm'),
-                                end: moment(calEvent.end).format('L HH:mm'),
+                                start: calEvent.start.format('L HH:mm'),
+                                end: calEvent.end.format('L HH:mm'),
                                 notes: calEvent.notes
                             };
 
@@ -246,8 +245,8 @@ angular.module('arxivar.plugins.controller').controller('CalendarCtrl', [
                 arxivarResourceService.get('users')
             ])
             .then(function(result) {
-                var users = result[0];
-                var userService = result[1];
+                var userService = result[0];
+                var users = result[1];
 
                 var currentUser = _.find(users, {
                     'user': parseInt(userService.getUserId())
