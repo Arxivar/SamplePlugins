@@ -127,11 +127,14 @@ angular.module('arxivar.plugins.controller').controller('CalendarCtrl', [
                                 endTime = String('0000' + endTime).slice(-4);
                                 end.hour(parseInt(endTime.substring(0, 2)));
                                 end.minute(parseInt(endTime.substring(2)));
-
+                                var oggetto = _.find(row.columns, {
+                                    'id': nomeCampoOggetto
+                                }).value;
+                                var nota = _.find(row.columns, {
+                                    'id': nomeCampoNote
+                                }).value;
                                 userSource.events.push({
-                                    title: _.find(row.columns, {
-                                        'id': nomeCampoOggetto
-                                    }).value,
+                                    title: oggetto + ' - ' + nota,
                                     start: start.format(),
                                     end: end.format(),
                                     resourceId: user.user.toString(),
