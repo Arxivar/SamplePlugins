@@ -1,11 +1,3 @@
-// cdn fullcalendar
-var jQueryScript = document.createElement('script');
-jQueryScript.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.js');
-var jQueryScriptLocale = document.createElement('script');
-jQueryScriptLocale.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/locale-all.js');
-document.head.appendChild(jQueryScript);
-document.head.appendChild(jQueryScriptLocale);
-
 angular.module('arxivar.plugins.controller').controller('CalendarCtrl', [
     '$scope', 'Calendar', 'arxivarResourceService', 'arxivarUserServiceCreator', '_', '$window', '$q', '$uibModal', 'moment', 'arxivarDocumentsService', 'arxivarRouteService',
     function($scope, Calendar, arxivarResourceService, arxivarUserServiceCreator, _, $window, $q, $uibModal, moment, arxivarDocumentsService, arxivarRouteService) {
