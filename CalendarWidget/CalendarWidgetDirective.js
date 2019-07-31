@@ -1,7 +1,7 @@
 angular.module('arxivar.plugins.directives')
     .directive('calendarwidgetdirective', [
-        'CalendarWidget', '_', 'arxivarResourceService', '$q', '$interval', 'documentsService', 'moment',
-        function(CalendarWidget, _, arxivarResourceService, $q, $interval, documentsService, moment) {
+        'CalendarWidget', '_', 'arxivarResourceService', '$q', '$interval', 'documentsService', 'moment', 'arxivarNotifierService',
+        function (CalendarWidget, _, arxivarResourceService, $q, $interval, documentsService, moment, arxivarNotifierService) {
             return {
                 restrict: 'E',
                 scope: {
@@ -9,7 +9,7 @@ angular.module('arxivar.plugins.directives')
                     desktopId: '=?'
                 },
                 templateUrl: './Scripts/plugins/CalendarWidget/CalendarWidget.html',
-                link: function(scope) {
+                link: function (scope) {
 
                     var classe = CalendarWidget.plugin.customSettings[6].value;
                     var nomeCampoUtente = CalendarWidget.plugin.customSettings[0].value;;
@@ -25,17 +25,17 @@ angular.module('arxivar.plugins.directives')
                     scope.nowHoursString = moment().format('H:mm:ss');
 
 
-                    $interval(function() {
+                    $interval(function () {
                         scope.nowHoursString = moment().format('H:mm:ss');
                     }, 1000);
 
 
                     var campiSelect = [nomeCampoUtente, nomeCampoDa, nomeCampoA, nomeCampoDaOra, nomeCampoAOra, nomeCampoNote, nomeCampoOggetto, nomeCampoNumber];
 
-                    var executeSearch = function(users, start, end) {
+                    var executeSearch = function (users, start, end) {
                         var model = {};
                         return $q.all([arxivarResourceService.get('searches'), arxivarResourceService.get('searches/select/' + classe)])
-                            .then(function(values) {
+                            .then(function (values) {
                                 model = {
                                     searchModel: values[0],
                                     selectModel: {
@@ -45,7 +45,7 @@ angular.module('arxivar.plugins.directives')
                                 };
 
                                 //Preparo la search
-                                var classeField = _.find(model.searchModel.fields, function(field) {
+                                var classeField = _.find(model.searchModel.fields, function (field) {
                                     return (field.className === 'FieldBaseForSearchDocumentTypeDto');
                                 });
 
@@ -57,7 +57,7 @@ angular.module('arxivar.plugins.directives')
                                     type3: 0
                                 };
 
-                                _.forEach(campiSelect, function(fieldName) {
+                                _.forEach(campiSelect, function (fieldName) {
                                     var campo = _.find(model.selectModel.fields, {
                                         'name': fieldName
                                     });
@@ -68,8 +68,8 @@ angular.module('arxivar.plugins.directives')
 
                                 return arxivarResourceService.get('searches/Additional/' + classe + '/' + 0 + '/' + 0);
                             })
-                            .then(function(additionals) {
-                                _.forEach(additionals, function(additional) {
+                            .then(function (additionals) {
+                                _.forEach(additionals, function (additional) {
                                     if (additional.name === nomeCampoUtente) {
                                         additional.operator = 1;
                                         additional.multiple = users.join(';');
@@ -90,18 +90,18 @@ angular.module('arxivar.plugins.directives')
                             });
                     };
 
-                    var init = function() {
+                    var init = function () {
                         arxivarResourceService.get('users')
-                            .then(function(users) {
+                            .then(function (users) {
                                 scope.users = users;
                                 var end = moment().hours(23).minutes(59).format();
-                                executeSearch(_.map(scope.users, function(ut) {
+                                executeSearch(_.map(scope.users, function (ut) {
                                     return ut.user;
-                                }), moment().hours(0).minutes(0).format(), end).then(function(response) {
+                                }), moment().hours(0).minutes(0).format(), end).then(function (response) {
                                     var data = response.data;
                                     var result = [];
 
-                                    _.forEach(data, function(row) {
+                                    _.forEach(data, function (row) {
 
                                         var start = moment(_.find(row.columns, {
                                             'id': nomeCampoDa
@@ -145,11 +145,14 @@ angular.module('arxivar.plugins.directives')
                                     });
 
                                     scope.events = result;
+                                    if (scope.events && scope.events.length > 0) {
+                                        arxivarNotifierService.notifyInfo('Oggi hai ' + scope.events.length + ' appuntamenti')
+                                    }
                                 });
                             });
                     };
 
-                    scope.downloadDocument = function(calendarEvent) {
+                    scope.downloadDocument = function (calendarEvent) {
                         if (_.has(calendarEvent, 'docNumber') && !_.isNil(calendarEvent.docNumber)) {
                             documentsService.getForProfile(calendarEvent.docNumber).then(documentsService.downloadStream);
                         }
