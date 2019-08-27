@@ -1,6 +1,6 @@
 angular.module('arxivar.plugins.directives').directive('meteowidgetdirective', [
     'MeteoWidget', 'pluginService', '_',
-    function(MeteoWidget, pluginService, _) {
+    function (MeteoWidget, pluginService, _) {
         return {
             restrict: 'E',
             scope: {
@@ -8,14 +8,14 @@ angular.module('arxivar.plugins.directives').directive('meteowidgetdirective', [
                 desktopId: '=?'
             },
             templateUrl: 'Scripts/plugins/MeteoWidget/MeteoWidget.html',
-            link: function(scope, element) {
+            link: function (scope, element) {
                 var $mainContainer = $(element).find('div.arx-' + MeteoWidget.plugin.name.toLowerCase());
                 if ($mainContainer.length > 0) {
                     $mainContainer.addClass(scope.instanceId);
                 }
-                var searchWeather = function(city) {
+                var searchWeather = function (city) {
                     if ($(element.find('.weather-temperature')).openWeather === undefined) {
-                        setTimeout(function() {
+                        setTimeout(function () {
                             searchWeather(city);
                         }, 1000);
                         return;
@@ -33,16 +33,16 @@ angular.module('arxivar.plugins.directives').directive('meteowidgetdirective', [
                         sunsetTarget: $mainContainer.find('.weather-sunset'),
                         placeTarget: $mainContainer.find('.weather-place'),
                         iconTarget: $mainContainer.find('.weather-icon'),
-                        success: function() {
+                        success: function () {
                             $('.weather-wrapper').removeClass('hide');
                         },
-                        error: function(err) {
+                        error: function (err) {
                             console.log('Problems calling openWeather api', err);
                         }
                     });
                 };
 
-                var setUserSettings = function() {
+                var setUserSettings = function () {
                     pluginService.setPluginByUser({
                         pluginId: MeteoWidget.plugin.id,
                         desktopId: scope.desktopId,
@@ -58,12 +58,12 @@ angular.module('arxivar.plugins.directives').directive('meteowidgetdirective', [
                     ]);
                 };
 
-                var setColor = function(color) {
+                var setColor = function (color) {
                     $mainContainer.find('.weather-wrapper').css('backgroundColor', color);
                     setUserSettings();
                 };
 
-                scope.showMeteo = function() {
+                scope.showMeteo = function () {
                     if (scope.selectedCity) {
                         searchWeather(scope.selectedCity);
                         setUserSettings();
@@ -84,21 +84,22 @@ angular.module('arxivar.plugins.directives').directive('meteowidgetdirective', [
                     },
                 ];
 
-                scope.selectColor = function(color) {
+                scope.selectColor = function (color) {
                     scope.selectedColor = color.value;
                     setColor(color.value);
                 };
 
 
-                var init = function() {
+                var init = function () {
 
                     pluginService.getPluginByUser({
                         pluginId: MeteoWidget.plugin.id,
                         desktopId: scope.desktopId,
                         instanceId: scope.instanceId
-                    }).then(function(settings) {
+                    }).then(function (settings) {
                         if (_.isNil(settings) || _.isNil(settings.userSettings)) {
                             scope.selectedCity = 'Montichiari';
+
                             scope.selectedColor = scope.colors[0].value;
                         } else {
                             scope.selectedCity = _.some(settings.userSettings, {
@@ -112,6 +113,11 @@ angular.module('arxivar.plugins.directives').directive('meteowidgetdirective', [
                                 name: 'selectedColor'
                             }).value : scope.colors[0].value;
                         }
+                        MeteoWidget.plugin.setTitle({
+                            id: MeteoWidget.plugin.id,
+                            instanceId: scope.instanceId,
+                            title: 'Meteo ' + scope.selectedCity
+                        });
                         searchWeather(scope.selectedCity);
                         setColor(scope.selectedColor);
                     });
