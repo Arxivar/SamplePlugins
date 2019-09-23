@@ -1,25 +1,34 @@
-
-            <div class="arx-calendar">
-                <h3>
-                    <i class="fa fa-calendar"> </i> <span>Calendario</span>
-                </h3> 
-                        <div id="container" class="arx-calendar__container">
-                            <div class="arx-calendar__user-list">
-                                <div style="margin-bottom: 20px;">
-                                    <span class="fa fa-user fa-2x"></span><h2 style="display: inline">Utenti</h2>
-                                </div>
-								<div style="height:100%; overflow: auto;">
-									<div class="arx-calendar__user-element" ng-repeat="user in users" style="padding-bottom: 2px;margin-top: 2px;">
-										<input class="arx-calendar__user-check" icheck type="checkbox" ng-model="user.selected" />
-										<span class="arx-calendar__user-name" >{{user.completeName}}</span>
-										<div style="display: inline-block; height: 10px; width: 5px;background-color: {{user.color}};margin-bottom: -3px;"></div>
-									</div>
-								</div>
-                            </div>
-                            <div id="calendar"></div>
-                        </div>
+<div class="arx-calendar">
+    <h3>
+        <i class="fa fa-calendar"> </i> <span>Calendario</span>
+    </h3>
+    <div id="container" class="arx-calendar__container">
+        <div class="arx-calendar__user-list">
+            <div style="margin-bottom: 20px;">
+                <span class="fa fa-user fa-2x"></span>
+                <h2 style="display: inline">Utenti</h2>
+            </div>
+            <div style="height:100%; overflow: auto;">
+                <div class="arx-calendar__user-element" ng-repeat="user in users"
+                    style="padding-bottom: 2px;margin-top: 2px;">
+                    <input class="arx-calendar__user-check" icheck type="checkbox" ng-model="user.selected" />
+                    <span class="arx-calendar__user-name">{{user.completeName}}</span>
+                    <div
+                        style="display: inline-block; height: 10px; width: 5px;background-color: {{user.color}};margin-bottom: -3px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="calendar"></div>
+    </div>
 
 </div>
 <link rel="stylesheet" href="Scripts/plugins/Calendar/fullcalendar.min.css" />
 <link rel="stylesheet" href="Scripts/plugins/Calendar/Calendar.css" />
-<script type="text/javascript" src="Scripts/plugins/Calendar/fullcalendar.min.js"></script>
+<script type="text/javascript">
+    if (!$.fullCalendar) {
+        var fullCalendarSrc = document.createElement('script');
+        fullCalendarSrc.setAttribute('src', 'Scripts/plugins/Calendar/fullcalendar.min.js');
+        document.head.appendChild(fullCalendarSrc);
+    }
+</script>
