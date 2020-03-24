@@ -1,1 +1,8 @@
+.CalendarWidget__header {
+    padding-bottom: 20px;
+    max-height: 95px;
+}
 
+.CalendarWidget__body {
+    display: block;
+}
