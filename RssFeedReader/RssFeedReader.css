@@ -1,26 +1,35 @@
-.arx-arxivarinfo{
+.arx-arxivarinfo {}
 
-}
-.arx-arxivarinfo img{
-  width: auto!important;
-  height: auto!important;
-  max-width: 150px;
-  max-height: 150px;
+.arx-arxivarinfo img {
+    width: auto !important;
+    height: auto !important;
+    max-width: 150px;
+    max-height: 150px;
 }
 
 .arx-arxivarinfo .panel-group {
-  margin-left: 0px;
-  margin-right: 35px;
+    margin-left: 0px;
+    margin-right: 35px;
 }
 
 .fast-spin {
-  -webkit-animation: fa-spin 1s infinite linear;
-  animation: fa-spin 1s infinite linear;
+    -webkit-animation: fa-spin 1s infinite linear;
+    animation: fa-spin 1s infinite linear;
 }
 
-.no-border-radius{
-  border-radius: 0px;
+.no-border-radius {
+    border-radius: 0px;
 }
+
 .arx-arxivarinfo .feedTitle {
-  font-weight: 600;
+    font-weight: 600;
+}
+
+
+.RssFeedReader__header {
+    display: flex
+}
+
+.RssFeedReader__title {
+    flex-grow: 1
 }

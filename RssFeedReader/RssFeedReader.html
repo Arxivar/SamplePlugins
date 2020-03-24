@@ -19,14 +19,20 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <h4>
-                                <a class="collapse-link" style="margin-right:15px" data-toggle="collapse"
-                                    href="/#collapse{{$index + instanceId}}">
-                                    <i class="fa fa-chevron-down fa-lg"></i>
-                                    <span style="margin-right:5px">{{feed.title}}</span>
-                                </a>
-                                <a target="_blank" href="{{feed.link}}">
-                                    <i class="fa fa-external-link fa-lg"></i>
-                                </a>
+                                <div class="RssFeedReader__header">
+                                    <div class="RssFeedReader__title">
+                                        <a class="collapse-link" style="margin-right:15px" data-toggle="collapse"
+                                            href="/#collapse{{$index + instanceId}}">
+                                            <i class="fa fa-chevron-down fa-lg"></i>
+                                            <span style="margin-right:5px">{{feed.title}}</span>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a target="_blank" href="{{feed.link}}">
+                                            <i class="fa fa-external-link fa-lg"></i>
+                                        </a>
+                                    </div>
+                                </div>
                             </h4>
                             <p class="small text-left">{{feed.formattedPubDate}}</p>
                         </h4>
