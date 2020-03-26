@@ -9,7 +9,7 @@ angular.module('arxivar.plugins').factory('SendSystemIdCommand', [
             label: 'SendSystemId', // User Interface label (type: string)
             description: 'Command for send a systemId to a plugin route', // Plugin description (type: string)
             author: 'Abletech srl', // Plugin author (type: string)
-            minVersion: '2.2.0', // Minimun portal version this plugin supports. (type: string, format example: 0.0.1)
+            minVersion: '2.3.0', // Minimun portal version this plugin supports. (type: string, format example: 0.0.1)
             requireRefresh: false, // If this plugin requires grid data refresh (type boolean. Default: false)
             icon: 'fas fa-arrow-square-right'
         };
