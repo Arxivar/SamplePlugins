@@ -151,27 +151,3 @@ angular.module('arxivar.plugins').factory('feedService',
         }
     ]);
 
-	
-	// https://cors-anywhere.herokuapp.com/ 
-	//sostituito CORS_PROXY perchè cors-anywhere è limitato dal 31-01-2021
-
-
-	//prova mal riuscita
-	/* angular.module('arxivar.plugin').factory('feedService',
-	[,
-		function () {
-			let Parser = require('rss-parser');
-		let parser = new Parser();
-
-		(async () => {
-
- 		 let feed = await parser.parseURL('https://www.reddit.com/.rss');
-  		console.log(feed.title);
-
-  		feed.items.forEach(item => {
-   		 console.log(item.title + ':' + item.link);
-  });
-
-})();
-
-		}]); */
