@@ -1,6 +1,6 @@
 angular.module('arxivar.plugins.directives').directive('rssfeedreaderdirective', [
-    '$interval', '$log', '$state', 'RssFeedReader', 'pluginService', '_', 'feedService', 'moment',
-    function ($interval, $log, $state, RssFeedReader, pluginService, _, feedService, moment) {
+    '$interval', '$log', '$state', 'RssFeedReader', 'pluginService', '_', 'feedService', 'moment','arxivarNotifierService',
+    function ($interval, $log, $state, RssFeedReader, pluginService, _, feedService, moment, arxivarNotifierService) {
         return {
             restrict: 'E',
             scope: {
@@ -64,12 +64,22 @@ angular.module('arxivar.plugins.directives').directive('rssfeedreaderdirective',
 
                 scope.loadFeeds = loadFeeds;
 
+				scope.resetUrl = function() {
+					scope.feedUrl = '';
+					scope.feedItems = '';
+					arxivarNotifierService.notifyInfo('Hai eliminato l\'url del feed');
+				};
+
+				scope.listUrl = function() {
+					scope.feedUrl = 'https://www.ansa.it/sito/ansait_rss.xml';
+				};
+
                 var refreshFeeds = function () {
                     $interval(function () {
                         loadFeeds();
                     }, 60000);
                 };
-
+				
 
                 var init = function () {
                     var setFeedUrl = function (settings) {
@@ -126,11 +136,12 @@ angular.module('arxivar.plugins').factory('feedService',
             document.head.appendChild(jQueryScript);
 
             var _parseFeeds = function (url) {
-                var CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
+                var CORS_PROXY = 'https://thingproxy.freeboard.io/fetch/';
                 var parser = new RSSParser();
                 var defer = $q.defer();
                 parser.parseURL(CORS_PROXY + url, function (err, feed) {
                     defer.resolve(feed.items);
+					if (err) { throw err; } ; 
                 });
                 return defer.promise;
             };
@@ -139,3 +150,28 @@ angular.module('arxivar.plugins').factory('feedService',
             };
         }
     ]);
+
+	
+	// https://cors-anywhere.herokuapp.com/ 
+	//sostituito CORS_PROXY perchè cors-anywhere è limitato dal 31-01-2021
+
+
+	//prova mal riuscita
+	/* angular.module('arxivar.plugin').factory('feedService',
+	[,
+		function () {
+			let Parser = require('rss-parser');
+		let parser = new Parser();
+
+		(async () => {
+
+ 		 let feed = await parser.parseURL('https://www.reddit.com/.rss');
+  		console.log(feed.title);
+
+  		feed.items.forEach(item => {
+   		 console.log(item.title + ':' + item.link);
+  });
+
+})();
+
+		}]); */
