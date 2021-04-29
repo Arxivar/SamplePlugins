@@ -1,6 +1,6 @@
 angular.module('arxivar.plugins.directives').directive('meteowidgetdirective', [
-    'MeteoWidget', 'pluginService', '_',
-    function (MeteoWidget, pluginService, _) {
+    'MeteoWidget', 'pluginService', '_','arxivarNotifierService',
+    function (MeteoWidget, pluginService, _, arxivarNotifierService) {
         return {
             restrict: 'E',
             scope: {
@@ -58,6 +58,36 @@ angular.module('arxivar.plugins.directives').directive('meteowidgetdirective', [
                     ]);
                 };
 
+
+				const Http = new XMLHttpRequest();
+				function getApi(url) {
+					Http.open('GET', url);
+					Http.send();
+					Http.onreadystatechange = function () {
+						if (this.readyState === 4 && this.status === 200) {
+							console.log(JSON.parse(this.response));
+							var parsed = JSON.parse(this.response);
+							scope.selectedCity = parsed.locality;
+
+						}
+					};
+				} 
+
+				scope.getPosition = function() {
+
+					if (!navigator.geolocation) {
+						arxivarNotifierService.notifyError('Geolocalizzazione non supportata o disabilitata dal browser corrente');
+					} else {
+						navigator.geolocation.getCurrentPosition((position) => {
+							//console.log('long: ' + position.coords.longitude,'lat: ' + position.coords.latitude);
+							var revPosition = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude;
+							getApi(revPosition);
+							}
+						);
+					}
+				};
+
+
                 var setColor = function (color) {
                     $mainContainer.find('.weather-wrapper').css('backgroundColor', color);
                     setUserSettings();
@@ -67,6 +97,11 @@ angular.module('arxivar.plugins.directives').directive('meteowidgetdirective', [
                     if (scope.selectedCity) {
                         searchWeather(scope.selectedCity);
                         setUserSettings();
+						MeteoWidget.plugin.setTitle({
+                            id: MeteoWidget.plugin.id,
+                            instanceId: scope.instanceId,
+                            title: 'Meteo ' + scope.selectedCity
+                        });
                     }
                 };
 
@@ -113,13 +148,16 @@ angular.module('arxivar.plugins.directives').directive('meteowidgetdirective', [
                                 name: 'selectedColor'
                             }).value : scope.colors[0].value;
                         }
-                        MeteoWidget.plugin.setTitle({
+
+                        
+                        searchWeather(scope.selectedCity);
+                        setColor(scope.selectedColor);
+						
+						MeteoWidget.plugin.setTitle({
                             id: MeteoWidget.plugin.id,
                             instanceId: scope.instanceId,
                             title: 'Meteo ' + scope.selectedCity
                         });
-                        searchWeather(scope.selectedCity);
-                        setColor(scope.selectedColor);
                     });
                 };
                 init();
