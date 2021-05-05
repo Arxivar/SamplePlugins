@@ -1,0 +1,44 @@
+<div class="modal-header">
+	<h3 class="modal-title">Concludi o elimina processi</h3>
+</div>
+<div class="modal-body">
+	Selezionare il documento
+	<div ng-repeat='doc in documents'>
+		<button class="btn btn-primary" type="button" ng-model='doc'>{{doc.docnumbers}}</button>
+	</div>
+	<div ng-repeat='processhistory in processHistories'> {{processhistory.name}}
+		<button class="btn btn-primary" type="button" ng-click='stop(processhistory)'>CONCLUDI</button>
+		<button class="btn btn-primary" type="button" ng-click='delete(processhistory)'>ELIMINA</button>
+	</div>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-danger" type="button" ng-click="cancel()">ANNULLA</button>
+</div>
+
+
+
+'<div class="modal-header">' +
+	'<h3 class="modal-title">Concludi o elimina processi</h3>' +
+	'</div><div ng-repeat="nome in nomeDocumenti">{{nome}} </div>' +
+	'<div ng-repeat="storia in storielle">{{storia.id}} - {{storia.name}} - {{storia.description}}</div>' +
+	'<div class="modal-body">Selezionare il documento <div ng-repeat="doc in documents">ID:{{doc[0].id}} - {{doc[0].name}} - {{doc[0].description}}</div>' +
+	'<div ng-repeat="processHistory in processHistories"> {{processhistory.name}}' +
+	'<button class="btn btn-primary" type="button" ng-click="stop(processhistory)">CONCLUDI</button>' +
+	'<button class="btn btn-primary" type="button" ng-click="delete(processhistory)">ELIMINA</button>' +
+	'</div></div><div class="modal-footer">' +
+	'<button class="btn btn-danger" type="button" ng-click="cancel()">ANNULLA</button></div>',
+
+
+
+
+	template: '<div class="modal-header">' +
+		'<h3 class="modal-title">Concludi o elimina processi</h3>' +
+		'</div>Selezionare un documento ' +
+		'<select><option ng-repeat="doc in allDocs" ng-click="select(doc.DOCNUMBER)">ID documento: {{doc.DOCNUMBER}} - {{doc.DOCNAME}}</option></select>' +
+		'<div ng-repeat="doc in allDocs" ng-click="select(doc.DOCNUMBER)"><h4>ID documento: {{doc.DOCNUMBER}} - {{doc.DOCNAME}}</h4></div>' +
+		'<table class="table" ng-show ="visualizza" > <tr><th>ID</th> <th>Nome</th> <th>Descrizione</th> <th></th> <th></th> </tr>' +
+		'<tr ng-repeat="process in allProcess"> <td>{{process.id}}</td> <td>{{process.name}}</td> <td>{{process.description}}</td>' +
+		'<td><button class="btn btn-primary" type="button" ng-click="stop(process.id)">CONCLUDI</button></td>' +
+		'<td><button class="btn btn-primary" type="button" ng-click="delete(process.id)">ELIMINA</button></div></td> </tr> </table>' +
+		'</div></div><div class="modal-footer">' +
+		'<button class="btn btn-primary" type="button" ng-click="cancel()">ESCI</button></div>',

@@ -1,12 +1,12 @@
 [![Arxivar](http://portal.arxivar.it/download/resources/loghi/Logo-ARXivar_orizzontale-nero.png)](http://www.arxivar.it/)
 
-# Object Cloner plugin
+# Concludi Workflow plugin
 
-> Sample route implementation for ArxivarNext, allows you to clone views, models or reports.
+> Sample command implementation for ArxivarNext 
 
 ## Installation
 
-* In order to install this plugin in ARXivar Next, just put the plugin folder (`ObjectCloner`) in your plugin installation folder (e.g. `MyDrive:\Program Files (x86)\Able Tech S.r.l\ARXivarNext WebPortal\Scripts\plugins`)
+* In order to install this plugin in ARXivar Next, just put the plugin folder (`ConcludiWorkflow`) in your plugin installation folder (e.g. `MyDrive:\Program Files (x86)\Able Tech S.r.l\ARXivarNext WebPortal\Scripts\plugins`)
 
 _Note: this plugin is provided as a support for learning activities, it's not recommended its use in production environment. Use this as a 'draft' for creating your plugins._
 
@@ -14,7 +14,7 @@ _Note: Instructions for plugin creation can be found at [generator-arxivar-plugi
 
 ## Plugin specification
 
-This route plugin allows you to clone views, models or reports .
+This command plugin allows you to conclude or delete all processes related to the selected documents .
 
 Once you've added the plugin to your installation, you WON'T NEED to configure it.
 
@@ -22,8 +22,8 @@ Once you've added the plugin to your installation, you WON'T NEED to configure i
 
 ## Adding the plugin to the profiles commands
 
-In order to add the plugin to the profiles command list, just edit your command layout and add the `ObjectCloner` item in the position you want 
-_(the ObjectCloner entry is shown below the plugin group)_, then save the layout.
+In order to add the plugin to the profiles command list, just edit your command layout and add the `ConcludiWorkflow` item in the position you want 
+_(the ConcludiWorkflow entry is shown below the plugin group)_, then save the layout.
 
 ## License
 
