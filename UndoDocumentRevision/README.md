@@ -18,8 +18,6 @@ This command plugin allows you to restore the previous revision for the selected
 
 Once you've added the plugin to your installation, you WON'T NEED to configure it.
 
-
-
 ## Adding the plugin to the profiles commands
 
 In order to add the plugin to the profiles command list, just edit your command layout and add the `UndoDocumentRevision` item in the position you want 

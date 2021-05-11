@@ -16,13 +16,13 @@ _Note: Instructions for plugin creation can be found at [generator-arxivar-plugi
 
 This route plugin allows you to clone views, models or reports .
 
-Once you've added the plugin to your installation, you WON'T NEED to configure it.
+Once you've added the plugin to your installation, you won't need to configure it.
 
 
 
 ## Adding the plugin to the profiles commands
 
-In order to add the plugin to the profiles command list, just edit your command layout and add the `ObjectCloner` item in the position you want 
+In order to add the route plugin to the menu, just edit your menu layout and add the `ObjectCloner` item in the position you want .
 _(the ObjectCloner entry is shown below the plugin group)_, then save the layout.
 
 ## License

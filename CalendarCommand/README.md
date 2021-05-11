@@ -22,7 +22,6 @@ Once you've added the plugin to your installation, you will need to configure it
 
 > :exclamation: **This configuration part is common with calendar plugin and calendar widget plugin. Therefore, if you have already configured one of these plugins skip this section**
 
-
 The Calendar command plugin requires the creation of a specific DocumentType class on the first level of DocumentTypes ARXivar tree.
 
 _(The class name is not important)_
