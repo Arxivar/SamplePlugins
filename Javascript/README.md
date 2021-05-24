@@ -1,5 +1,5 @@
 [![Arxivar](http://portal.arxivar.it/download/resources/loghi/Logo-ARXivar_orizzontale-nero.png)](http://www.arxivar.it/)
-# sample-plugins
+# sample-plugins in Javascript [![Javascript](javascript.png)]
 
 > Some sample plugins for ARXivar Next
 

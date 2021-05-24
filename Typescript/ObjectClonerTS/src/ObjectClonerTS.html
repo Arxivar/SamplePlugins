@@ -1,0 +1,37 @@
+<div class="arx-objectclonerts">
+  <uib-tabset active="activeForm">
+    <uib-tab index="0" heading="Viste">
+      <input class="arx-search" type="text" placeholder="&#xf002; Cerca vista..." ng-model="viewObj.search"></input>
+      <div class="arx-repeat" ng-repeat="view in viewObj.filteredViews">{{view.description}} - {{view.documentTypeDescription}}
+        <span class="arx-span" ng-click="viewObj.cloneViewFunction(viewObj.currentPage,view)"><i class="fas fa-clone" title="clona"></i></span>
+      </div>
+      <ul uib-pagination total-items="viewObj.totalItems" ng-model="viewObj.currentPage"
+        boundary-links='viewObj.boundaryLinks' max-size='viewObj.maxSize' items-per-page="viewObj.itemsPerPage"
+        class="pagination-sm  arx-pagination" boundary-link-numbers="true" rotate="false" previous-text="&lsaquo;"
+        next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+    </uib-tab>
+
+    <uib-tab index="1" heading="Modelli">
+      <input class="arx-search" type="text" placeholder="&#xf002; Cerca modello..." ng-model="modelObj.search"></input>
+      <div class="arx-repeat" ng-repeat="model in modelObj.filteredModels">{{model.groupName}} - {{model.description}}
+        <span class="arx-span" ng-click="modelObj.cloneModelFunction(modelObj.currentPage,model)"><i class="fas fa-clone" title="clona"></i></span>
+      </div>
+      <ul uib-pagination total-items="modelObj.totalItems" ng-model="modelObj.currentPage"
+        boundary-links='modelObj.boundaryLinks' max-size='modelObj.maxSize' item-per-page="modelObj.itemsPerPage"
+        class="pagination-sm  arx-pagination" boundary-link-numbers="true" rotate="false" previous-text="&lsaquo;"
+        next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+    </uib-tab>
+
+    <uib-tab index="2" heading="Report">
+      <input class="arx-search" type="text" placeholder="&#xf002; Cerca report..." ng-model="reportObj.search"></input>
+      <div class="arx-repeat" ng-repeat="report in reportObj.filteredReports">{{report.name}} - {{report.description}}
+        <span class="arx-span" ng-click="reportObj.cloneReportFunction(reportObj.currentPage, report)"><i class="fas fa-clone" title="clona"></i></span>
+      </div>
+      <ul uib-pagination total-items="reportObj.totalItems" ng-model="reportObj.currentPage"
+        boundary-links='reportObj.boundaryLinks' max-size='reportObj.maxSize' item-per-page="reportObj.itemsPerPage"
+        class="pagination-sm  arx-pagination" boundary-link-numbers="true" rotate="false" previous-text="&lsaquo;"
+        next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+    </uib-tab>
+  </uib-tabset>
+
+</div>
