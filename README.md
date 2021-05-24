@@ -1,5 +1,5 @@
 [![Arxivar](http://portal.arxivar.it/download/resources/loghi/Logo-ARXivar_orizzontale-nero.png)](http://www.arxivar.it/)
-# sample-plugins in Javascript ![Javascript](javascript.png)
+# sample-plugins in Javascript ![Javascript](Javascript/javascript.png)
 
 > Some sample plugins for ARXivar Next
 
@@ -27,7 +27,7 @@ This repository contains these Javascript plugins:
   - [UndoDocumentRevision](Javascript/UndoDocumentRevision/README.md)
   
   
-  # sample-plugins in Typescript ![Typescript](typescript.png)
+  # sample-plugins in Typescript ![Typescript](Typescript/typescript.png)
 
 
 > Some sample plugins for ARXivar Next
