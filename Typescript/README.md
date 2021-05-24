@@ -18,7 +18,7 @@
   npm run webpack
 ```
 
-_Remember: if you specify the path in the options, you'll not need to follow the steps below. Your plugin already running in ARXivar.
+_Remember: if you specify the path in the options, you'll not need to follow the steps below. Your plugin already running in ARXivar._
 
 - now a new subfolder named '`(e.g. `CalendarWidget`)`' has been created, in this folder you will find the javascript compiled files. 
 
