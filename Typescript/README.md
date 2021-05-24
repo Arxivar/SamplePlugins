@@ -1,5 +1,5 @@
 [![Arxivar](http://portal.arxivar.it/download/resources/loghi/Logo-ARXivar_orizzontale-nero.png)](http://www.arxivar.it/)
-# sample-plugins in Typescript [![Typescript](typescript.png)]
+# sample-plugins in Typescript ![Typescript](typescript.png)
 
 
 > Some sample plugins for ARXivar Next
