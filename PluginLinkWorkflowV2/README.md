@@ -22,7 +22,7 @@ _Attention: if it's a Typescript plugin don't forget to run the command ```npm i
 
 ### How to use the CLI
 
-- Open a command prompt and use the instruction below into `"C:\path to workflow service"` to run the CLI and see possible options:
+- Open a command prompt and use the instruction below into `"C:\..\..\ARXivarNext Workflow Service\wf-plugin.exe""` to run the CLI and see possible options:
   
 ```bash
   wf-plugin.exe help
