@@ -42,7 +42,7 @@ _Attention: if it's a Typescript plugin don't forget to run the command ```npm i
 - To delete the plugin run the delete command (use  ```wf-plugin.exe list``` if you don't remember the Assembly name ) :
 
 ```bash
-  wf-plugin.exe delete -a youProject
+  wf-plugin.exe delete -a yourProject
 ```
 ## Repository content
 This repository contains these link plugins:
