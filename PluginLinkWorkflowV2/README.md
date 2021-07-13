@@ -31,12 +31,12 @@ _Attention: if it's a Typescript plugin don't forget to run the command ```npm i
 - Upload your plugin into Arxivar as in this example:
 
 ```bash
-  wf-plugin.exe upload -p your\plugin\path\folder\youProject.zip
+  wf-plugin.exe upload -p your\plugin\path\folder\yourProject.zip
 ```
 - If you have to edit your plugin, rebuild the solution after finishing the changes then run the update command:
 
 ```bash
-  wf-plugin.exe update -p your\plugin\path\folder\youProject.zip
+  wf-plugin.exe update -p your\plugin\path\folder\yourProject.zip
 ```
 
 - To delete the plugin run the delete command (use  ```wf-plugin.exe list``` if you don't remember the Assembly name ) :
