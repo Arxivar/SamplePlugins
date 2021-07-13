@@ -25,6 +25,8 @@ This repository contains these Javascript plugins:
   - [SendSystemIdCommand](Javascript/SendSystemIdCommand/README.md)
   - [ShowParamsPluginRoute](Javascript/ShowParamsPluginRoute/README.md)
   - [UndoDocumentRevision](Javascript/UndoDocumentRevision/README.md)
+
+You can either download the .zip file or clone the repo.
   
   
   # sample-plugins in Typescript ![Typescript](Typescript/typescript.png)
@@ -64,6 +66,28 @@ This repository contains these Typescript plugins:
   - [UndoDocumentRevisionTS](Typescript/UndoDocumentRevisionTS/README.md)
 
 You can either download the .zip file or clone the repo.
+
+
+# sample-plugins Link Workflow V2
+
+> Some sample plugins for ARXivar Next
+
+## Installation
+
+* Click [here](https://github.com/Arxivar/SamplePlugins/tree/dev/PluginLinkWorkflowV2/) in order to install a plugin  link in ARXivar Next.
+
+_Note: These plugins are provided as a support for learning activities, it's not recommended their use in production environment. Use them as a 'draft' for creating your plugins._
+
+_Note: Instructions for plugin creation can be found at [generator-arxivar-plugin](https://github.com/Arxivar/PluginGenerator/blob/master/README.md)._
+
+## Repository content
+This repository contains these link Workflow V2 plugins:
+  - [Plugin link 1](Javascript/Calendar/README.md)
+  - [Plugin link 2](Javascript/CalendarCommand/README.md)
+  - [Plugin link 3](Javascript/CalendarWidget/README.md)
+
+You can either download the .zip file or clone the repo.
+
 
 ## License
 
