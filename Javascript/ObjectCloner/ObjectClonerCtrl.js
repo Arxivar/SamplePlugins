@@ -20,10 +20,9 @@ angular.module('arxivar.plugins.controller').controller('ObjectClonerCtrl',
 				return newArr;
 			};
 
-
 			//***************************************************VIEW**********************************************
 			function onInitView() {
-				$scope.filterObj = {
+				$scope.viewsObj = {
 					search: '',
 					currentPage: 1,
 					itemsPerPage: 10,
@@ -44,10 +43,11 @@ angular.module('arxivar.plugins.controller').controller('ObjectClonerCtrl',
 								return arxivarResourceService.get('v3/Views');
 							})
 							.then(function(views) {
+								arxivarNotifierService.notifySuccess('Operazione andata a buon fine');
 								$scope.allViews = _.sortBy(views, ['description']);
-								$scope.filterObj.filteredViews = _.cloneDeep($scope.allViews);
-								$scope.filterObj.totalItems = $scope.filterObj.filteredViews.length;
-								$scope.filterObj.filteredViews = pagination($scope.filterObj.filteredViews, $scope.filterObj.currentPage, $scope.filterObj.itemsPerPage);
+								$scope.viewsObj.filteredViews = _.cloneDeep($scope.allViews);
+								$scope.viewsObj.totalItems = $scope.viewsObj.filteredViews.length;
+								$scope.viewsObj.filteredViews = pagination($scope.viewsObj.filteredViews, $scope.viewsObj.currentPage, $scope.viewsObj.itemsPerPage);
 							})
 							.catch(function(err) {
 								arxivarNotifierService.notifyError(err);
@@ -55,48 +55,43 @@ angular.module('arxivar.plugins.controller').controller('ObjectClonerCtrl',
 					}
 				};
 
-
 				arxivarResourceService.get('v3/Views')
 					.then(function(views) {
 						$scope.allViews = _.sortBy(views, ['description']);
-						$scope.filterObj.filteredViews = _.cloneDeep($scope.allViews);
-						$scope.filterObj.totalItems = $scope.filterObj.filteredViews.length;
-						$scope.filterObj.filteredViews = pagination($scope.filterObj.filteredViews, $scope.filterObj.currentPage, $scope.filterObj.itemsPerPage);
+						$scope.viewsObj.filteredViews = _.cloneDeep($scope.allViews);
+						$scope.viewsObj.totalItems = $scope.viewsObj.filteredViews.length;
+						$scope.viewsObj.filteredViews = pagination($scope.viewsObj.filteredViews, $scope.viewsObj.currentPage, $scope.viewsObj.itemsPerPage);
 					})
 					.catch(function(err) {
 						arxivarNotifierService.notifyError(err);
 					});
 
-
 			}
 
 			onInitView();
 
-
-			function goToPage(page) {
-				var search = _.isNil($scope.filterObj.search) ? '' : $scope.filterObj.search.toLowerCase();
-				$scope.filterObj.filteredViews = _.filter($scope.allViews, function(v) {
+			function goToViewPage(page) {
+				var search = _.isNil($scope.viewsObj.search) ? '' : $scope.viewsObj.search.toLowerCase();
+				$scope.viewsObj.filteredViews = _.filter($scope.allViews, function(v) {
 					return _.includes(v.description.toLowerCase(), search);
 				});
-				$scope.filterObj.totalItems = $scope.filterObj.filteredViews.length;
-				$scope.filterObj.currentPage = page;
-				$scope.filterObj.filteredViews = pagination($scope.filterObj.filteredViews, $scope.filterObj.currentPage, $scope.filterObj.itemsPerPage);
+				$scope.viewsObj.totalItems = $scope.viewsObj.filteredViews.length;
+				$scope.viewsObj.currentPage = page;
+				$scope.viewsObj.filteredViews = pagination($scope.viewsObj.filteredViews, $scope.viewsObj.currentPage, $scope.viewsObj.itemsPerPage);
 			}
 
-			$scope.$watch('filterObj.search', function(newVal, oldVal) {
-				goToPage(1);
+			$scope.$watch('viewsObj.search', function(newVal, oldVal) {
+				goToViewPage(1);
 			});
 
-
-			$scope.$watch('filterObj.currentPage', function(newVal, oldVal) {
-				goToPage(newVal);
+			$scope.$watch('viewsObj.currentPage', function(newVal, oldVal) {
+				goToViewPage(newVal);
 			});
-
 
 			//***************************************MODEL************************************************************
 			function onInitModel() {
 
-				$scope.filterObj2 = {
+				$scope.modelsObj = {
 					search: '',
 					currentPage: 1,
 					itemsPerPage: 10,
@@ -131,7 +126,6 @@ angular.module('arxivar.plugins.controller').controller('ObjectClonerCtrl',
 											var formData = new FormData();
 											var myBlob = new Blob([byteArray.data]);
 											formData.append('file', myBlob, filename);
-
 
 											var fileNamePartsPrev = clonedModel.previewFileName.split('.');
 											fileNamePartsPrev[fileNamePartsPrev.length - 2] = fileNamePartsPrev[fileNamePartsPrev.length - 2] + ' CLONE';
@@ -173,15 +167,14 @@ angular.module('arxivar.plugins.controller').controller('ObjectClonerCtrl',
 											return arxivarResourceService.get('Models');
 										})
 										.then(function(models) {
-											$scope.allModels = _.sortBy(models, ['groupName']);
-											$scope.filterObj2.filteredModels = _.cloneDeep($scope.allModels);
-											$scope.filterObj2.totalItems = $scope.filterObj2.filteredModels.length;
-											$scope.filterObj2.filteredModels = pagination($scope.filterObj2.filteredModels, $scope.filterObj2.currentPage, $scope.filterObj2.itemsPerPage);
+											arxivarNotifierService.notifySuccess('Operazione andata a buon fine');
+											$scope.allModels = _.sortBy(models, ['description']);
+											$scope.modelsObj.filteredModels = _.cloneDeep($scope.allModels);
+											$scope.modelsObj.totalItems = $scope.modelsObj.filteredModels.length;
+											$scope.modelsObj.filteredModels = pagination($scope.modelsObj.filteredModels, $scope.modelsObj.currentPage, $scope.modelsObj.itemsPerPage);
 										});
 
-
 								} else if (!clonedModel.previewFileName) {
-
 
 									arxivarResourceService
 										.getByteArray('Models/template/' + model.id)
@@ -213,10 +206,11 @@ angular.module('arxivar.plugins.controller').controller('ObjectClonerCtrl',
 											return arxivarResourceService.get('Models');
 										})
 										.then(function(models) {
-											$scope.allModels = _.sortBy(models, ['groupName']);
-											$scope.filterObj2.filteredModels = _.cloneDeep($scope.allModels);
-											$scope.filterObj2.totalItems = $scope.filterObj2.filteredModels.length;
-											$scope.filterObj2.filteredModels = pagination($scope.filterObj2.filteredModels, $scope.filterObj2.currentPage, $scope.filterObj2.itemsPerPage);
+											arxivarNotifierService.notifySuccess('Operazione andata a buon fine');
+											$scope.allModels = _.sortBy(models, ['description']);
+											$scope.modelsObj.filteredModels = _.cloneDeep($scope.allModels);
+											$scope.modelsObj.totalItems = $scope.modelsObj.filteredModels.length;
+											$scope.modelsObj.filteredModels = pagination($scope.modelsObj.filteredModels, $scope.modelsObj.currentPage, $scope.modelsObj.itemsPerPage);
 										})
 										.catch(function(err) {
 											arxivarNotifierService.notifyError(err);
@@ -226,13 +220,12 @@ angular.module('arxivar.plugins.controller').controller('ObjectClonerCtrl',
 					}
 				};
 
-
 				arxivarResourceService.get('Models')
 					.then(function(models) {
-						$scope.allModels = _.sortBy(models, ['groupName']);
-						$scope.filterObj2.filteredModels = _.cloneDeep($scope.allModels);
-						$scope.filterObj2.totalItems = $scope.filterObj2.filteredModels.length;
-						$scope.filterObj2.filteredModels = pagination($scope.filterObj2.filteredModels, $scope.filterObj2.currentPage, $scope.filterObj2.itemsPerPage);
+						$scope.allModels = _.sortBy(models, ['description']);
+						$scope.modelsObj.filteredModels = _.cloneDeep($scope.allModels);
+						$scope.modelsObj.totalItems = $scope.modelsObj.filteredModels.length;
+						$scope.modelsObj.filteredModels = pagination($scope.modelsObj.filteredModels, $scope.modelsObj.currentPage, $scope.modelsObj.itemsPerPage);
 					})
 					.catch(function(err) {
 						arxivarNotifierService.notifyError(err);
@@ -241,32 +234,29 @@ angular.module('arxivar.plugins.controller').controller('ObjectClonerCtrl',
 
 			onInitModel();
 
-
-			function goToPage2(page) {
-				var search = _.isNil($scope.filterObj2.search) ? '' : $scope.filterObj2.search.toLowerCase();
-				$scope.filterObj2.filteredModels = _.filter($scope.allModels, function(obj) {
+			function goToModelPage(page) {
+				var search = _.isNil($scope.modelsObj.search) ? '' : $scope.modelsObj.search.toLowerCase();
+				$scope.modelsObj.filteredModels = _.filter($scope.allModels, function(obj) {
 					return _.includes(obj.description.toLowerCase(), search);
 				});
-				$scope.filterObj2.totalItems = $scope.filterObj2.filteredModels.length;
-				$scope.filterObj2.currentPage = page;
-				$scope.filterObj2.filteredModels = pagination($scope.filterObj2.filteredModels, $scope.filterObj2.currentPage, $scope.filterObj2.itemsPerPage);
+				$scope.modelsObj.totalItems = $scope.modelsObj.filteredModels.length;
+				$scope.modelsObj.currentPage = page;
+				$scope.modelsObj.filteredModels = pagination($scope.modelsObj.filteredModels, $scope.modelsObj.currentPage, $scope.modelsObj.itemsPerPage);
 			}
 
-			$scope.$watch('filterObj2.search', function(newVal, oldVal) {
-				goToPage2(1);
+			$scope.$watch('modelsObj.search', function(newVal, oldVal) {
+				goToModelPage(1);
 			});
 
-
-			$scope.$watch('filterObj2.currentPage', function(newVal, oldVal) {
-				goToPage2(newVal);
+			$scope.$watch('modelsObj.currentPage', function(newVal, oldVal) {
+				goToModelPage(newVal);
 			});
 
 			//****************************************REPORT*************************************
 
-
 			function onInitReport() {
 
-				$scope.filterObj3 = {
+				$scope.reportsObj = {
 					search: '',
 					currentPage: 1,
 					itemsPerPage: 10,
@@ -296,7 +286,8 @@ angular.module('arxivar.plugins.controller').controller('ObjectClonerCtrl',
 									return arxivarResourceService.save('Report/' + newReport.data.id + '/UpdateTemplate', JSON.stringify(templateParams));
 
 								} else {
-									throw new Error('Non ci sono template');	//arxivarNotifierService.notifyError('Non ci sono template');
+									return arxivarNotifierService.notifyError('Non ci sono template da clonare');
+									//throw new Error('Non ci sono template');	//arxivarNotifierService.notifyError('Non ci sono template');
 								}
 
 							})
@@ -306,9 +297,9 @@ angular.module('arxivar.plugins.controller').controller('ObjectClonerCtrl',
 							})
 							.then(function(reports) {
 								$scope.allReports = _.sortBy(reports, ['name']);
-								$scope.filterObj3.filteredReports = _.cloneDeep($scope.allReports);
-								$scope.filterObj3.totalItems = $scope.filterObj3.filteredReports.length;
-								$scope.filterObj3.filteredReports = pagination($scope.filterObj3.filteredReports, $scope.filterObj3.currentPage, $scope.filterObj3.itemsPerPage);
+								$scope.reportsObj.filteredReports = _.cloneDeep($scope.allReports);
+								$scope.reportsObj.totalItems = $scope.reportsObj.filteredReports.length;
+								$scope.reportsObj.filteredReports = pagination($scope.reportsObj.filteredReports, $scope.reportsObj.currentPage, $scope.reportsObj.itemsPerPage);
 							})
 							.catch(function(err) {
 								arxivarNotifierService.notifyError(err);
@@ -317,39 +308,34 @@ angular.module('arxivar.plugins.controller').controller('ObjectClonerCtrl',
 				};
 			};
 
-
 			arxivarResourceService.get('Report')
 				.then(function(reports) {
 					$scope.allReports = _.sortBy(reports, ['name']);
-					$scope.filterObj3.filteredReports = _.cloneDeep($scope.allReports);
-					$scope.filterObj3.totalItems = $scope.filterObj3.filteredReports.length;
-					$scope.filterObj3.filteredReports = pagination($scope.filterObj3.filteredReports, $scope.filterObj3.currentPage, $scope.filterObj3.itemsPerPage);
+					$scope.reportsObj.filteredReports = _.cloneDeep($scope.allReports);
+					$scope.reportsObj.totalItems = $scope.reportsObj.filteredReports.length;
+					$scope.reportsObj.filteredReports = pagination($scope.reportsObj.filteredReports, $scope.reportsObj.currentPage, $scope.reportsObj.itemsPerPage);
 				})
 				.catch(function(err) {
 					arxivarNotifierService.notifyError(err);
 				});
 
-
 			onInitReport();
 
-			function goToPage3(page) {
-				var search = _.isNil($scope.filterObj3.search) ? '' : $scope.filterObj3.search.toLowerCase();
-				$scope.filterObj3.filteredReports = _.filter($scope.allReports, function(obj) {
+			function goToReportPage(page) {
+				var search = _.isNil($scope.reportsObj.search) ? '' : $scope.reportsObj.search.toLowerCase();
+				$scope.reportsObj.filteredReports = _.filter($scope.allReports, function(obj) {
 					return _.includes(obj.name.toLowerCase(), search);
 				});
-				$scope.filterObj3.totalItems = $scope.filterObj3.filteredReports.length;
-				$scope.filterObj3.currentPage = page;
-				$scope.filterObj3.filteredReports = pagination($scope.filterObj3.filteredReports, $scope.filterObj3.currentPage, $scope.filterObj3.itemsPerPage);
+				$scope.reportsObj.totalItems = $scope.reportsObj.filteredReports.length;
+				$scope.reportsObj.currentPage = page;
+				$scope.reportsObj.filteredReports = pagination($scope.reportsObj.filteredReports, $scope.reportsObj.currentPage, $scope.reportsObj.itemsPerPage);
 			}
 
-			$scope.$watch('filterObj3.search', function(newVal, oldVal) {
-				goToPage3(1);
+			$scope.$watch('reportsObj.search', function(newVal, oldVal) {
+				goToReportPage(1);
 			});
 
-
-			$scope.$watch('filterObj3.currentPage', function(newVal, oldVal) {
-				goToPage3(newVal);
+			$scope.$watch('reportsObj.currentPage', function(newVal, oldVal) {
+				goToReportPage(newVal);
 			});
-
-
 		}]);
