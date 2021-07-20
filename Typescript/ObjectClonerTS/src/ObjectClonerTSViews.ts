@@ -1,6 +1,6 @@
-import { LoDashStatic } from "lodash";
-import { httpOption, pagination } from "./ObjectClonerTSCommon";
-import { ISingleObject, IObjectCloner, IObjects } from "./ObjectClonerTSTypes";
+import { LoDashStatic } from 'lodash';
+import { httpOption, pagination } from './ObjectClonerTSCommon';
+import { ISingleObject, IObjectCloner, IObjects } from './ObjectClonerTSTypes';
 
 export const onInitView = (itemPerPage: number, arxivarResourceService: IArxivarResourceService, arxivarNotifierService: IArxivarNotifierService, _: LoDashStatic) => {
 	const cloneViewFunction = (currentPage: number, view: IObjects) => {
@@ -15,12 +15,12 @@ export const onInitView = (itemPerPage: number, arxivarResourceService: IArxivar
 			})
 			.then(() => arxivarResourceService.get('v3/Views', httpOption))
 			.then((views: IObjects[]) => {
-				const allViews = _.sortBy(views, ['description'])
+				const allViews = _.sortBy(views, ['description']);
 				return {
 					allViews,
 					totalItems: allViews.length,
 					filteredViews: pagination(_.cloneDeep(allViews), currentPage, itemPerPage)
-				}
+				};
 			})
 			.catch(err => arxivarNotifierService.notifyError(err));
 	};
@@ -34,8 +34,8 @@ export const onInitView = (itemPerPage: number, arxivarResourceService: IArxivar
 			totalItems: filteredViews.length,
 			currentPage: page,
 			filteredViews: pagination(filteredViews, viewObj.currentPage, viewObj.itemsPerPage),
-		}
-	}
+		};
+	};
 
 	return arxivarResourceService.get('v3/Views', httpOption)
 		.then((views) => {
@@ -47,8 +47,8 @@ export const onInitView = (itemPerPage: number, arxivarResourceService: IArxivar
 				filteredViews: pagination(_.cloneDeep(allViews), 1, itemPerPage),
 				cloneViewFunction,
 				goToViewPage
-			}
+			};
 		})
 		.catch(err => arxivarNotifierService.notifyError(err));
 
-}
+};

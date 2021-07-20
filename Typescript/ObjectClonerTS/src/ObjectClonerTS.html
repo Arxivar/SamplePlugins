@@ -13,7 +13,7 @@
 
     <uib-tab index="1" heading="Modelli">
       <input class="arx-search" type="text" placeholder="&#xf002; Cerca modello..." ng-model="modelObj.search"></input>
-      <div class="arx-repeat" ng-repeat="model in modelObj.filteredModels">{{model.groupName}} - {{model.description}}
+      <div class="arx-repeat" ng-repeat="model in modelObj.filteredModels">{{model.description}} - {{model.groupName}}
         <span class="arx-span" ng-click="modelObj.cloneModelFunction(modelObj.currentPage,model)"><i class="fas fa-clone" title="clona"></i></span>
       </div>
       <ul uib-pagination total-items="modelObj.totalItems" ng-model="modelObj.currentPage"

@@ -1,9 +1,6 @@
-import { LoDashStatic } from "lodash";
-import { httpOption, pagination } from "./ObjectClonerTSCommon";
-import { IObjectCloner, ISingleObject, IObjects } from "./ObjectClonerTSTypes";
-
-
-
+import { LoDashStatic } from 'lodash';
+import { httpOption, pagination } from './ObjectClonerTSCommon';
+import { IObjectCloner, ISingleObject, IObjects } from './ObjectClonerTSTypes';
 
 
 export const onInitReport = (itemPerPage: number, arxivarResourceService: IArxivarResourceService, arxivarNotifierService: IArxivarNotifierService, _: LoDashStatic) => {
@@ -28,20 +25,20 @@ export const onInitReport = (itemPerPage: number, arxivarResourceService: IArxiv
 				if (templateParams) {
 					return arxivarResourceService.save('Report/' + newReport.data.id + '/UpdateTemplate', JSON.stringify(templateParams), httpOption);
 				} else {
-					throw new Error('Non ci sono template');	//arxivarNotifierService.notifyError('Non ci sono template');
+					return arxivarNotifierService.notifyError('Non ci sono template da clonare');
+					//throw new Error('Non ci sono template');
 				}
 			})
 			.then(() => {
-				arxivarNotifierService.notifySuccess('Operazione andata a buon fine');
 				return arxivarResourceService.get('Report', httpOption);
 			})
 			.then((reports: IObjects[]) => {
-				const allReports = _.sortBy(reports, ['name'])
+				const allReports = _.sortBy(reports, ['name']);
 				return {
 					allReports,
 					totalItems: allReports.length,
 					filteredReports: pagination(_.cloneDeep(allReports), currentPage, itemPerPage)
-				}
+				};
 
 			})
 			.catch(err => arxivarNotifierService.notifyError(err));
@@ -54,11 +51,11 @@ export const onInitReport = (itemPerPage: number, arxivarResourceService: IArxiv
 			return _.includes(obj.name.toLowerCase(), search);
 		});
 		return {
-			totalItems: reportObj.filteredReports.length,
+			totalItems: filteredReports.length,
 			currentPage: page,
 			filteredReports: pagination(filteredReports, reportObj.currentPage, reportObj.itemsPerPage)
-		}
-	}
+		};
+	};
 
 	return arxivarResourceService.get('Report', httpOption)
 		.then((reports) => {
@@ -69,7 +66,7 @@ export const onInitReport = (itemPerPage: number, arxivarResourceService: IArxiv
 				filteredReports: pagination(_.cloneDeep(allReports), 1, itemPerPage),
 				cloneReportFunction,
 				goToReportPage
-			}
+			};
 
 		})
 		.catch(err => arxivarNotifierService.notifyError(err));

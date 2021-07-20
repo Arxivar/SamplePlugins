@@ -1,6 +1,6 @@
-import { LoDashStatic } from "lodash";
-import { httpOption, pagination } from "./ObjectClonerTSCommon";
-import { ISingleObject, IObjects, IObjectCloner } from "./ObjectClonerTSTypes";
+import { LoDashStatic } from 'lodash';
+import { httpOption, pagination } from './ObjectClonerTSCommon';
+import { ISingleObject, IObjects, IObjectCloner } from './ObjectClonerTSTypes';
 
 export const onInitModel = (itemPerPage: number, arxivarResourceService: IArxivarResourceService, arxivarNotifierService: IArxivarNotifierService, _: LoDashStatic, $http: any) => {
 	const cloneModelFunction = (currentPage: number, model: IObjects) => {
@@ -71,12 +71,12 @@ export const onInitModel = (itemPerPage: number, arxivarResourceService: IArxiva
 						})
 						.then(() => arxivarResourceService.get('Models', httpOption))
 						.then((models: IObjects[]) => {
-							const allModels = _.sortBy(models, ['groupName'])
+							const allModels = _.sortBy(models, ['description']);
 							return {
 								allModels,
 								totalItems: allModels.length,
 								filteredModels: pagination(_.cloneDeep(allModels), currentPage, itemPerPage)
-							}
+							};
 						})
 						.catch((err: any) => arxivarNotifierService.notifyError(err));
 
@@ -112,12 +112,12 @@ export const onInitModel = (itemPerPage: number, arxivarResourceService: IArxiva
 						})
 						.then(() => arxivarResourceService.get('Models', httpOption))
 						.then((models: IObjects[]) => {
-							const allModels = _.sortBy(models, ['groupName'])
+							const allModels = _.sortBy(models, ['description']);
 							return {
 								allModels,
 								totalItems: allModels.length,
 								filteredModels: pagination(_.cloneDeep(allModels), currentPage, itemPerPage)
-							}
+							};
 						})
 						.catch(err => arxivarNotifierService.notifyError(err));
 				};
@@ -134,8 +134,8 @@ export const onInitModel = (itemPerPage: number, arxivarResourceService: IArxiva
 			totalItems: filteredModels.length,
 			currentPage: page,
 			filteredModels: pagination(filteredModels, modelObj.currentPage, modelObj.itemsPerPage),
-		}
-	}
+		};
+	};
 
 	return arxivarResourceService.get('Models', httpOption)
 		.then((models) => {
@@ -147,15 +147,9 @@ export const onInitModel = (itemPerPage: number, arxivarResourceService: IArxiva
 				filteredModels: pagination(_.cloneDeep(allModels), 1, itemPerPage),
 				cloneModelFunction,
 				goToModelPage
-			}
+			};
 		})
 		.catch(err => arxivarNotifierService.notifyError(err));
-
-
-
 };
-
-
-
 
 
