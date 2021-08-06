@@ -4,6 +4,7 @@
 
 > Sample implementation for ArxivarNext Workflow V2  
 
+
 ## Installation
 
 - open the terminal into MongoPlugin folder and install the node_modules locally using the command:
@@ -29,11 +30,11 @@ _Note: this plugin is provided as a support for learning activities, it's not re
 
 _Note: Instructions for plugin creation can be found at [generator-arxivar-plugin](https://github.com/Arxivar/PluginGenerator/blob/master/README.md)._
 
+
 ## Plugin specification
 
 This Mongo Query plugin allows you to perform queries on a Mongo Database.
 
-Once you've added the plugin to your installation, you WON'T NEED to configure it.
 
 ## License
 
