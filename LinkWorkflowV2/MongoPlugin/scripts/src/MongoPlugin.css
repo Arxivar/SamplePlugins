@@ -1,0 +1,283 @@
+.arxpl-mongoplugin {
+    display: flex;
+    flex-direction: column;
+}
+
+.arxpl-mongoplugin-required {
+    margin-left: 0.2em;
+    font-size: 0.5em;
+    position: relative;
+    color: #ff0000;
+}
+
+.arxpl-mongoplugin-container {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 10px 0 10px;
+}
+
+.arxpl-mongoplugin-container-fixed {
+    flex-direction: column;
+    padding-top: 20px;
+    position: fixed;
+    width: calc(100% - 60px);
+    background: #f8fafb;
+    z-index: 999999;
+}
+
+.arxpl-mongoplugin-container-item-full {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    flex-grow: 1;
+}
+
+.arxpl-mongoplugin-container-item {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 0 10px;
+    flex-basis: 50%;
+}
+
+.arxpl-mongoplugin-container-item-label-required {
+    display: flex;
+    flex-direction: row;
+}
+
+.arxpl-mongoplugin-action {
+    padding: 10px;
+    background-color: #F6981E;
+    border-radius: 5px;
+    color: #ffffff;
+    border: 1px solid #F6981E;
+}
+
+.arxpl-mongoplugin-action:hover {
+    color: #000000;
+    border: 1px solid #F6981E;
+}
+
+.arxpl-mongoplugin-action-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.arxpl-mongoplugin-action i {
+    margin: 0 4px;
+}
+
+.arxpl-mongoplugin-label {
+    font-weight: 700;
+}
+
+.arxpl-mongoplugin-label-required {
+    display: flex;
+}
+
+.arxpl-mongoplugin-input {
+    height: 28px;
+    padding: 3px 12px;
+}
+
+.arxpl-mongoplugin-input::placeholder {
+    color: #c2c2c2;
+}
+
+.arxpl-mongoplugin-textarea {
+    padding: 3px 12px;
+}
+
+.arxpl-mongoplugin-textarea::placeholder {
+    color: #c2c2c2;
+}
+
+.arxpl-mongoplugin-columns {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-top: 10px;
+}
+
+.arxpl-mongoplugin-columns-item {
+    padding: 8px 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.arxpl-mongoplugin-columns-item a {
+    padding: 5px;
+    border-radius: 10px;
+    margin-left: 10px;
+    border: 1px solid #dddddd;
+}
+
+.arxpl-mongoplugin-columns-item a:hover {
+    background-color: #F6981E;
+    color: #ffffff;
+}
+
+.arxpl-mongoplugin-columns-item-selected {
+    background-color: #F6981E;
+    color: #ffffff;
+}
+
+.arxpl-mongoplugin-columns-item i {
+    width: 15px;
+}
+
+.arxpl-mongoplugin-columns-selected {
+    max-width: 300px;
+    border: 1px solid #dddddd;
+    padding: 10px;
+    margin-left: 10px;
+    border-radius: 10px;
+}
+
+.arxpl-mongoplugin-columns-selected strong {
+    margin-bottom: 10px;
+}
+
+.arxpl-mongoplugin-columns-selected-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.arxpl-mongoplugin-columns-selected-item {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border-top: 1px solid #dddddd;
+}
+
+.arxpl-mongoplugin-columns-selected-item span {
+    padding: 8px 0;
+}
+
+.arxpl-mongoplugin-columns-selected-item i {
+    padding: 8px;
+}
+
+.arxpl-mongoplugin-columns-selected-item i:hover {
+    color: #F6981E;
+    cursor: pointer;
+}
+
+.arxpl-mongoplugin-query-variables {
+    max-width: 300px;
+    border: 1px solid #dddddd;
+    padding: 10px;
+    margin-left: 10px;
+    border-radius: 10px;
+}
+
+.arxpl-mongoplugin-query-variables-title {
+    margin-bottom: 5px;
+}
+
+.arxpl-mongoplugin-query-variables-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.arxpl-mongoplugin-query-variables-item {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 5px;
+    border-top: 1px solid #dddddd;
+}
+
+.arxpl-mongoplugin-query-variables-item:hover {
+    background-color: #FEF2E2;
+    cursor: pointer;
+}
+
+.arxpl-mongoplugin-query-variables-item i {
+    width: 15px;
+}
+
+.arxpl-mongoplugin-query-test {
+    max-width: 300px;
+    border: 1px solid #dddddd;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 10px;
+    justify-content: space-between;
+}
+
+.arxpl-mongoplugin-query-test-item {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 5px;
+}
+
+.arxpl-mongoplugin-query-test-label {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.arxpl-mongoplugin-query-test-inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.arxpl-mongoplugin-query-test-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 5px;
+}
+
+.arxpl-mongoplugin-query-test-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.arxpl-mongoplugin-loader {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 9999;
+}
+
+@-webkit-keyframes spin {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.arxpl-mongoplugin-loader::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 48%;
+    top: 40%;
+    width: 40px;
+    height: 40px;
+    border-style: solid;
+    border-color: #F6981E;
+    border-top-color: transparent;
+    border-width: 4px;
+    border-radius: 50%;
+    -webkit-animation: spin .8s linear infinite;
+    animation: spin .8s linear infinite;
+}

@@ -5,7 +5,7 @@
 
 ## Installation
 
-* In order to install a plugin in ARXivar Next, just put the plugin folder (e.g. `CalendarWidget`) in your plugin installation folder (e.g. `MyDrive:\Program Files (x86)\Able Tech S.r.l\ARXivarNext WebPortal\Scripts\plugins`)
+* In order to install a plugin in ARXivar Next, just put the plugin folder (e.g. `CalendarWidget`) in your plugin installation folder (e.g. `MyDrive:\Program Files (x86)\Abletech\ARXivarNext WebPortal\Scripts\plugins`)
 
 
 ## Repository content
@@ -49,7 +49,7 @@ _Remember: if you specify the path in the options, you'll not need to follow the
 
 - now a new subfolder named '`(e.g. `CalendarWidget`)`' has been created, in this folder you will find the javascript compiled files. 
 
-- When you finish to develope your plugin, you have to copy the compiled files folder mentioned above in Scripts/plugins/ (path of ARXivarPortal) in order to use it.(e.g. `MyDrive:\Program Files (x86)\Able Tech S.r.l\ARXivarNext WebPortal\Scripts\plugins`)
+- When you finish to develope your plugin, you have to copy the compiled files folder mentioned above in Scripts/plugins/ (path of ARXivarPortal) in order to use it.(e.g. `MyDrive:\Program Files (x86)\Abletech\ARXivarNext WebPortal\Scripts\plugins`)
   
   ## Repository content
 This repository contains these Typescript plugins:
@@ -66,11 +66,11 @@ You can either download the .zip file or clone the repo.
 
 ## Installation
 
-* Click [here](https://github.com/Arxivar/SamplePlugins/tree/dev/PluginLinkWorkflowV2/) in order to install a plugin  link in ARXivar Next.
+* Click [here](LinkWorkflowV2/README.md) in order to install a plugin  link in ARXivar Next.
 
 ## Repository content
 This repository contains these link Workflow V2 plugins:
-  - [Plugin link 1](Javascript/Calendar/README.md)
+  - [MongoPlugin](LinkWorkflowV2/MongoPlugin/README.md)
 
 You can either download the .zip file or clone the repo.
 

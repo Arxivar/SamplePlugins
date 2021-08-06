@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyVersion>1.0.1.1</AssemblyVersion>
+    <FileVersion>1.0.1.1</FileVersion>
+    <Version>1.0.1</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="ARXivar.Workflow.Plugins" Version="2.5.1">
+		<ExcludeAssets>runtime</ExcludeAssets>
+	</PackageReference>
+  	<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+  	<PackageReference Include="MongoDB.Driver" Version="2.12.4" />   
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="JsonHelper\" />
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="call &quot;$(SolutionDir)\prebuild.bat&quot; &quot;$(TargetDir)&quot;" />
+  </Target>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="call &quot;$(SolutionDir)\postbuild.bat&quot; &quot;$(TargetDir)&quot; &quot;$(TargetDir)\*&quot; &quot;..\$(ProjectName)&quot;" />
+  </Target>
+
+</Project>

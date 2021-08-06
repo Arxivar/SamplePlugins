@@ -1,0 +1,160 @@
+<script type="text/ng-template" id="47643477b5a04154b2531a3511c7799b.html">
+	<div ng-if="ctrl.viewerMode===true">
+		<div data-plugin-name="MongoPlugin" class="arxpl-mongoplugin" ng-if="ctrl.listColumnsItems.length === 0">
+			<div class="arxpl-mongoplugin-container">
+				<div class="arxpl-mongoplugin-container-item-full" ng-if="ctrl.model.useAdvancedConfiguration.value">
+					<label class="arxpl-mongoplugin-label">
+						Utilizza la configurazione personalizzata
+					</label>
+					<em>Verrà valutata solamente la configurazione personalizzata, qualunque impostazione dei parametri in ingresso e dei parametri in uscita verrà trascurata.</em>
+				</div>            
+				<div class="arxpl-mongoplugin-container-item-full" ng-if="!ctrl.model.useAdvancedConfiguration.value">
+					<label class="arxpl-mongoplugin-label">
+						Non Utilizzare la configurazione personalizzata
+					</label>					
+				</div>            
+			</div>        
+		</div>
+		<div class="arxpl-mongoplugin" ng-if="ctrl.model.useAdvancedConfiguration.value">
+			<div class="arxpl-mongoplugin-loader" ng-if="ctrl.loadingCommand||ctrl.loadingVariables"></div>
+			<div class="arxpl-mongoplugin-container">
+				<div class="arxpl-mongoplugin-container-item">
+					<label class="arxpl-mongoplugin-label">
+						<span>Nome del Database</span>						
+					</label>
+					<span>{{ctrl.model.databaseName.value}}</span>
+				</div>
+				<div class="arxpl-mongoplugin-container-item">
+					<label class="arxpl-mongoplugin-label">
+						<span>Seleziona la variabile matrice di uscita</span>						
+					</label>
+					<span>{{ctrl.selectedOutputVariable.name}}</span>
+				</div>
+			</div>
+			<div class="arxpl-mongoplugin-container">
+				<div class="arxpl-mongoplugin-container-item" style="flex-grow:1;">
+					<label for="{{ctrl.model.queryText.name}}" class="arxpl-mongoplugin-label">
+						<span>Testo della query</span>						
+					</label>
+					<em>Una variabile viene valutata se scritta nella forma <strong>#@variableName@#</strong></em>					
+					<textarea  rows="10" name="{{ctrl.model.queryText.name}}" ng-model="ctrl.model.queryText.value" ng-disabled="true" class="arxpl-mongoplugin-textarea"></textarea>
+				</div>
+				<div class="arxpl-mongoplugin-container-item arxpl-mongoplugin-columns-selected">
+					<strong>Colonne selezionate</strong>
+					<div class="arxpl-mongoplugin-columns-selected-container">
+						<div class="arxpl-mongoplugin-columns-selected-item" style="padding:5px;" ng-repeat="item in ctrl.selectedColumnsIds">							
+							<span title="{{item}}">{{item}}</span>
+						</div>
+					</div>
+				</div>				
+			</div>		        
+		</div>		
+	</div>
+	<div ng-if="ctrl.viewerMode===false">
+		<div data-plugin-name="MongoPlugin" class="arxpl-mongoplugin" ng-if="ctrl.listColumnsItems.length === 0">
+			<div class="arxpl-mongoplugin-container">
+				<div class="arxpl-mongoplugin-container-item-full arxpl-mongoplugin-container-item-row" style="flex-direction:row;">
+					<input name="{{ctrl.model.useAdvancedConfiguration.name}}" id="{{ctrl.model.useAdvancedConfiguration.name}}" type="checkbox" ng-model="ctrl.model.useAdvancedConfiguration.value" ng-change="ctrl.validate()" />
+					<label for="{{ctrl.model.useAdvancedConfiguration.name}}" class="arxpl-mongoplugin-label" style="flex-grow:1; margin-left:10px; display: flex; flex-direction: column;">
+						<span>Utilizza la configurazione personalizzata</span>
+						<em style="font-weight: 100;">Selezionando questa opzione verrà valutata solamente la configurazione personalizzata, qualunque impostazione dei parametri in ingresso e dei parametri in uscita verrà trascurata.</em>
+					</label>
+				</div>            
+			</div>        
+		</div>
+		<div class="arxpl-mongoplugin" ng-if="ctrl.listColumnsItems.length === 0 && ctrl.model.useAdvancedConfiguration.value">
+			<div class="arxpl-mongoplugin-loader" ng-if="ctrl.loadingCommand||ctrl.loadingVariables"></div>
+			<div class="arxpl-mongoplugin-container">
+				<div class="arxpl-mongoplugin-container-item">
+					<label for="{{ctrl.model.databaseName.name}}" class="arxpl-mongoplugin-label arxpl-mongoplugin-label-required">
+						<span>Nome del Database</span>
+						<span class="fas fa-circle arxpl-mongoplugin-required"></span>
+					</label>
+					<input placeholder="{{ctrl.model.databaseName.placeholder}}" name="{{ctrl.model.databaseName.name}}" id="{{ctrl.model.databaseName.name}}" type="text" ng-model="ctrl.model.databaseName.value" ng-change="ctrl.allowTest()" class="arxpl-mongoplugin-input" />
+				</div>
+				<div class="arxpl-mongoplugin-container-item">
+					<label for="{{ctrl.model.outputVariableName.name}}" class="arxpl-mongoplugin-label arxpl-mongoplugin-label-required">
+						<span>Seleziona la variabile matrice di uscita</span>
+						<span class="fas fa-circle arxpl-mongoplugin-required"></span>
+					</label>
+					<select name="{{ctrl.model.outputVariableName.name}}" id="{{ctrl.model.outputVariableName.name}}" ng-model="ctrl.model.outputVariableName.value" ng-change="ctrl.allowTest()" class="arxpl-mongoplugin-input">
+						<option ng-repeat="option in ctrl.outputVariables" value="{{option.id}}">{{option.name}}</option>
+					</select>                
+				</div>
+			</div>
+			<div class="arxpl-mongoplugin-container">
+				<div class="arxpl-mongoplugin-container-item" style="flex-grow:1;">
+					<label for="{{ctrl.model.queryText.name}}" class="arxpl-mongoplugin-label arxpl-mongoplugin-label-required">
+						<span>Testo della query</span>
+						<span class="fas fa-circle arxpl-mongoplugin-required"></span>
+					</label>
+					<em>Una variabile viene valutata se scritta nella forma <strong>#@variableName@#</strong></em>
+					<textarea  placeholder="{{ctrl.model.queryText.placeholder}}" rows="10" name="{{ctrl.model.queryText.name}}" id="{{ctrl.model.queryText.name}}" ng-model="ctrl.model.queryText.value" ng-change="ctrl.checkQueryText()" class="arxpl-mongoplugin-textarea"></textarea>
+				</div>
+				<div class="arxpl-mongoplugin-container-item arxpl-mongoplugin-query-variables">
+					<strong class="arxpl-mongoplugin-query-variables-title"><i class="far fa-plus" style="margin-right:5px;"></i>Aggiungi una variabile</strong>
+					<div class="arxpl-mongoplugin-query-variables-container" ng-if="ctrl.queryVariables.length > 0">
+						<a class="arxpl-mongoplugin-query-variables-item" ng-repeat="item in ctrl.queryVariables" ng-click="ctrl.addQueryVariable(item)">
+							<i class="far fa-hashtag" ng-if="item.variableType!==ctrl.variablesTypes.String"></i>
+							<i class="far fa-text" ng-if="item.variableType===ctrl.variablesTypes.String"></i>
+							<span title="{{item.name}}">{{item.name}}</span>
+						</a>
+					</div>
+				</div>
+				<div class="arxpl-mongoplugin-container-item arxpl-mongoplugin-query-test">
+					<div class="arxpl-mongoplugin-query-test-inputs">
+						<strong>Verifica la query</strong>
+						<em>Proseguendo la configurazione verrà eseguito il test della query necessario per scegliere le colonne da salvare nella variabile di uscita</em>
+						<div class="arxpl-mongoplugin-query-test-container" ng-if="ctrl.usedQueryVariables.length > 0">
+							<div class="arxpl-mongoplugin-query-test-item" ng-repeat="item in ctrl.usedQueryVariables">
+								<label class="arxpl-mongoplugin-label arxpl-mongoplugin-query-test-label" for="var-{{item.id}}" title="{{item.name}}">{{item.name}}</label>
+								<input ng-if="item.variableType!==ctrl.variablesTypes.String" class="arxpl-mongoplugin-input" type="number" ng-model="item.value" id="var-{{item.id}}" ng-change="ctrl.allowTest()" />
+								<input ng-if="item.variableType===ctrl.variablesTypes.String" class="arxpl-mongoplugin-input" type="text" ng-model="item.value" id="var-{{item.id}}" ng-change="ctrl.allowTest()" />
+							</div>
+						</div>
+					</div>
+					<div class="arxpl-mongoplugin-query-test-actions">
+						<a ng-disabled="!ctrl.testButtonEnabled" class="arxpl-mongoplugin-action" ng-class="{'arxpl-mongoplugin-action-disabled': !ctrl.testButtonEnabled}" ng-click="ctrl.executeCommand()">Imposta le colonne<i class="far fa-chevron-right"></i></a>
+					</div>
+				</div>
+			</div>		        
+		</div>
+		<div class="arxpl-mongoplugin" ng-if="ctrl.listColumnsItems.length > 0">
+			<div class="arxpl-mongoplugin-container arxpl-mongoplugin-container-fixed">
+				<div class="arxpl-mongoplugin-container-item-full">
+					<div class="arxpl-mongoplugin-columns-actions">
+						<a class="arxpl-mongoplugin-action" ng-click="ctrl.backToConfiguration()"><i class="far fa-chevron-left"></i>Torna alla configurazione</a>
+					</div>
+				</div>        
+				<div class="arxpl-mongoplugin-container-item-full" style="margin-top: 20px;">
+					<label class="arxpl-mongoplugin-label arxpl-mongoplugin-label-required">
+						<span>Seleziona le colonne</span>
+						<span class="fas fa-circle arxpl-mongoplugin-required"></span>
+					</label>
+					<em>Imposta le colonne che desideri vengano salvate nella variabile matrice di uscita</em>
+				</div>        
+			</div>        
+			<div class="arxpl-mongoplugin-container" style="margin-top:90px;">
+				<div class="arxpl-mongoplugin-container-item" style="flex-grow:1;">				
+					<div class="arxpl-mongoplugin-columns">
+						<div ng-repeat="item in ctrl.listColumnsItems" class="arxpl-mongoplugin-columns-item">
+							<a ng-class="{'arxpl-mongoplugin-columns-item-selected' : item.selected}" ng-click="ctrl.selectColumn(item)">
+								<i ng-if="item.selected" class="far fa-check"></i>							
+								<span title="{{item.id}}" class="arxpl-mongoplugin-columns-item-text">{{item.id}}</span>
+							</a>					
+						</div>
+					</div>
+				</div>
+				<div class="arxpl-mongoplugin-container-item arxpl-mongoplugin-columns-selected">
+					<strong>Colonne selezionate</strong>
+					<div class="arxpl-mongoplugin-columns-selected-container">
+						<div class="arxpl-mongoplugin-columns-selected-item" ng-repeat="item in ctrl.listColumnsItems | filter:{ selected: true }">
+							<i class="far fa-times" ng-click="ctrl.selectColumn(item)"></i>
+							<span title="{{item.id}}">{{item.id}}</span>
+						</div>
+					</div>
+				</div>
+			</div>        
+		</div>
+	</div>	
+</script>

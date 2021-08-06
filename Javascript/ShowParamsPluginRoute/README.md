@@ -6,7 +6,7 @@
 
 ## Installation
 
-* In order to install this plugin in ARXivar Next, just put the plugin folder (`ShowParamsPluginRoute`) in your plugin installation folder (e.g. `MyDrive:\Program Files (x86)\Able Tech S.r.l\ARXivarNext WebPortal\Scripts\plugins`)
+* In order to install this plugin in ARXivar Next, just put the plugin folder (`ShowParamsPluginRoute`) in your plugin installation folder (e.g. `MyDrive:\Program Files (x86)\Abletech\ARXivarNext WebPortal\Scripts\plugins`)
 
 _Note: this plugin is provided as a support for learning activities, it's not recommended its use in production environment. Use this as a 'draft' for creating your plugins._
 

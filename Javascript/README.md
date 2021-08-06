@@ -5,7 +5,7 @@
 
 ## Installation
 
-* In order to install a plugin in ARXivar Next, just put the plugin folder (e.g. `CalendarWidget`) in your plugin installation folder (e.g. `MyDrive:\Program Files (x86)\Able Tech S.r.l\ARXivarNext WebPortal\Scripts\plugins`)
+* In order to install a plugin in ARXivar Next, just put the plugin folder (e.g. `CalendarWidget`) in your plugin installation folder (e.g. `MyDrive:\Program Files (x86)\Abletech\ARXivarNext WebPortal\Scripts\plugins`)
 
 _Note: These plugins are provided as a support for learning activities, it's not recommended their use in production environment. Use them as a 'draft' for creating your plugins._
 
