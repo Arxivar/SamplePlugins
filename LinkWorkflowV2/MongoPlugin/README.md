@@ -12,7 +12,7 @@
   npm install
 ```
 
-- click on MondoPlugin.sln an then build the solution, the MongoPlugin.zip will be created inside the folder.
+- click on MongoPlugin.sln an then build the solution, the MongoPlugin.zip will be created inside the folder.
   
 - open a command prompt and go to `"C:\..\..\Abletech\ARXivarNext Workflow Service\wf-plugin.exe"` 
   
