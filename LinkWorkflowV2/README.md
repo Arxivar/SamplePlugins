@@ -46,7 +46,7 @@ _Attention: if it's a Typescript plugin don't forget to run the command ```npm i
 ```
 ## Repository content
 This repository contains these link plugins:
-  - [PluginLink1](ConcludiWorkflowTS/README.md)
+ - [MongoPlugin](LinkWorkflowV2/MongoPlugin/README.md)
 
 You can either download the .zip file or clone the repo.
 
