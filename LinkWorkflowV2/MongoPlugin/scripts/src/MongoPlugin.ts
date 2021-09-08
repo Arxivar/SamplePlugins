@@ -141,12 +141,7 @@ class MongoPlugin {
 	}
 
 	validate() {
-		const enable = this.model.useAdvancedConfiguration.value === false || (
-			this.model.useAdvancedConfiguration.value === true &&
-			this.listColumnsItems.filter(x => x.selected === true).length > 0 &&
-			!this._.isNil(this.model.databaseName.value) && this.model.databaseName.value !== '' &&
-			!this._.isNil(this.model.outputVariableName.value) && this.model.outputVariableName.value !== '' &&
-			!this._.isNil(this.model.queryText.value) && this.model.queryText.value !== '');
+		const enable = true;
 		this.enableSave({ enable: enable });
 	}
 
