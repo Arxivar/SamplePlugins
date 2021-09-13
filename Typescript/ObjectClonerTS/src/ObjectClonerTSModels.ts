@@ -18,11 +18,7 @@ export const onInitModel = (itemPerPage: number, arxivarResourceService: IArxiva
 						arxivarResourceService.getByteArray('Models/template/' + model.id, httpOption),
 						arxivarResourceService.getByteArray('Models/previewTemplate/' + model.id, httpOption)
 					])
-						.then(([byteArray,byteArrayPrev]) => {
-							// let byteArray = arr[0];
-							// let byteArrayPrev = arr[1];
-							
-
+						.then(([byteArray, byteArrayPrev]) => {
 							//Upload
 							let fileNameParts = clonedModel.fileName.split('.');
 							fileNameParts[fileNameParts.length - 2] = fileNameParts[fileNameParts.length - 2] + ' CLONE';
@@ -43,13 +39,15 @@ export const onInitModel = (itemPerPage: number, arxivarResourceService: IArxiva
 
 							return Promise.all([
 								$http({
-									url: 'http://localhost/ARXivarResourceServer/api/Cache/insert',
+									url: arxivarResourceService.resourceService.arxivarConfig.rootApi + 'Cache/insert',
 									headers: { 'Content-Type': undefined },
 									data: formData,
 									method: 'POST'
 								}),
+
+
 								$http({
-									url: 'http://localhost/ARXivarResourceServer/api/Cache/insert',
+									url: arxivarResourceService.resourceService.arxivarConfig.rootApi + 'Cache/insert',
 									headers: { 'Content-Type': undefined },
 									data: formDataPrev,
 									method: 'POST'
@@ -57,8 +55,6 @@ export const onInitModel = (itemPerPage: number, arxivarResourceService: IArxiva
 							]);
 						})
 						.then(([cache1, cache2]) => {
-							// let cache1 = arr2[0];
-							// let cache2 = arr2[1];
 
 							let cacheId = cache1.data[0];
 							clonedModel.documentCacheId = cacheId;
@@ -99,7 +95,7 @@ export const onInitModel = (itemPerPage: number, arxivarResourceService: IArxiva
 							formData.append('file', myBlob, filename);
 
 							return $http({
-								url: 'http://localhost/ARXivarResourceServer/api/Cache/insert',
+								url: arxivarResourceService.resourceService.arxivarConfig.rootApi + 'Cache/insert',
 								headers: { 'Content-Type': undefined },
 								data: formData,
 								method: 'POST'

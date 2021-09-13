@@ -4,7 +4,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 //don't touch the code below for your sake
-const outDir = 'C:/Git/ArxivarNext/Web/ARXivarSuite/Abletech.Arxivar.Client.Web.Portal/Scripts/plugins/ConcludiWorkflowTS';
+const outDir = './ConcludiWorkflowTS';
 const pluginName = 'ConcludiWorkflowTS';
 const pluginCommand = pluginName + 'PluginCommand';
 const entry = {};

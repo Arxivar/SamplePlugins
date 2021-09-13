@@ -5,7 +5,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 //don't touch the code below for your sake
-const outDir =  'C:/Git/ArxivarNext/Web/ARXivarSuite/Abletech.Arxivar.Client.Web.Portal/Scripts/plugins/ObjectClonerTS';
+const outDir =  './ObjectClonerTS';
 const pluginName = 'ObjectClonerTS';
 const pluginCtrl = pluginName + 'Ctrl';
 const entry = {};
@@ -109,4 +109,4 @@ module.exports = {
 		pathinfo: true,
 		sourceMapFilename: '[name].js.map'
 	},
-}
+};
