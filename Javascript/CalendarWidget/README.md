@@ -32,7 +32,7 @@ This document class will need the following additional fields
   - User, texbox (will contain the user id of the calendar appointment owner)
   - ByDate, databox (will contain the date of appointment begins)
   - ToDate, databox (will contain the date of appointment ends)
-  - FromTime, numeric (will contain the time the appointment begins)
+  - FromTime, numeric (will contain the time the appointment begins, e.g. 1500 are 15:00)
   - ToTime, numeric (will contain the time the appointment ends)
   - Notes, texbox (will contain any appointment notes)
 
