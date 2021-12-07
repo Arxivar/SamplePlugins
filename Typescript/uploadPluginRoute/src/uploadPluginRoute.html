@@ -1,0 +1,21 @@
+<div class="arx-uploadpluginroute">
+  <h3>Selezionare il file da caricare</h3>
+  <input ng-disabled="disabled" id='upload' type="file" accept=".pdf">
+  <!-- <button ng-click="upload()">UP</button> -->
+  <h4 ng-if="arrayBufferComplete.length > 0" class="">File caricati nel buffer</h4>
+  <table class="bufferTable" ng-if="arrayBufferComplete.length > 0">
+    <tr>
+      <th>File Name</th>
+      <th>Buffer ID</th>
+      <th></th>
+    </tr>
+    <tr class="bufferItem" ng-repeat="buffer in arrayBufferComplete">
+      <td>{{buffer.bufferName}}</td>
+      <td>{{buffer.bufferId}}</td>
+      <td class="downloadButton"><i ng-click="download(buffer.bufferId)" class="fas fa-download downloadButton_icon"></i></td>
+    </tr>
+  </table>
+</div>
+
+
+<link rel="stylesheet" type="text/css" href="./Scripts/plugins/uploadPluginRoute/uploadPluginRoute.css">

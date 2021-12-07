@@ -1,0 +1,42 @@
+.arx-uploadpluginroute {
+  padding: 10px;
+}
+
+.bufferTable{
+	width: 50%;
+}
+
+.bufferTable th{
+	background-color: #F3F3F4;
+	border: 1px solid;
+	padding: 5px 0px 5px 3px;
+}
+
+.bufferTable td{
+	border: 1px solid;
+	padding: 5px 0px 5px 3px;
+	overflow: hidden;
+	max-width: 200px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.bufferItem:hover{
+	background-color: #F3F3F4;
+}
+
+.downloadButton{
+	text-align: center;
+}
+
+.downloadButton_icon:hover{
+	color: #f6981E;
+}
+
+
+.arx-uploadpluginroute h4 {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #dddddd;
+  max-width: 50%;
+}
