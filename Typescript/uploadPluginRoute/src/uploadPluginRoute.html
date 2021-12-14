@@ -2,17 +2,24 @@
   <h3>Selezionare il file da caricare</h3>
   <input ng-disabled="disabled" id='upload' type="file" accept=".pdf">
   <!-- <button ng-click="upload()">UP</button> -->
-  <h4 ng-if="arrayBufferComplete.length > 0" class="">File caricati nel buffer</h4>
+  <h4 ng-if="arrayBufferComplete.length > 0">File caricati nel buffer</h4>
   <table class="bufferTable" ng-if="arrayBufferComplete.length > 0">
     <tr>
       <th>File Name</th>
       <th>Buffer ID</th>
       <th></th>
+      <th></th>
+      <th></th>
     </tr>
     <tr class="bufferItem" ng-repeat="buffer in arrayBufferComplete">
-      <td>{{buffer.bufferName}}</td>
+      <td title="{{buffer.bufferName}}">{{buffer.bufferName}}</td>
       <td>{{buffer.bufferId}}</td>
-      <td class="downloadButton"><i ng-click="download(buffer.bufferId)" class="fas fa-download downloadButton_icon"></i></td>
+      <td class="downloadButton"><i ng-click="download(buffer.bufferId)" class="fas fa-download downloadButton_icon"
+          title="Download"></i></td>
+      <td class="downloadButton"><a href="{{buffer.url}}"><i class="fas fa-file-archive downloadButton_icon"
+            title="Archivia"></i></a></td>
+      <td class="downloadButton"><a href="{{buffer.maskUrl}}"><i class="fas fa-newspaper downloadButton_icon"
+            title="Maschera"></i></a></td>
     </tr>
   </table>
 </div>

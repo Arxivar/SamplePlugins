@@ -10,6 +10,8 @@ angular.module('arxivar.plugins.controller').controller('uploadPluginRouteCtrl',
 
 		$scope.arrayBufferComplete = [];
 		$scope.disabled = false;
+		//insert an existing mask id below
+		const maskID = 'eb69d6c75f56460b8756cef279c86551';
 		const inputFile = angular.element('#upload');
 
 		const _uploadXmlHttpRequest = (url: string, file: File): Promise<string> => {
@@ -70,14 +72,16 @@ angular.module('arxivar.plugins.controller').controller('uploadPluginRouteCtrl',
 
 		const handler = () => {
 			$scope.disabled = true;
-			const url = arxivarResourceService.resourceService.arxivarConfig.rootApi + 'buffer/insert';
+			const url = arxivarResourceService.webApiUrl + 'buffer/insert';
 			const input = inputFile[0] as HTMLInputElement;
 			const file = input.files[0];
 			//_uploadXmlHttpRequest(url, file)
 			_upload$http(url, file)
 				.then(bufferId => {
 					$timeout(() => {
-						$scope.arrayBufferComplete.push({ bufferId: bufferId, bufferName: file.name });
+						const url = arxivarRouteService.getURLProfilation({ bufferId: bufferId, fileName: file.name });
+						const maskUrl = arxivarRouteService.getMaskProfilation(maskID, { bufferId: bufferId, fileName: file.name });
+						$scope.arrayBufferComplete.push({ bufferId: bufferId, bufferName: file.name, url, maskUrl });
 						$scope.disabled = false;
 						inputFile.val('');
 					});
@@ -85,7 +89,7 @@ angular.module('arxivar.plugins.controller').controller('uploadPluginRouteCtrl',
 		};
 
 		inputFile.on({ change: handler });
-		
+
 		//$scope.upload = handler;
 
 		$scope.download = (bufferId) => {
