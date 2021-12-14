@@ -138,7 +138,7 @@ angular.module('arxivar.plugins.controller').controller('ObjectClonerCtrl',
 											return $q.all([
 												//arxivarResourceService.getPost('Cache/insert', formData, { 'Content-Type': undefined }),
 												$http({
-													url: arxivarResourceService.resourceService.arxivarConfig.rootApi + 'Cache/insert',
+													url: arxivarResourceService.webApiUrl + 'Cache/insert',
 													headers: { 'Content-Type': undefined },
 													data: formData,
 													method: 'POST'
@@ -146,7 +146,7 @@ angular.module('arxivar.plugins.controller').controller('ObjectClonerCtrl',
 
 
 												$http({
-													url: arxivarResourceService.resourceService.arxivarConfig.rootApi + 'Cache/insert',
+													url: arxivarResourceService.webApiUrl + 'Cache/insert',
 													headers: { 'Content-Type': undefined },
 													data: formDataPrev,
 													method: 'POST'
@@ -194,7 +194,7 @@ angular.module('arxivar.plugins.controller').controller('ObjectClonerCtrl',
 											formData.append('file', myBlob, filename);
 
 											return $http({
-												url: arxivarResourceService.resourceService.arxivarConfig.rootApi + 'Cache/insert',
+												url: arxivarResourceService.webApiUrl + 'Cache/insert',
 												headers: { 'Content-Type': undefined },
 												data: formData,
 												method: 'POST'

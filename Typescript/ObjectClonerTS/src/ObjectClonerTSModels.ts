@@ -39,7 +39,7 @@ export const onInitModel = (itemPerPage: number, arxivarResourceService: IArxiva
 
 							return Promise.all([
 								$http({
-									url: arxivarResourceService.resourceService.arxivarConfig.rootApi + 'Cache/insert',
+									url: arxivarResourceService.webApiUrl + 'Cache/insert',
 									headers: { 'Content-Type': undefined },
 									data: formData,
 									method: 'POST'
@@ -47,7 +47,7 @@ export const onInitModel = (itemPerPage: number, arxivarResourceService: IArxiva
 
 
 								$http({
-									url: arxivarResourceService.resourceService.arxivarConfig.rootApi + 'Cache/insert',
+									url: arxivarResourceService.webApiUrl + 'Cache/insert',
 									headers: { 'Content-Type': undefined },
 									data: formDataPrev,
 									method: 'POST'
@@ -95,7 +95,7 @@ export const onInitModel = (itemPerPage: number, arxivarResourceService: IArxiva
 							formData.append('file', myBlob, filename);
 
 							return $http({
-								url: arxivarResourceService.resourceService.arxivarConfig.rootApi + 'Cache/insert',
+								url: arxivarResourceService.webApiUrl + 'Cache/insert',
 								headers: { 'Content-Type': undefined },
 								data: formData,
 								method: 'POST'
