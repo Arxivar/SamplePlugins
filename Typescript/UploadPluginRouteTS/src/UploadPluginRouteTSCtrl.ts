@@ -1,19 +1,18 @@
-import { IHttpService, ITimeoutService } from 'angular';
-import { LoDashStatic, reject } from 'lodash';
-import { routeType } from './uploadPluginRoute';
-import { IScopeUploadPlugin } from './uploadPluginRouteTypes';
+import { LoDashStatic } from 'lodash';
+import { routeType } from './UploadPluginRouteTS';
+import { IScopeUploadPlugin } from './UploadPluginRouteTSType';
 
-
-angular.module('arxivar.plugins.controller').controller('uploadPluginRouteCtrl', [
-	'$scope', '_', 'arxivarResourceService', 'arxivarUserServiceCreator', 'arxivarRouteService', 'arxivarDocumentsService', 'arxivarNotifierService', 'uploadPluginRoute', '$http', '$timeout',
-	($scope: IScopeUploadPlugin, _: LoDashStatic, arxivarResourceService: IArxivarResourceService, arxivarUserServiceCreator: IArxivarUserServiceCreator, arxivarRouteService: IArxivarRouteService, arxivarDocumentsService: IArxivarDocumentsService, arxivarNotifierService: IArxivarNotifierService, uploadPluginRoute: routeType, $http: IHttpService, $timeout: ITimeoutService) => {
+angular.module('arxivar.plugins.controller').controller('UploadPluginRouteTSCtrl', [
+	'$scope', '$http', '$timeout', '_', 'arxivarResourceService', 'arxivarUserServiceCreator', 'arxivarRouteService', 'arxivarDocumentsService', 'arxivarNotifierService', 'UploadPluginRouteTS',
+	($scope: IScopeUploadPlugin, $http: angular.IHttpService, $timeout: angular.ITimeoutService, _: LoDashStatic, arxivarResourceService: IArxivarResourceService, arxivarUserServiceCreator: IArxivarUserServiceCreator, arxivarRouteService: IArxivarRouteService, arxivarDocumentsService: IArxivarDocumentsService, arxivarNotifierService: IArxivarNotifierService, UploadPluginRouteTS: routeType) => {
 
 		$scope.arrayBufferComplete = [];
 		$scope.disabled = false;
-		//insert an existing mask id below
+		//IMPORTANT: INSERT AN EXISTING MASK ID BELOW
 		const maskID = 'eb69d6c75f56460b8756cef279c86551';
 		const inputFile = angular.element('#upload');
 
+		//XMLHttpRequest call (disabled)
 		const _uploadXmlHttpRequest = (url: string, file: File): Promise<string> => {
 			const formData = new FormData();
 			const http = new XMLHttpRequest();
@@ -41,6 +40,7 @@ angular.module('arxivar.plugins.controller').controller('uploadPluginRouteCtrl',
 			});
 		};
 
+		//$http call (enabled)
 		const _upload$http = (url: string, file: File): Promise<string> => {
 			const formData = new FormData();
 			const reader = new FileReader();
@@ -70,6 +70,7 @@ angular.module('arxivar.plugins.controller').controller('uploadPluginRouteCtrl',
 
 		};
 
+		// comment/decomment _uploadXmlHttpRequest/_upload$http below to change between $http or XMLHttpRequest call function 
 		const handler = () => {
 			$scope.disabled = true;
 			const url = arxivarResourceService.webApiUrl + 'buffer/insert';

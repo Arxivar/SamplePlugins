@@ -2,11 +2,11 @@ const routeFactory = (PluginRoute: IPluginRoute) => {
     // MANDATORY settings in order for the plugin to work.
 	// MANDATORY settings in order for the plugin to work.
     const requiredSettings: IRequiredSettings = {
-        id: 'a7d36267-c71e-400f-9b31-4d8ca2b695dc', // Unique plugin identifier (type: string)
-        name: 'uploadPluginRoute', // Plugin name. Spaces special characters not allowed (type: string)
+        id: '06a70066-13e5-46da-83d4-bd969f9f1e84', // Unique plugin identifier (type: string)
+        name: 'UploadPluginRouteTS', // Plugin name. Spaces special characters not allowed (type: string)
         icon: 'fas fa-upload', 
-        label: 'uploadPluginRoute', // User Interface label (type: string)
-        description: 'An example plugin that upload a txt file', // Plugin description (type: string)
+        label: 'UploadPluginRouteTS', // User Interface label (type: string)
+        description: 'An example plugin that upload pdf file', // Plugin description (type: string)
         author: 'Abletech srl', // Plugin author (type: string)
         minVersion: '2.1.0', // Minimun portal version this plugin supports. (type: string, format example: 0.0.1)
 		useTypescript: true // If this plugin use typescript compiler (type boolean. Default: false) 
@@ -32,6 +32,6 @@ const routeFactory = (PluginRoute: IPluginRoute) => {
     return { plugin: myPlugin };
 };
 
-angular.module('arxivar.plugins').factory('uploadPluginRoute', ['PluginRoute',routeFactory ]);
+angular.module('arxivar.plugins').factory('UploadPluginRouteTS', ['PluginRoute',routeFactory ]);
 
 export type routeType = ReturnType<typeof routeFactory>

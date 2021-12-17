@@ -56,7 +56,7 @@ This repository contains these Typescript plugins:
   - [ConcludiWorkflowTS](Typescript/ConcludiWorkflowTS/README.md)
   - [ObjectClonerTS](Typescript/ObjectClonerTS/README.md)
   - [UndoDocumentRevisionTS](Typescript/UndoDocumentRevisionTS/README.md)
-  - [uploadPluginRoute](Typescript/uploadPluginRoute/README.md)
+  - [UploadPluginRouteTS](Typescript/UploadPluginRouteTS/README.md)
 
 You can either download the .zip file or clone the repo.
 

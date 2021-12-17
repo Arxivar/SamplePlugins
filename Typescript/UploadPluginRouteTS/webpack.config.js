@@ -5,8 +5,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 
 //don't touch the code below for your sake
-const outDir = './uploadPluginRoute';
-const pluginName = 'uploadPluginRoute';
+const outDir = 'UploadPluginRouteTS';
+const pluginName = 'UploadPluginRouteTS';
 const pluginCtrl = pluginName + 'Ctrl';
 const entry = {};
 entry[pluginName] = './src\\' + pluginName + '.ts';
@@ -129,4 +129,4 @@ module.exports = {
 		pathinfo: true,
 		sourceMapFilename: '[name].js.map'
 	},
-}
+};
