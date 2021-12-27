@@ -187,67 +187,14 @@ FakesAssemblies/
 .idea/
 
 # Exclude custom
-UnitTestErrors.txt
-UnitTestResults.txt
-UnitTestResults.xml
-wcf-nunit-result.xml
-ARXivarIdentity_nunit-result.xml
-_references.js
-Web/ARXivarSuite/Abletech.Arxivar.Client.Web.Portal/Logging/
-Web/ARXivarSuite/Abletech.Arxivar.Server.WebApi.Services/Logging/
-Web/ARXivarSuite/ArxLanguageSettings.xml
-Web/ARXivarSuite/Abletech.Arxivar.Server.WebApi.Services/App_Data/
 
-
-
-Web/ARXivarSuite/.vs/config/applicationhost.config
-Web/ARXivarSuite/Abletech.Arxivar.Client.Web.Portal/typings/angularjs/angular.d.ts
-typings/angularjs/angular.d.ts
-typings/mocha/mocha.d.ts
-typings/sinon/sinon.d.ts
-Web/ARXivarSuite/Abletech.Arxivar.Client.Web.Portal/test-results.testxml
-Web/ARXivarSuite/Abletech.Arxivar.Client.Web.Portal/compilerconfig.json
-Web/ARXivarSuite/Abletech.Arxivar.Client.Web.Portal/compilerconfig.json.defaults
-Web/ARXivarSuite/Abletech.Arxivar.Client.Web.Portal/.htmlhintrc
-Web/ARXivarSuite/Abletech.Arxivar.Server.License.Service/Logging
-Web/ARXivarSuite/Abletech.Arxivar.Client.Web.Portal/.tags_swap
-Web/ARXivarSuite/Abletech.Arxivar.Client.Web.Portal/Scripts/app/jsconfig.json
-Web/ARXivarSuite/Abletech.Arxivar.Client.Web.Portal/coverage
-Web/ARXivarSuite/Abletech.Arxivar.Client.Web.Portal/e2e-test-result.xml
-Web/ARXivarSuite/.vscode
-
-Web/ARXivarSuite/Abletech.Arxivar.Server.Auth.Service/App_Data/Abletech.Arxivar.Server.Auth.Service.XML
-Web/ARXivarSuite/Abletech.Arxivar.Server.Auth.Service/Logging/
-Win/Arxivar/.vs/config/applicationhost.config
 .vs
-/Web/ArxLicense/Abletech.Web.ArxLicenseWebApi/log
-Web/ARXivarSuite/MyARXivarSuiteWebApi.sln
-Web/ARXivarSuite/.idea/
-Web/ARXivarSuite/Abletech.Arxivar.Server.Queue.Service/Logging
-Setup/AutoBuild/Log
-/Web/ARXivarSuite/Abletech.Arxivar.ArxToolParametersWebApi/Logging
 
 #
 *.datasource
-Program Files (x86)/ARXivar Client/Plugin/RegistraVisite/PluginConfig.xml
-Program Files (x86)/ARXivar Client/Plugin/RegistraVisite/StoreAndSignConfiguration.xml
-/Web/ARXivarSuite/Abletech.Arxivar.Server.Auth.Service/*.user
-Web/ARXivarSuite/Abletech.Arxivar.Client.Web.Portal/junit.xml
-# Exclude setup file
-Setup/AutoBuild/grunt.lock
 
-# Exclude arxdrive web plugins
-/Web/ArxDrive/ArxDrive.Web/Plugins/*
-
-
-#IxAgent
-Clienti/ToolsGenerici/IXDEV/Abletech.Web.IXAgentPortalMvc/log
-Web/ARXivarSuite/Abletech.Arxivar.Client.Web.Portal/Views/Includes/*
 .DS_Store
 .sonarqube
-Web/ARXivarSuite/Abletech.Arxivar.Client.Web.Portal/.eslintcache
-Web/ARXivarSuite/Abletech.Arxivar.Client.Web.Portal/jest-portal-result.json
-Web/ARXivarSuite/Abletech.Arxivar.Client.Web.Portal/Scripts/thunderbirdPlugin/manifest.xpi
 
-#Workflow
-Workflow/ArxLanguageSettings.xml
+# Exclude .zip files
+*.zip
