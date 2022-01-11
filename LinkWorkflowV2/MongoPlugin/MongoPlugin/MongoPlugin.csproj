@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ARXivar.Workflow.Plugins" Version="2.6.2">
+    <PackageReference Include="ARXivar.Workflow.Plugins" Version="2.6.3">
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
   	<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
