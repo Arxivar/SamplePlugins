@@ -33,6 +33,8 @@ You can either download the .zip file or clone the repo.
 
 ## Installation
 
+- install [NodeJs](https://nodejs.org/en/) if you don't already have it (LTS version 16.13.2 should be fine).
+
 - open the terminal into your plugin folder and install the node_modules locally using the command:
 
 ```bash

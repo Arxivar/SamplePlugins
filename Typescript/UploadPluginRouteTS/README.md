@@ -6,6 +6,8 @@
 
 ## Installation
 
+- install [NodeJs](https://nodejs.org/en/) if you don't already have it (LTS version 16.13.2 should be fine).
+
 - open the terminal into uploadPluginRoute folder and install the node_modules locally using the command:
 
 ```bash

@@ -15,9 +15,10 @@ Your generated plugin will be find into plugin-link folder
 
 ### Advanced configuration:
 
+
 * In order to install a plugin link that uses advanced configuration in Arxivar Next just build the solution(after writing your plugin) and upload the generated .zip file running the CLI.
 
-_Attention: if it's a Typescript plugin don't forget to run the command ```npm install``` before build the solution._
+_Attention: if it's a Typescript plugin don't forget to install [NodeJs](https://nodejs.org/en/) and run the command ```npm install``` before build the solution._
 
 
 ### How to use the CLI
