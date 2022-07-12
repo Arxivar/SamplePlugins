@@ -35,6 +35,7 @@ This repository contains these plugins:
   - [ConcludiWorkflowTS](ConcludiWorkflowTS/README.md)
   - [ObjectClonerTS](ObjectClonerTS/README.md)
   - [UndoDocumentRevisionTS](UndoDocumentRevisionTS/README.md)
+  - [TaskV2InvoiceWidget](TaskV2InvoiceWidget/README.md)
 
 You can either download the .zip file or clone the repo.
 

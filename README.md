@@ -24,8 +24,8 @@ This repository contains these Javascript plugins:
   - [UndoDocumentRevision](Javascript/UndoDocumentRevision/README.md)
 
 You can either download the .zip file or clone the repo.
-  
-  
+
+
   # sample-plugins in Typescript ![Typescript](Typescript/typescript.png)
 
 
@@ -49,16 +49,17 @@ You can either download the .zip file or clone the repo.
 
 _Remember: if you specify the path in the options, you'll not need to follow the steps below. Your plugin already running in ARXivar._
 
-- now a new subfolder named '`(e.g. `CalendarWidget`)`' has been created, in this folder you will find the javascript compiled files. 
+- now a new subfolder named '`(e.g. `CalendarWidget`)`' has been created, in this folder you will find the javascript compiled files.
 
 - When you finish to develope your plugin, you have to copy the compiled files folder mentioned above in Scripts/plugins/ (path of ARXivarPortal) in order to use it.(e.g. `MyDrive:\Program Files (x86)\Abletech\ARXivarNext WebPortal\Scripts\plugins`)
-  
+
   ## Repository content
 This repository contains these Typescript plugins:
   - [ConcludiWorkflowTS](Typescript/ConcludiWorkflowTS/README.md)
   - [ObjectClonerTS](Typescript/ObjectClonerTS/README.md)
   - [UndoDocumentRevisionTS](Typescript/UndoDocumentRevisionTS/README.md)
   - [UploadPluginRouteTS](Typescript/UploadPluginRouteTS/README.md)
+  - [TaskV2InvoiceWidget](Typescript/TaskV2InvoiceWidget/README.md)
 
 You can either download the .zip file or clone the repo.
 
@@ -84,5 +85,5 @@ _Note: These plugins are provided as a support for learning activities, it's not
 _Note: Instructions for plugin creation can be found at [generator-arxivar-plugin](https://github.com/Arxivar/PluginGenerator/blob/master/README.md)._
 
  © [Abletech S.r.l.](http://www.arxivar.it/)
- 
- 
+
+
