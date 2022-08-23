@@ -1,0 +1,85 @@
+.arx-taskv2invoicewidget .invoice {
+    max-width: 800px;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #eee;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+    font-size: 16px;
+    line-height: 24px;
+    font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    color: #555;
+	display: flex;
+	flex-direction: column;
+}
+.arx-taskv2invoicewidget .information,
+.arx-taskv2invoicewidget.title{
+	display: flex;
+	justify-content: space-between;
+	margin:10px;
+}
+.arx-taskv2invoicewidget .table,
+.arx-taskv2invoicewidget .map{
+	display: flex;
+	justify-content: center;
+	margin:10px;
+}
+.arx-taskv2invoicewidget .map .frame{
+	width: 100%;
+	height: 100%;
+}
+.arx-taskv2invoicewidget #map{
+	width: 100%;
+	height: 300px;
+}
+.arx-taskv2invoicewidget .invoice table {
+    width: 100%;
+    line-height: inherit;
+    text-align: left;
+}
+
+.arx-taskv2invoicewidget .invoice table td {
+    padding: 5px;
+    vertical-align: top;
+}
+
+.arx-taskv2invoicewidget .invoice table tr td:nth-child(2) {
+    text-align: right;
+}
+
+.arx-taskv2invoicewidget .invoice table tr.top table td {
+    padding-bottom: 20px;
+}
+
+.arx-taskv2invoicewidget .invoice table tr.top table td.title {
+    font-size: 45px;
+    line-height: 45px;
+    color: #333;
+	background-color: white;
+}
+
+.arx-taskv2invoicewidget .invoice table tr.information table td {
+    padding-bottom: 40px;
+}
+
+.arx-taskv2invoicewidget .invoice table tr.heading td {
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+}
+
+.arx-taskv2invoicewidget .invoice table tr.details td {
+    padding-bottom: 20px;
+}
+
+.arx-taskv2invoicewidget .invoice table tr.item td {
+    border-bottom: 1px solid #eee;
+}
+
+.arx-taskv2invoicewidget .invoice table tr.item.last td {
+    border-bottom: none;
+}
+
+.arx-taskv2invoicewidget .invoice table tr.total td:nth-child(2) {
+    border-top: 2px solid #eee;
+    font-weight: bold;
+}
