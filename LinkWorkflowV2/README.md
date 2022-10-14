@@ -48,6 +48,7 @@ _Attention: if it's a Typescript plugin don't forget to install [NodeJs](https:/
 ## Repository content
 This repository contains these link plugins:
  - [MongoPlugin](MongoPlugin/README.md)
+ - [ReceiptPluginLink](ReceiptPluginLink/README.md)
 
 You can either download the .zip file or clone the repo.
 
