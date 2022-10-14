@@ -60,6 +60,7 @@ This repository contains these Typescript plugins:
   - [UndoDocumentRevisionTS](Typescript/UndoDocumentRevisionTS/README.md)
   - [UploadPluginRouteTS](Typescript/UploadPluginRouteTS/README.md)
   - [TaskV2InvoiceWidget](Typescript/TaskV2InvoiceWidget/README.md)
+  - [FeesCanPrototype](Typescript/FeesCanPrototype/README.md)
 
 You can either download the .zip file or clone the repo.
 
@@ -75,6 +76,7 @@ You can either download the .zip file or clone the repo.
 ## Repository content
 This repository contains these link Workflow V2 plugins:
   - [MongoPlugin](LinkWorkflowV2/MongoPlugin/README.md)
+  - [ReceiptPluginLink](LinkWorkflowV2/ReceiptPluginLink/README.md)
 
 You can either download the .zip file or clone the repo.
 
