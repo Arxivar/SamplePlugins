@@ -32,14 +32,36 @@ _Note: Instructions for plugin creation can be found at [generator-arxivar-plugi
 
 ## Plugin specification
 
-This plugin allows you to retrieve a file from the Portal and call Fee Scan Services.
+This plugin allows you to retrieve a file from the Portal and call Fees Scan Implementation Services.
 
 Once you've added the plugin to your installation, you will need to configure it.
 
 You will need to apply the 2.7.23 fix to be able to use this plugin.
 
+## Plugin configuration
 
+This plugin was created as a proof of concept to retrieve a file from the Portal and call Fees Scan Implementation Services.
+This plugin requires the configuration of custom settings. You will need to set the custom settings in the plugin's configuration.
 
+In
+```sh
+ARXivar Next -> Admin (accessible only to administrative users) -> Plugins manager
+```
+
+You have to configure this custom setting :
+
+- **DateFieldName**: this input should be mapped to a string variable, containing the name of a datetime additional field.
+- **PriceFieldName**: this input should be mapped to a string variable, containing the name of a double additional field.
+- **CurrencyFieldName**: this input should be mapped to a string variable, containing the name of a string additional field.
+- **VatNumberFieldName**: this input should be mapped to a string variable, containing the name of a string additional field.
+- **CompanyNameFieldName**: this input should be mapped to a string variable, containing the name of a string additional field.
+- **CompanyAddressFieldName**: this input should be mapped to a string variable, containing the name of a string additional field.
+- **MerchantFieldName**: this input should be mapped to a string variable, containing the name of a string additional field.
+- **CountryCodeFieldName**: this input should be mapped to a string variable, containing the name of a string additional field.
+- **DocumentNumberFieldName**: this input should be mapped to a string variable, containing the name of a string additional field.
+- **ApiKey (Required)**: this setting contain the API Key needed to call the *Fees Scan APIs*(https://www.fees.world/)
+
+The information read from the receipt will be stored in the additional fields that you configured. 
 ## Adding the plugin to the profiles commands
 
 In order to add the route plugin to the menu, just edit your menu layout and add the `FeesCanPrototype` item in the position you want .
