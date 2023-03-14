@@ -7,7 +7,7 @@ angular.module('arxivar.plugins').factory('ObjectCloner', ['PluginRoute', functi
         label: 'ObjectCloner', // User Interface label (type: string)
         description: 'Clona viste,modelli e report', // Plugin description (type: string)
         author: 'Abletech srl', // Plugin author (type: string)
-        minVersion: '2.1.0' // Minimun portal version this plugin supports. (type: string, format example: 0.0.1)
+        minVersion: '2.6.0' // Minimun portal version this plugin supports. (type: string, format example: 0.0.1)
     };
 
     // OPTIONAL settings. These objects require the following properties: name, description, defaultValue and type.
