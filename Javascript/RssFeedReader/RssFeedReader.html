@@ -6,8 +6,8 @@
             <span class="input-group-btn">
                 <input type="submit" class="btn btn-primary" ng-click="loadFeeds(true)" value="Load feeds">
                 </input>
-				<button class="btn btn-default" ng-click='listUrl()' uib-tooltip="Default feed" tooltip-trigger="mouseenter" uib-dropdown-toggle><i class="fas fa-th-list"></i></button>
-				<button class="btn btn-default" ng-click='resetUrl()' uib-tooltip="Erase" tooltip-trigger="mouseenter"><i class="fa fa-eraser"></i></button>
+				<button class="btn-outline-secondary" ng-click='restoreDefault()' uib-tooltip="Default feed" tooltip-trigger="mouseenter" uib-dropdown-toggle><i class="fas fa-clock-rotate-left"></i></button>
+				<button class="btn-outline-secondary erase-feed" ng-click='resetUrl()' uib-tooltip="Erase" tooltip-trigger="mouseenter"><i class="fa fa-eraser"></i></button>
                 <span>
         </div>
     </form>

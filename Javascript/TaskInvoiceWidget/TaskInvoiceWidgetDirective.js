@@ -1,6 +1,6 @@
 angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirective', [
     'TaskInvoiceWidget', 'taskOperationsService', '_', 'moment', '$timeout', '$sce',
-    function(TaskInvoiceWidget, taskOperationsService, _, moment, $timeout, $sce) {
+    function (TaskInvoiceWidget, taskOperationsService, _, moment, $timeout, $sce) {
 
         return {
             restrict: 'E',
@@ -8,9 +8,9 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
                 taskDto: '=?'
             },
             templateUrl: './Scripts/plugins/TaskInvoiceWidget/TaskInvoiceWidget.html',
-            link: function(scope, element) {
+            link: function (scope, element) {
                 //get custom fields from cinfiguration
-                var _getCustomField = function() {
+                var _getCustomField = function () {
                     return {
                         ragionesociale: _.find(TaskInvoiceWidget.plugin.customSettings, {
                             name: 'Ragione_sociale_field'
@@ -32,7 +32,7 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
                         }).value,
                     };
                 };
-                var _settVariables = function(varibles) {
+                var _settVariables = function (varibles) {
 
                     var booleanVariables = varibles.booleanVariables;
                     var stringVariables = varibles.stringVariables;
@@ -66,11 +66,11 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
                     }).value).format('L');
 
                 };
-                scope.getUrl = function() {
+                scope.getUrl = function () {
                     return $sce.trustAsResourceUrl('https://www.google.com/maps?q=' + scope.indirizzo + '&output=embed');
                 };
                 //initalize the widget
-                var init = function() {
+                var init = function () {
                     var $mainContainer = $(element).find('div.arx-' + TaskInvoiceWidget.plugin.name.toLowerCase());
                     if ($mainContainer.length > 0) {
                         $mainContainer.addClass(scope.instanceId);
@@ -78,7 +78,7 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
                     if (!_.isNil(scope.taskDto.id)) {
                         if (_.isNil(scope.operationVariables)) {
                             taskOperationsService.getTaskOperations(scope.taskDto.id)
-                                .then(function(operations) {
+                                .then(function (operations) {
                                     scope.operationVariables = operations.taskWorkVariablesOperation;
                                     _settVariables(operations.taskWorkVariablesOperation.processVariablesFields);
 
@@ -101,12 +101,12 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
                 };
                 //get conversion rates from EUR
                 var _rate = {};
-                $.getJSON('https://api.exchangeratesapi.io/latest?base=EUR', function(data) {
+                $.getJSON('https://api.exchangeratesapi.io/latest?base=EUR', function (data) {
                     _rate = _.assign(_rate, data.rates);
                 });
 
-                var convert = function() {
-                    $timeout(function() {
+                var convert = function () {
+                    $timeout(function () {
                         if (scope.importo !== undefined && _rate !== undefined) {
                             var newRate = scope.currency === 'EUR' ? 1 : _rate[scope.currency];
                             scope.importoView = (newRate * scope.importo).toFixed(2);
@@ -115,7 +115,7 @@ angular.module('arxivar.plugins.directives').directive('taskinvoicewidgetdirecti
                 };
 
                 //on change currency run convert
-                scope.$watch('currency', function(newVal, oldVal) {
+                scope.$watch('currency', function (newVal, oldVal) {
                     if (newVal !== oldVal) {
                         convert();
                     }

@@ -9,6 +9,11 @@
 	-ms-flex-direction: column;
 	flex-direction: column;
 }
+
+.fc-unthemed td.fc-today {
+    background: grey;
+}
+
 .arx-calendar__container{
 	display: flex; height: 100%;    overflow: hidden;
 }

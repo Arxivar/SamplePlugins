@@ -1,4 +1,6 @@
-.arx-arxivarinfo {}
+.arx-arxivarinfo button{
+    border-radius: 0px;
+}
 
 .arx-arxivarinfo img {
     width: auto !important;
@@ -32,4 +34,9 @@
 
 .RssFeedReader__title {
     flex-grow: 1
+}
+
+.erase-feed{
+    border-radius: 0px 4px 4px 0px !important;
+    border-left: 0px;
 }
