@@ -1,160 +1,62 @@
-{
-  "id": 1,
-  "binderTypeId": 1,
-  "folderId": 0,
-  "binderName": "Incidente Mario Rossi modified",
-  "code": "50",
-  "endDate": null,
-  "startDate": "2015-09-07T00:00:00",
-  "binderState": 2,
-  "user": 2,
-  "externalId": "external",
-  "binderTypeDescription": "string",
-  "fields": [
-    {
-      "className": "AdditionalFieldStringDTO",
-        "displayValue": null,
-        "value": "Furgone",
-        "numMaxChar": 100,
-        "numRows": 0,
-        "additionalFieldType": 0,
-        "groupId": 0,
-        "binderFieldId": 1,
-        "name": "TESTO1_1",
-        "externalId": null,
-        "description": "Mezzo",
-        "order": 0,
-        "dataSource": null,
-        "required": false,
-        "formula": null,
-        "locked": false,
-        "comboGruppiId": null,
-        "dependencyFields": [],
-        "associations": null,
-        "isAdditional": true,
-        "visible": true,
-        "predefinedProfileFormula": null
-      },
-      {
-        "className": "AdditionalFieldStringDTO",
-        "displayValue": null,
-        "value": "AA100AA",
-        "numMaxChar": 7,
-        "numRows": 0,
-        "additionalFieldType": 0,
-        "groupId": 0,
-        "binderFieldId": 2,
-        "name": "TESTO2_1",
-        "externalId": null,
-        "description": "Targa",
-        "order": 0,
-        "dataSource": null,
-        "required": false,
-        "formula": null,
-        "locked": false,
-        "comboGruppiId": null,
-        "dependencyFields": [],
-        "associations": null,
-        "isAdditional": true,
-        "visible": true,
-        "predefinedProfileFormula": null
-      },
-      {
-        "className": "AdditionalFieldStringDTO",
-        "displayValue": null,
-        "value": "Mario Rossi",
-        "numMaxChar": 100,
-        "numRows": 0,
-        "additionalFieldType": 0,
-        "groupId": 0,
-        "binderFieldId": 3,
-        "name": "TESTO3_1",
-        "externalId": null,
-        "description": "Autista",
-        "order": 0,
-        "dataSource": null,
-        "required": false,
-        "formula": null,
-        "locked": false,
-        "comboGruppiId": null,
-        "dependencyFields": [],
-        "associations": null,
-        "isAdditional": true,
-        "visible": true,
-        "predefinedProfileFormula": null
-      },
-      {
-        "className": "AdditionalFieldStringDTO",
-        "displayValue": null,
-        "value": "uno",
-        "numMaxChar": 150,
-        "numRows": 0,
-        "additionalFieldType": 3,
-        "groupId": 0,
-        "binderFieldId": 4,
-        "name": "TESTO4_1",
-        "externalId": null,
-        "description": "sdfsdf",
-        "order": 0,
-        "dataSource": null,
-        "required": false,
-        "formula": null,
-        "locked": false,
-        "comboGruppiId": null,
-        "dependencyFields": [],
-        "associations": null,
-        "isAdditional": true,
-        "visible": true,
-        "predefinedProfileFormula": null
-      },
-      {
-        "className": "AdditionalFieldStringDTO",
-        "displayValue": null,
-        "value": "",
-        "numMaxChar": 100,
-        "numRows": 0,
-        "additionalFieldType": 9,
-        "groupId": 0,
-        "binderFieldId": 5,
-        "name": "TESTO5_1",
-        "externalId": null,
-        "description": "utente",
-        "order": 0,
-        "dataSource": null,
-        "required": false,
-        "formula": null,
-        "locked": false,
-        "comboGruppiId": null,
-        "dependencyFields": [],
-        "associations": null,
-        "isAdditional": true,
-        "visible": true,
-        "predefinedProfileFormula": null
-      },
-      {
-        "className": "AdditionalFieldStringDTO",
-        "displayValue": null,
-        "value": "",
-        "numMaxChar": 100,
-        "numRows": 0,
-        "additionalFieldType": 0,
-        "groupId": 0,
-        "binderFieldId": 6,
-        "name": "TESTO6_1",
-        "externalId": null,
-        "description": "jhmhjg",
-        "order": 0,
-        "dataSource": null,
-        "required": false,
-        "formula": null,
-        "locked": false,
-        "comboGruppiId": null,
-        "dependencyFields": [],
-        "associations": null,
-        "isAdditional": true,
-        "visible": true,
-        "predefinedProfileFormula": null
-      }
-      ]
-    }
- 
+.arx-meteowidget {
+  .input-group{
+    margin-bottom: 8px;
+  }
+
+  .weather-wrapper{
+    padding: 4px;
+  }
+
+  .form-control {
+    height: 32px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.4286;
+    background-image: none;
+    border: 1px solid var(--color-border-theme-weak);
+    border-radius: 4px;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  }
+}
+
+.arx-meteowidget-light{
+    color: #161719;
+    font-size: 13px;
+}
+
+.arx-meteowidget-light button {
+    border: 1px #d3d6d8 solid;
+    border-radius: 0 4px 4px 0;
+}
+
+.arx-meteowidget-dark{
+    color: #0d0d0d;
+    font-size: 13px;   
+}
+
+.arx-meteowidget-dark button {
+    color: #d3d6d8;
+    background-color: #0d0d0d;
+    border: 1px #41464b solid;
+    border-radius: 0 4px 4px 0;
+}
+
+.arx-meteowidget-dark button:hover {
+  background-color: #41464b;
+  border: 1px #41464b solid;
+  border-radius: 0 4px 4px 0;
+}
+
+.arx-meteowidget-dark button:active {
+  background-color: #0d0d0d;
+  border: 1px #41464b solid;
+  border-radius: 0 4px 4px 0;
+}
+
+.arx-meteowidget-dark button:focus {
+  background-color: #0d0d0d;
+  border: 1px #41464b solid;
+  border-radius: 0 4px 4px 0;
+}
+
+
