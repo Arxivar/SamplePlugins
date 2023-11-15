@@ -2,7 +2,7 @@
     max-width: 800px;
     margin: auto;
     padding: 30px;
-    border: 1px solid #eee;
+    border: 1px solid #a1a1a1;
     box-shadow: 0 0 10px rgba(0, 0, 0, .15);
     font-size: 16px;
     line-height: 24px;
@@ -62,8 +62,8 @@
 }
 
 .arx-taskv2invoicewidget .invoice table tr.heading td {
-    background: #eee;
-    border-bottom: 1px solid #ddd;
+    background: #a1a1a1;
+    border-bottom: 1px solid #a1a1a1;
     font-weight: bold;
 }
 
@@ -72,7 +72,7 @@
 }
 
 .arx-taskv2invoicewidget .invoice table tr.item td {
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #a1a1a1;
 }
 
 .arx-taskv2invoicewidget .invoice table tr.item.last td {
@@ -80,6 +80,6 @@
 }
 
 .arx-taskv2invoicewidget .invoice table tr.total td:nth-child(2) {
-    border-top: 2px solid #eee;
+    border-top: 2px solid #a1a1a1;
     font-weight: bold;
 }

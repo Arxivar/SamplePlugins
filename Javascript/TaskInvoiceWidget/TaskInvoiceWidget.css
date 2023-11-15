@@ -4,7 +4,7 @@
     max-width: 800px;
     margin: auto;
     padding: 30px;
-    border: 1px solid #eee;
+    border: 1px solid #a1a1a1;
     box-shadow: 0 0 10px rgba(0, 0, 0, .15);
     font-size: 16px;
     line-height: 24px;
@@ -65,7 +65,7 @@
 
 .arx-testtask .invoice table tr.heading td {
     background: #a1a1a1;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #a1a1a1;
     font-weight: bold;
 }
 
@@ -74,7 +74,7 @@
 }
 
 .arx-testtask .invoice table tr.item td {
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #a1a1a1;
 }
 
 .arx-testtask .invoice table tr.item.last td {
@@ -82,6 +82,6 @@
 }
 
 .arx-testtask .invoice table tr.total td:nth-child(2) {
-    border-top: 2px solid #eee;
+    border-top: 2px solid #a1a1a1;
     font-weight: bold;
 }
