@@ -1,4 +1,4 @@
-<div class="arx-uploadpluginroute">
+<div class="arx-uploadpluginroute" ng-class="{ 'arx-uploadpluginroute-light': isThemeLight, 'arx-uploadpluginroute-dark': !isThemeLight }">
 	<h3>Selezionare il file da caricare</h3>
 	<input ng-disabled="disabled" id='upload' type="file" accept=".pdf">
 	<!-- <button ng-click="upload()">UP</button> -->

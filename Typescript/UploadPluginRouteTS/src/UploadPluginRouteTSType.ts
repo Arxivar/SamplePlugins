@@ -4,5 +4,6 @@ export interface IScopeUploadPlugin extends angular.IScope {
 	download: (bufferId: any) => void;
 	bufferId: string;
 	arrayBufferComplete: { bufferId: string, bufferName: string, url: string, maskUrl: string }[];
-	upload: any
+	upload: any;
+	isThemeLight: boolean;
 }

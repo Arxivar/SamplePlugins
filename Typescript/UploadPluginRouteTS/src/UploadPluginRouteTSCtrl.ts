@@ -8,6 +8,7 @@ angular.module('arxivar.plugins.controller').controller('UploadPluginRouteTSCtrl
 
 		$scope.arrayBufferComplete = [];
 		$scope.disabled = false;
+		$scope.isThemeLight = document.body.classList.contains('theme-light');
 		//IMPORTANT: INSERT AN EXISTING MASK ID BELOW
 		const maskID = 'eb69d6c75f56460b8756cef279c86551';
 		const inputFile = angular.element('#upload');
