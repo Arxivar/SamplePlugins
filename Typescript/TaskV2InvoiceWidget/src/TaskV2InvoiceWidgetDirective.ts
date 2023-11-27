@@ -74,7 +74,7 @@ angular.module('arxivar.plugins.directives').directive('taskv2invoicewidgetdirec
 						if (_.isNil(scope.operationVariables)) {
 							workflowResourceService.get('v1/task-operations/task/' + scope.taskDto.id + '/variables', undefined)
 								.then((results: any) => {
-									scope.operationVariables = results.items;
+									scope.operationVariables = results;
 									_setVariables(scope.operationVariables);
 
 								});
