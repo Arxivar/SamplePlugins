@@ -1,0 +1,71 @@
+
+<div class="arx-taskv2invoicewidget">
+    <html>
+        <head>
+            <meta charset="utf-8">
+        </head>
+        <body>
+            <div class="invoice">
+                <div class="title">
+                    <div>
+                        <img src="./Scripts/plugins/TaskV2InvoiceWidget/libs/src/libs/Logo-ARXivar_orizzontale-nero.png" style="width:100%; max-width:300px;">
+                    </div>
+                    <div>
+                        Fattura #: {{numerofattura}}<br> Data: {{datafattura}}<br> Scadenza: {{datascadenza}}
+                    </div>
+                </div>
+                <div class="information">
+                    <div>
+                        {{ragionesociale}}
+                    </div>
+                    <div>
+                        {{indirizzo}}
+                    </div>
+                </div>
+                <div class="map">
+                    <div  id="map" ng-if="indirizzo && !hideMap">
+                        <iframe class="frame" ng-src="{{getUrl()}}"></iframe>
+                    </div>
+                </div>
+                <div class="table">
+                    <table>
+                        <tr class="heading">
+                            <td>
+                                Item
+                            </td>
+                            <td>
+                                Price
+                                <select ng-model="currency" ng-init="currency='EUR'">
+                                    <option value="EUR">€</option>
+                                    <option value="USD">$</option>
+                                    <option value="JPY">¥</option>
+                                    <option value="GBP">£</option>
+                                    <option value="RUB">₽</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr class="item">
+                            <td>
+                                Customer service
+                            </td>
+
+                            <td>
+                                {{importoView}} {{currencyToSymbol[currency]}}
+                            </td>
+                        </tr>
+                        <tr class="total">
+                            <td></td>
+                            <td>
+                                Totale: {{importoView}} {{currencyToSymbol[currency]}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </body>
+        </html>
+</div>
+
+<link rel="stylesheet" type="text/css" href="./Scripts/plugins/TaskV2InvoiceWidget/TaskV2InvoiceWidget.css">
+
