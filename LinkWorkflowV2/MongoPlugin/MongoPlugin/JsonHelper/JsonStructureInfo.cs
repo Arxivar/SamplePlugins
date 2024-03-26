@@ -59,28 +59,20 @@ namespace MongoPlugin.JsonHelper
 
     public class JsonStructure : JsonElementBase
     {
-        public string Key { get; set; }
-
         public string Description { get; set; }
-
-        public bool IsSelected { get; set; }
-
         public List<JsonStructure> Childs { get; set; }
     }
 
     public class JsonElementBase 
     {
         public string Key { get; set; }
-
         public bool IsSelected { get; set; }
     }
 
     public class JsonElement : JsonElementBase
     {
         public string Value { get; set; }
-
         public List<JsonElement> Childs { get; set; }
-
         public bool IsArray { get; set; }
     }
 }

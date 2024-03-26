@@ -3,38 +3,37 @@ using MongoDB.Driver;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using MongoDB.Bson.IO;
-using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.Serializers;
-using System;
 
 namespace MongoPlugin
 {
     public interface IMongoQuery
     {
-        public Task<string> ExecuteQuery(string query);
+        public string ExecuteQuery(string query);
     }
 
     public abstract class MongoBaseQuery : IMongoQuery
     {
-        protected readonly IMongoDatabase MongoDatabase;
+        public readonly IMongoDatabase MongoDatabase;
 
         private string ConnectionString { get; }
 
         private string DatabaseName { get; }
+        
+        protected MongoClient Client { get; }
 
         protected MongoBaseQuery(string connectionString, string databaseName)
         {
             ConnectionString = connectionString;
             DatabaseName = databaseName;
 
-            var dbClient = new MongoClient(ConnectionString);
+            Client = new MongoClient(ConnectionString);
 
-            MongoDatabase = dbClient.GetDatabase(DatabaseName);
+            MongoDatabase = Client.GetDatabase(DatabaseName);
             if (MongoDatabase == null)
                 throw new ValidationException($"Unable to find {DatabaseName}");
         }
 
-        public abstract Task<string> ExecuteQuery(string query);
+        public abstract string ExecuteQuery(string query);
     }
 
     public class MongoQuery : MongoBaseQuery
@@ -46,10 +45,12 @@ namespace MongoPlugin
 
         }
 
-        public override async Task<string> ExecuteQuery(string query)
+        public override string ExecuteQuery(string query)
         {
             var result = MongoDatabase.RunCommand<BsonDocument>(query);
-            return await Task.FromResult(result.ToJson(new JsonWriterSettings() { OutputMode = JsonOutputMode.Strict }));
+            var jsonResult = result.ToJson(new JsonWriterSettings { OutputMode = JsonOutputMode.Strict });
+            jsonResult = JsonHelper.JsonHelper.TryConvertBinaryGuid(jsonResult);
+            return jsonResult;
         }
     }
 }

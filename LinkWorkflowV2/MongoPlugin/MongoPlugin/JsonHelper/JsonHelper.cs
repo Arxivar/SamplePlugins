@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text.RegularExpressions;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace MongoPlugin.JsonHelper
@@ -50,13 +52,90 @@ namespace MongoPlugin.JsonHelper
                         {
                             epuredKey = "result";
                         }
+
                         var structureElement = new JsonStructure { Key = epuredKey, Description = "result", Childs = new List<JsonStructure>() };
                         structure.MappedModel.Add(epuredKey, structureElement);
                         structure.Model.Childs.Add(structureElement);
                     }
+
                     break;
             }
+
             return structure;
+        }
+
+        public static string TryConvertBinaryGuid(string json)
+        {
+            try
+            {
+                dynamic obj = JsonConvert.DeserializeObject(json);
+                SubstituteNodes(obj);
+                var retVal = JsonConvert.SerializeObject(obj);
+                return retVal;
+            }
+            catch (Exception)
+            {
+                // Ritorno json originale
+                return json;
+            }
+        }
+
+        private static JToken SubstituteNodes(dynamic obj)
+        {
+            switch (obj)
+            {
+                case JProperty jProperty:
+                {
+                    var jVal = SubstituteNodes(jProperty.Value);
+                    if (jVal != null)
+                        jProperty.Value = jVal;
+                    return null;
+                }
+                case JObject jObject:
+                {
+                    var nameProp = jObject.Property("$binary");
+                    var typeProp = jObject.Property("$type");
+
+                    if (nameProp == null || typeProp == null)
+                    {
+                        foreach (var jsonProp in jObject.Properties())
+                            SubstituteNodes(jsonProp);
+                        return null;
+                    }
+
+                    var idValue = ConvertBinaryGuid(nameProp.Value, typeProp.Value.ToString());
+
+                    jObject.Remove("$binary");
+                    jObject.Remove("$type");
+
+                    return new JValue(idValue);
+                }
+                case JArray jArray:
+                {
+                    for (var i = jArray.Count - 1; i >= 0; i--)
+                    {
+                        var jVal = SubstituteNodes(jArray[i]);
+                        if (jVal != null)
+                            jArray[i] = jVal;
+                    }
+
+                    return null;
+                }
+            }
+
+            return null;
+        }
+
+        private static string ConvertBinaryGuid(object base64Data, string idType)
+        {
+            var subType = BsonBinarySubType.UuidLegacy;
+            if (Enum.TryParse(idType, out BsonBinarySubType parsedSybType))
+                subType = parsedSybType;
+
+            var bytes = Convert.FromBase64String(base64Data.ToString());
+            var binaryData = new BsonBinaryData(bytes, subType);
+            var result = binaryData.ToGuid(GuidRepresentation.CSharpLegacy);
+            return result.ToString();
         }
 
         private void ParseJsonArray(JArray ja, JsonStructureInfo structureInfo, JsonElement parent, JsonStructure parentStructure, string optionlDesc = "")
@@ -91,7 +170,6 @@ namespace MongoPlugin.JsonHelper
 
                 switch (jt.Type)
                 {
-
                     case JTokenType.Object:
                         ParseJsonObject(((JObject)jt), structureInfo, elementArray, structureArray);
                         break;
@@ -123,7 +201,7 @@ namespace MongoPlugin.JsonHelper
                             Childs = new List<JsonElement>()
                         };
 
-                        structureInfo.MappedData.Add(keyNode, jt.ToString());//value
+                        structureInfo.MappedData.Add(keyNode, jt.ToString()); //value
                         elementArray.Childs.Add(element);
 
                         var epuredKey = EpureKey(keyNode);
@@ -134,6 +212,7 @@ namespace MongoPlugin.JsonHelper
                             structureInfo.MappedModel.Add(epuredKey, jse);
                             structureArray.Childs.Add(jse);
                         }
+
                         break;
 
                     default:
@@ -219,6 +298,7 @@ namespace MongoPlugin.JsonHelper
                     result = result.Replace(m.Value, "[]");
                 }
             }
+
             return result;
         }
 
@@ -228,8 +308,6 @@ namespace MongoPlugin.JsonHelper
 
             // Rimuovo le colonne non configurate
             //TODO:
-
-
 
 
             // Recupero i dati parsati
@@ -328,6 +406,7 @@ namespace MongoPlugin.JsonHelper
                 {
                     colName = "result";
                 }
+
                 row.Values.Add(new ValueParsed { Path = jt.Path, Value = jt.ToString(), ColumnName = colName });
             }
 
@@ -344,6 +423,7 @@ namespace MongoPlugin.JsonHelper
                     {
                         ParseValues(row, p);
                     }
+
                     break;
 
                 case JTokenType.Array:
@@ -354,6 +434,7 @@ namespace MongoPlugin.JsonHelper
 
                         ParseValues(sr, c);
                     }
+
                     break;
 
                 case JTokenType.Property:
@@ -362,6 +443,7 @@ namespace MongoPlugin.JsonHelper
                     {
                         ParseValues(row, c);
                     }
+
                     break;
 
                 case JTokenType.None:
@@ -421,6 +503,7 @@ namespace MongoPlugin.JsonHelper
                 {
                     colName = "result";
                 }
+
                 if (!dt.Columns.Contains(colName))
                 {
                     var dc = dt.Columns.Add(colName, typeof(string));
@@ -440,12 +523,14 @@ namespace MongoPlugin.JsonHelper
                     {
                         PrepreDataTable(dt, p);
                     }
+
                     break;
                 case JTokenType.Array:
                     foreach (JToken c in jt.Children())
                     {
                         PrepreDataTable(dt, c);
                     }
+
                     break;
                 case JTokenType.Property:
                     var jp = (JProperty)jt;
@@ -477,6 +562,7 @@ namespace MongoPlugin.JsonHelper
                     {
                         var dc = dt.Columns.Add(colName, typeof(string));
                     }
+
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -491,6 +577,7 @@ namespace MongoPlugin.JsonHelper
                 SubRow = new List<RowParsed>();
                 Parent = parent;
             }
+
             public RowParsed Parent { get; private set; }
 
             public List<ValueParsed> Values { get; set; }
