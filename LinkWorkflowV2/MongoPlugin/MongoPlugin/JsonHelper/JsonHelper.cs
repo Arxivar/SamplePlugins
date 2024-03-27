@@ -93,22 +93,22 @@ namespace MongoPlugin.JsonHelper
                 }
                 case JObject jObject:
                 {
-                    var nameProp = jObject.Property("$binary");
-                    var typeProp = jObject.Property("$type");
+                    var name = jObject.Property("$binary")?.Value.ToString();
+                    var type = jObject.Property("$type")?.Value.ToString();
 
-                    if (nameProp == null || typeProp == null)
+                    if (!string.IsNullOrEmpty(name) && 
+                        !string.IsNullOrEmpty(type) && 
+                        jObject.Properties().Count() == 2)
                     {
-                        foreach (var jsonProp in jObject.Properties())
-                            SubstituteNodes(jsonProp);
-                        return null;
+                        var stringGuid = ConvertBinaryGuid(name, type);
+                        jObject.Remove("$binary");
+                        jObject.Remove("$type");
+                        return new JValue(stringGuid);
                     }
 
-                    var idValue = ConvertBinaryGuid(nameProp.Value, typeProp.Value.ToString());
-
-                    jObject.Remove("$binary");
-                    jObject.Remove("$type");
-
-                    return new JValue(idValue);
+                    foreach (var jsonProp in jObject.Properties())
+                        SubstituteNodes(jsonProp);
+                    return null;
                 }
                 case JArray jArray:
                 {
