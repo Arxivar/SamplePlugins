@@ -21,7 +21,7 @@ using MongoPlugin.JsonHelper;
 
 namespace MongoPlugin
 {
-    [Plugin("47643477-b5a0-4154-b253-1a3511c7799b", "Mongo Query", "1.0.2", Description = "A plugin to interact with a Mongo database", Icon = "far fa-database", UseAdvancedConfiguration = true)]
+    [Plugin("47643477-b5a0-4154-b253-1a3511c7799b", "Mongo Query", "1.0.3", Description = "A plugin to interact with a Mongo database", Icon = "far fa-database", UseAdvancedConfiguration = true)]
     public class MongoPlugin : WorkflowPluginLink, IWorkflowPlugin
     {
         #region Constants

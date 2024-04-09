@@ -26,7 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{99A1CAF3-451
 		scripts\src\MongoPlugin.ts = scripts\src\MongoPlugin.ts
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestMongoPlugin", "TestMongoPlugin\TestMongoPlugin.csproj", "{EF8E1B74-2B71-4749-A131-49254ED79046}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMongoPlugin", "TestMongoPlugin\TestMongoPlugin.csproj", "{353595C5-4CFB-4E48-A15A-F973629C1580}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,10 +38,10 @@ Global
 		{47643477-B5A0-4154-B253-1A3511C7799B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47643477-B5A0-4154-B253-1A3511C7799B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47643477-B5A0-4154-B253-1A3511C7799B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EF8E1B74-2B71-4749-A131-49254ED79046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF8E1B74-2B71-4749-A131-49254ED79046}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EF8E1B74-2B71-4749-A131-49254ED79046}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF8E1B74-2B71-4749-A131-49254ED79046}.Release|Any CPU.Build.0 = Release|Any CPU
+		{353595C5-4CFB-4E48-A15A-F973629C1580}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{353595C5-4CFB-4E48-A15A-F973629C1580}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{353595C5-4CFB-4E48-A15A-F973629C1580}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{353595C5-4CFB-4E48-A15A-F973629C1580}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
