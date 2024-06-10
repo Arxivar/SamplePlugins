@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 
 //don't touch the code below for your sake
-const outDir = 'C:/GIT/ArxivarNext/Web/ARXivarSuite/Abletech.Arxivar.Client.Web.Portal/Scripts/plugins/DynamicTitle';
+const outDir = 'DynamicTitle';
 const pluginName = 'DynamicTitle';
 const pluginDirective = pluginName + 'Directive';
 const entry = {};
