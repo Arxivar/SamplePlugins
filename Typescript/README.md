@@ -37,6 +37,7 @@ This repository contains these plugins:
   - [UndoDocumentRevisionTS](UndoDocumentRevisionTS/README.md)
   - [TaskV2InvoiceWidget](TaskV2InvoiceWidget/README.md)
   - [FeesCanPrototype](FeesCanPrototype/README.md)
+  - [DynamicTitle](DynamicTitle/README.md)
 
 You can either download the .zip file or clone the repo.
 

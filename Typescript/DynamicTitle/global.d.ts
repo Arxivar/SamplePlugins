@@ -7,6 +7,7 @@ declare global {
     type IArxivarNotifierService = arxInterfaces.IArxivarNotifierService;
     type IArxivarResourceService = arxInterfaces.IArxivarResourceService;
     type IArxivarRouteService = arxInterfaces.IArxivarRouteService;
+    type ITaskV2PluginService = arxInterfaces.ITaskV2PluginService;
     type IArxivarUserServiceCreator = arxInterfaces.IArxivarUserServiceCreator;
     type IWorkflowResourceService = arxInterfaces.IArxivarResourceService;
     type IHttpOptions = arxInterfaces.IHttpOptions;
@@ -34,6 +35,11 @@ declare global {
         description: string;
         externalId: any;
     };
+    type ICommandParamsFile = {
+        fileGuid: string,
+        name: string,
+        isSelected: boolean,
+    }
     export interface ISettingsGenericTypeValue {
         name: string,
         description: string,
@@ -70,7 +76,7 @@ declare global {
 
     type ISettingsTypeValue = ISettingsStringValue | ISettingsNumberValue | ISettingsBooleanValue | ISettingsDateValue;
     type ISettingsTypeValueForRuntime = ISettingsStringValueForRuntime | ISettingsNumberValueForRuntime | ISettingsBooleanValueForRuntime | ISettingsDateValueForRuntime;
-    type IProfilationCommandParams = { docnumber?: number; elementId: string, fields: ICommandParamsField[] };
+    type IProfilationCommandParams = { docnumber?: number; elementId: string, fields: ICommandParamsField[]; files?: ICommandParamsFile[] };
     type IMoment = typeof moment;
     type ILoDash = typeof LoDashStatic;
     type IRouteParams = { queryParams: string };
@@ -90,30 +96,33 @@ declare global {
         T extends arxInterfaces.ConfigurationDataTypeEnum.Int ? IConfigurationDynamicBase<T> & { value?: number } :
         T extends arxInterfaces.ConfigurationDataTypeEnum.String ? IConfigurationDynamicBase<T> & { value?: string } :
         never
-    interface IPluginCommand {
+
+    interface IPluginBase {
+        requiredSettings: IRequiredSettings,
+        customSettings: ICustomSettingsForRuntime[],
+        userSettings: IUserSettingsForRuntime[],
+    }
+    interface IPluginCommand extends IPluginBase {
         new(requiredSettings: IRequiredSettings, customSettings: ICustomSettings[], userSettings: IUserSettings[]): IPluginCommand,
         canRun: (params: ICommandParams) => Promise<boolean>,
         run: (params: ICommandParams) => Promise<any>
     }
-    interface IPluginProfilation {
+    interface IPluginProfilation extends IPluginBase {
         new(requiredSettings: IRequiredSettings, customSettings: ICustomSettings[], userSettings: IUserSettings[]): IPluginProfilation,
         canRun: (params: IProfilationCommandParams) => Promise<boolean>,
         run: (params: IProfilationCommandParams) => Promise<any>
     }
-    interface IPluginRoute {
+    interface IPluginRoute extends IPluginBase {
         new(requiredSettings: IRequiredSettings, customSettings: ICustomSettings[], userSettings: IUserSettings[]): IPluginRoute
     }
-    interface IPluginWidget {
+    interface IPluginWidget extends IPluginBase {
         new(requiredSettings: IRequiredSettings, customSettings: ICustomSettings[], userSettings: IUserSettings[]): IPluginWidget
     }
-    interface IPluginTask {
+    interface IPluginTask extends IPluginBase {
         new(requiredSettings: IRequiredSettings, customSettings: ICustomSettings[], userSettings: IUserSettings[]): IPluginTask
     }
-    interface IPluginTaskV2 {
+    interface IPluginTaskV2 extends IPluginBase {
         new(requiredSettings: IRequiredSettings, customSettings: ICustomSettings[], userSettings: IUserSettings[], widgetSettings: IWidgetSettings[]): IPluginTaskV2,
-        requiredSettings: IRequiredSettings,
-        customSettings: ICustomSettingsForRuntime[],
-        userSettings: IUserSettingsForRuntime[],
         widgetSettings: IWidgetSettingsForRuntime[]
 
     }

@@ -11,7 +11,7 @@ angular.module('arxivar.plugins.directives').directive('taskv2invoicewidgetdirec
 				widgetSettings: '=?'
 			},
 			templateUrl: './Scripts/plugins/TaskV2InvoiceWidget/TaskV2InvoiceWidget.html',
-			link: (scope: IScopeWidgetTask, element: JQuery<HTMLElement>) => {
+			link: (scope: IScopeWidgetTaskV2, element: JQuery<HTMLElement>) => {
 				const $mainContainer = element.find('div.arx-' + TaskV2InvoiceWidget.plugin.name.toLowerCase());
 				if ($mainContainer.length > 0) {
 					$mainContainer.addClass(scope.instanceId);
