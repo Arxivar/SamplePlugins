@@ -61,6 +61,7 @@ This repository contains these Typescript plugins:
   - [UploadPluginRouteTS](Typescript/UploadPluginRouteTS/README.md)
   - [TaskV2InvoiceWidget](Typescript/TaskV2InvoiceWidget/README.md)
   - [FeesCanPrototype](Typescript/FeesCanPrototype/README.md)
+  - [DynamicTitle](Typescript/DynamicTitle/README.md)
 
 You can either download the .zip file or clone the repo.
 
