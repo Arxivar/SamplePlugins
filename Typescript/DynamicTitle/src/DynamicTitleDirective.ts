@@ -135,7 +135,8 @@ angular.module('arxivar.plugins.directives').directive('dynamictitledirective', 
 					//set initial texts
 					scope.selectLanguageText = translations[scope.languageSelected].selectLanguage;
 					scope.changeText = translations[scope.languageSelected].change;
-					scope.lockUnlockText = booleanVariable.value ? translations[scope.languageSelected]?.lock : translations[scope.languageSelected].unlock;
+					scope.variableValue = booleanVariable.value;
+					scope.lockUnlockText = scope.variableValue ? translations[scope.languageSelected]?.lock : translations[scope.languageSelected].unlock;
 					scope.successText = translations[scope.languageSelected].success;
 
 					//use taskV2PluginService function to update widget title
@@ -146,7 +147,7 @@ angular.module('arxivar.plugins.directives').directive('dynamictitledirective', 
 						taskV2PluginService.updateWidgetSettings(DynamicTitle.plugin.requiredSettings.id, scope.instanceId, 'title', scope.titleTranslated(selectedLanguage));
 						scope.selectLanguageText = translations[selectedLanguage].selectLanguage;
 						scope.changeText = translations[selectedLanguage].change;
-						scope.lockUnlockText = booleanVariable.value ? translations[selectedLanguage].lock : translations[selectedLanguage].unlock;
+						scope.lockUnlockText = scope.variableValue ? translations[selectedLanguage].lock : translations[selectedLanguage].unlock;
 						scope.successText = translations[selectedLanguage].success;
 						scope.languageSelected = selectedLanguage;
 					};
@@ -158,9 +159,6 @@ angular.module('arxivar.plugins.directives').directive('dynamictitledirective', 
 
 					scope.forceUpdate = async () => {
 
-						const booleanVariables: VariableType[] = await workflowResourceService.get(`v1/task-operations/task/${scope.taskDto.id}/variables`, { hideUserMessageError: false, openloader: false });
-						const booleanVariable = booleanVariables.find(variable => variable.variableDefinition.configuration.name === "BooleanVariable")
-
 						let setVariableObject: SetVariableObjectType = {
 							operationId: operationInfo[0].id,
 							processId: scope.taskDto.processTaskInfo.id,
@@ -169,7 +167,7 @@ angular.module('arxivar.plugins.directives').directive('dynamictitledirective', 
 								{
 									diagramVarId: booleanVariable.variableDefinition.id,
 									variableType: booleanVariable.variableType,
-									value: !booleanVariable.value,
+									value: !scope.variableValue,
 									id: booleanVariable.id
 								}
 							]
@@ -178,8 +176,9 @@ angular.module('arxivar.plugins.directives').directive('dynamictitledirective', 
 						try {
 							await workflowResourceService.save(`v1/task-operations/execute/set-variables`, setVariableObject, { hideUserMessageError: false, openloader: false });
 							taskV2PluginService.forceUpdateOutcomesByTaskId(scope.taskDto.id);
-							scope.lockUnlockText = !booleanVariable.value ? translations[scope.languageSelected]?.lock : translations[scope.languageSelected]?.unlock;
-							arxivarNotifierService.notifySuccess(`${scope.successText} ${!booleanVariable.value}`);
+							scope.variableValue = !scope.variableValue;
+							scope.lockUnlockText = scope.variableValue ? translations[scope.languageSelected]?.lock : translations[scope.languageSelected]?.unlock;
+							arxivarNotifierService.notifySuccess(`${scope.successText} ${scope.variableValue}`);
 						} catch (error) {
 							arxivarNotifierService.notifyError(error);
 						}

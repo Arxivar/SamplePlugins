@@ -1,0 +1,23 @@
+
+<div class="arx-dynamictitle">
+    
+
+    <div class="language-container">
+        
+        <label for="cars">{{selectLanguageText}}</label>
+        <div>
+            <select name="languages" id="languages" ng-model="languageSelected">
+                <option ng-repeat="language in languages" value="{{language}}">{{language}}</option>
+              </select> 
+              <button ng-click="changeLanguage(languageSelected)">
+                  {{changeText}}
+              </button>
+              <button ng-click="forceUpdate()">
+                {{lockUnlockText}}
+              </button>
+        </div>
+    </div>   
+</div>
+
+<link rel="stylesheet" type="text/css" href="./Scripts/plugins/DynamicTitle/DynamicTitle.css">
+
