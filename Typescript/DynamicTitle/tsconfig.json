@@ -22,6 +22,6 @@
 		"src/**/*",
 	],
     "exclude": [
-        "C:/GIT/ArxivarNext/Web/ARXivarSuite/Abletech.Arxivar.Client.Web.Portal/Scripts/plugins/DynamicTitle/**/*",
+        "DynamicTitle/**/*",
     ]
 }

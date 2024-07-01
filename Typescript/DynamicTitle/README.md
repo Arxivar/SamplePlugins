@@ -51,7 +51,7 @@ ARXivar Next -> Admin (accessible only to administrative users) -> Plugins manag
 
 The DynamicTitle plugin requires the creation of a specific process variable, follow the steps below to configure it:
 
-1. Configure a boolean variable called "BooleanVariable."
+1. Configure a boolean variable called "BooleanVariable"
 
 2. In the task configuration, set the validation on the outcomes using the formula: [$BooleanVariable$] = true.
 

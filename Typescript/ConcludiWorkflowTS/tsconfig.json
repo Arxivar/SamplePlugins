@@ -22,6 +22,6 @@
 		"src/**/*",
 	],
     "exclude": [
-        "C:/Git/ArxivarNext/Web/ARXivarSuite/Abletech.Arxivar.Client.Web.Portal/Scripts/plugins/ConcludiWorkflowTS/**/*",
+        "ConcludiWorkflowTS/**/*",
     ]
 }

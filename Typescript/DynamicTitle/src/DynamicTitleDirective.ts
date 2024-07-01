@@ -26,11 +26,18 @@ type VariableType = {
 		}
 	}
 }
+
+enum OperationTypeEnum {
+	SetManualVariable = 1006,
+}
 type OperationInfoType = {
 	id: string;
 	processId: string;
 	processObjectId: string;
 	operationDescription: string;
+	configuration: {
+		operationType: OperationTypeEnum;
+	}
 }
 type DynamicTitleScopeType = {
 	languages: string[];
@@ -67,8 +74,8 @@ angular.module('arxivar.plugins.directives').directive('dynamictitledirective', 
 					scope.languages = ['IT', 'ES', 'FR', 'DE', 'RO', 'EN'];
 
 					//get the boolean variable called "BooleanVariable"
-					const booleanVariables: VariableType[] = await workflowResourceService.get(`v1/task-operations/task/${scope.taskDto.id}/variables`, { hideUserMessageError: false, openloader: false });
-					const booleanVariable = booleanVariables.find(variable => variable.variableDefinition.configuration.name === "BooleanVariable")
+					const booleanVariables: VariableType[] = await workflowResourceService.get(`v1/task-operations/task/${scope.taskDto.id}/variables`, { hideUserMessageError: true, openloader: false });
+					const booleanVariable = booleanVariables?.find(variable => variable.variableDefinition.configuration.name === "BooleanVariable")
 
 					// Translation object
 					const translations: Record<LanguageType, TranslationsType> = {
@@ -155,12 +162,13 @@ angular.module('arxivar.plugins.directives').directive('dynamictitledirective', 
 
 					//************** EXAMPLE OF forceUpdateOutcomesByTaskId **************
 
-					const operationInfo: OperationInfoType[] = await workflowResourceService.get(`v1/task-operations/task/${scope.taskDto.id}`, { hideUserMessageError: false, openloader: false });
+					const operationsInfo: OperationInfoType[] = await workflowResourceService.get(`v1/task-operations/task/${scope.taskDto.id}`, { hideUserMessageError: false, openloader: false });
+					const setManualVariableOperation: OperationInfoType = operationsInfo.find(operation => operation.configuration.operationType === OperationTypeEnum.SetManualVariable);
 
 					scope.forceUpdate = async () => {
 
 						let setVariableObject: SetVariableObjectType = {
-							operationId: operationInfo[0].id,
+							operationId: setManualVariableOperation.id,
 							processId: scope.taskDto.processTaskInfo.id,
 							processObjectId: scope.taskDto.id,
 							setVariables: [

@@ -48,7 +48,11 @@ module.exports = {
 							'@babel/plugin-transform-modules-commonjs',
 							'@babel/plugin-syntax-dynamic-import',
 							'@babel/plugin-proposal-class-properties',
-							'@babel/plugin-transform-runtime'
+							['@babel/plugin-transform-runtime',
+								{
+									helpers: false,
+									regenerator: true
+								}]
 						],
 						// This is a feature of `babel-loader` for webpack (not Babel itself).
 						// It enables caching results in ./node_modules/.cache/babel-loader/
