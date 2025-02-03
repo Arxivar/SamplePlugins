@@ -13,7 +13,7 @@ module.exports = {
 	entry: entry,
 	mode: 'production',
 	devtool: 'inline-source-map',
-		module: {
+	module: {
 		rules: [
 			{
 				test: /\.(js|mjs|jsx|ts|tsx)$/,
@@ -33,7 +33,6 @@ module.exports = {
 								'corejs': '3'
 							}
 							],
-							['@babel/preset-react'],
 							['@babel/preset-typescript', {
 								'allExtensions': true,
 								'isTSX': true
@@ -90,7 +89,7 @@ module.exports = {
 		minimizer: [
 			new TerserPlugin({
 				parallel: true,
-				
+
 				extractComments: false,
 				terserOptions: {
 					output: {
@@ -107,7 +106,7 @@ module.exports = {
 	output: {
 		filename: '[name].js',
 		path: path.resolve(outDir),
-		
+
 		pathinfo: true,
 		sourceMapFilename: '[name].js.map'
 	},

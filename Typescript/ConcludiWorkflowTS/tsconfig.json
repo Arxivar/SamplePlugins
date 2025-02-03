@@ -6,7 +6,6 @@
 		"preserveConstEnums": true,
 		"sourceMap": true,
 		"baseUrl": ".",
-		"jsx": "react",
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"target": "es6",

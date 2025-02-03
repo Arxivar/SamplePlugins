@@ -1,6 +1,6 @@
-import { LoDashStatic } from "lodash";
-import uiGrid from "ui-grid";
-import { arrayResult, httpOption, IScopeConcludiWorkflow, promiseArray } from "./ConcludiWorkflowTSTypes";
+import { LoDashStatic } from 'lodash';
+import uiGrid from 'ui-grid';
+import { arrayResult, httpOption, IScopeConcludiWorkflow, promiseArray } from './ConcludiWorkflowTSTypes';
 
 angular.module('arxivar.plugins').factory('ConcludiWorkflowTS', [
 	'PluginCommand', '_', '$uibModal', 'arxivarResourceService', 'arxivarUserServiceCreator', 'arxivarRouteService', 'arxivarDocumentsService', 'arxivarNotifierService',

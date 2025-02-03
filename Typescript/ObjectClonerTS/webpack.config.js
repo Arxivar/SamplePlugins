@@ -5,7 +5,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 //don't touch the code below for your sake
-const outDir =  './ObjectClonerTS';
+const outDir = './ObjectClonerTS';
 const pluginName = 'ObjectClonerTS';
 const pluginCtrl = pluginName + 'Ctrl';
 const entry = {};
@@ -37,7 +37,6 @@ module.exports = {
 								'corejs': '3'
 							}
 							],
-							['@babel/preset-react'],
 							['@babel/preset-typescript', {
 								'allExtensions': true,
 								'isTSX': true

@@ -1,4 +1,4 @@
-import { widgetType } from "./DynamicTitle";
+import { widgetType } from './DynamicTitle';
 
 //Types
 type LanguageType = 'IT' | 'ES' | 'FR' | 'DE' | 'RO' | 'EN';
@@ -75,7 +75,7 @@ angular.module('arxivar.plugins.directives').directive('dynamictitledirective', 
 
 					//get the boolean variable called "BooleanVariable"
 					const booleanVariables: VariableType[] = await workflowResourceService.get(`v1/task-operations/task/${scope.taskDto.id}/variables`, { hideUserMessageError: true, openloader: false });
-					const booleanVariable = booleanVariables?.find(variable => variable.variableDefinition.configuration.name === "BooleanVariable")
+					const booleanVariable = booleanVariables?.find(variable => variable.variableDefinition.configuration.name === 'BooleanVariable');
 
 					// Translation object
 					const translations: Record<LanguageType, TranslationsType> = {

@@ -1,4 +1,4 @@
-import * as arxInterfaces from './Interfaces'
+import * as arxInterfaces from './Interfaces';
 import moment from 'moment';
 
 declare global {
@@ -23,7 +23,7 @@ declare global {
 		useTypescript: boolean
 	};
 
-	type ICommandParams = { docnumbers: {DOCNUMBER: number}[]}
+	type ICommandParams = { docnumbers: { DOCNUMBER: number }[] }
 	type IMoment = typeof moment;
 	type IRouteParams = { queryParams: string };
 	type ISettingsType = 'string' | 'number' | 'boolean' | 'date';
