@@ -5,12 +5,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 
 //don't touch the code below for your sake
-const outDir = 'TaskV2InvoiceWidget';
+const outDir = 'dist\\TaskV2InvoiceWidget';
 const pluginName = 'TaskV2InvoiceWidget';
 const pluginDirective = pluginName + 'Directive';
 const entry = {};
 entry[pluginName] = './src\\' + pluginName + '.ts';
 entry[pluginDirective] = './src\\' + pluginDirective + '.ts';
+
 
 module.exports = {
 	entry: entry,
