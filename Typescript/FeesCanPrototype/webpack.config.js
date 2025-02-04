@@ -1,8 +1,9 @@
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 //don't touch the code below for your sake
-const outDir = './FeesCanPrototype';
+const outDir = 'dist\\FeesCanPrototype';
 const pluginName = 'FeesCanPrototype';
 const PluginCommandProfilation = pluginName + 'PluginCommandProfilation';
 const entry = {};
@@ -12,7 +13,7 @@ entry[pluginName] = './src\\' + PluginCommandProfilation + '.ts';
 module.exports = {
 	entry: entry,
 	mode: 'production',
-	devtool: 'inline-source-map',
+	devtool: 'source-map',
 	module: {
 		rules: [
 			{
@@ -38,7 +39,6 @@ module.exports = {
 								'isTSX': true
 							}
 							]
-
 						],
 						plugins: [
 							'@babel/plugin-syntax-function-bind',
@@ -59,39 +59,42 @@ module.exports = {
 			},
 			{
 				test: /\.css$/,
-				use: [{
-					loader: 'style-loader'
-				}, {
-					loader: 'css-loader'
-				}
+				use: [
+					MiniCssExtractPlugin.loader,
+					{
+						loader: 'css-loader'
+					}
 				]
 			},
 			{
 				test: /\.scss$/,
-				use: [{
-					loader: 'style-loader'
-				}, {
-					loader: 'css-loader',
-					options: {
-						importLoaders: 2, // 0 => no loaders (default); 1 => postcss-loader; 2 => postcss-loader, sass-loader
+				use: [
+					MiniCssExtractPlugin.loader,
+					{
+						loader: 'css-loader',
+						options: {
+							importLoaders: 2 // 0 => no loaders (default); 1 => postcss-loader; 2 => postcss-loader, sass-loader
+						}
+					}, {
+						loader: 'postcss-loader'
+					}, {
+						loader: 'sass-loader'
 					}
-				}, {
-					loader: 'postcss-loader'
-				}, {
-					loader: 'sass-loader'
-				},
-				],
+				]
 			}
 		],
 	},
+	plugins: [
+		new MiniCssExtractPlugin({ filename: '[name].css' }),
+	],
 	optimization: {
 		minimize: true,
 		minimizer: [
 			new TerserPlugin({
 				parallel: true,
-
 				extractComments: false,
 				terserOptions: {
+					sourceMap: true,
 					output: {
 						comments: false
 					},
@@ -106,7 +109,7 @@ module.exports = {
 	output: {
 		filename: '[name].js',
 		path: path.resolve(outDir),
-
+		// devtoolLineToLine: true,
 		pathinfo: true,
 		sourceMapFilename: '[name].js.map'
 	},

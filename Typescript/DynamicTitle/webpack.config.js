@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 
 //don't touch the code below for your sake
-const outDir = 'DynamicTitle';
+const outDir = 'dist\\DynamicTitle';
 const pluginName = 'DynamicTitle';
 const pluginDirective = pluginName + 'Directive';
 const entry = {};
@@ -47,11 +47,7 @@ module.exports = {
 							'@babel/plugin-transform-modules-commonjs',
 							'@babel/plugin-syntax-dynamic-import',
 							'@babel/plugin-proposal-class-properties',
-							['@babel/plugin-transform-runtime',
-								{
-									helpers: false,
-									regenerator: true
-								}]
+							'@babel/plugin-transform-runtime'
 						],
 						// This is a feature of `babel-loader` for webpack (not Babel itself).
 						// It enables caching results in ./node_modules/.cache/babel-loader/

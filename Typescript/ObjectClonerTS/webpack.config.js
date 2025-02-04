@@ -1,11 +1,11 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 
 //don't touch the code below for your sake
-const outDir = './ObjectClonerTS';
+const outDir = 'dist\\ObjectClonerTS';
 const pluginName = 'ObjectClonerTS';
 const pluginCtrl = pluginName + 'Ctrl';
 const entry = {};
@@ -15,8 +15,8 @@ entry[pluginCtrl] = './src\\' + pluginCtrl + '.ts';
 
 module.exports = {
 	entry: entry,
-	mode: 'development',
-	devtool: 'eval',
+	mode: 'production',
+	devtool: 'source-map',
 	module: {
 		rules: [
 			{
@@ -42,7 +42,6 @@ module.exports = {
 								'isTSX': true
 							}
 							]
-
 						],
 						plugins: [
 							'@babel/plugin-syntax-function-bind',
@@ -63,48 +62,65 @@ module.exports = {
 			},
 			{
 				test: /\.css$/,
-				use: [{
-					loader: 'style-loader'
-				}, {
-					loader: 'css-loader'
-				}
+				use: [
+					MiniCssExtractPlugin.loader,
+					{
+						loader: 'css-loader'
+					}
 				]
 			},
 			{
 				test: /\.scss$/,
-				use: [{
-					loader: 'style-loader'
-				}, {
-					loader: 'css-loader',
-					options: {
-						importLoaders: 2, // 0 => no loaders (default); 1 => postcss-loader; 2 => postcss-loader, sass-loader
+				use: [
+					MiniCssExtractPlugin.loader,
+					{
+						loader: 'css-loader',
+						options: {
+							importLoaders: 2 // 0 => no loaders (default); 1 => postcss-loader; 2 => postcss-loader, sass-loader
+						}
+					}, {
+						loader: 'postcss-loader'
+					}, {
+						loader: 'sass-loader'
 					}
-				}, {
-					loader: 'postcss-loader'
-				}, {
-					loader: 'sass-loader'
-				},
-				],
+				]
 			}
 		],
+	},
+	plugins: [
+		new MiniCssExtractPlugin({ filename: '[name].css' }),
+		new CopyWebpackPlugin({
+			patterns: [
+				{
+					from: './src\\' + pluginName + '.html',
+					to: './' + pluginName + '.html',
+					toType: 'file',
+				}]
+		})
+	],
+	optimization: {
+		minimize: true,
+		minimizer: [
+			new TerserPlugin({
+				parallel: true,
+				extractComments: false,
+				terserOptions: {
+					sourceMap: true,
+					output: {
+						comments: false
+					},
+					compress: { inline: false }
+				}
+			})
+		]
 	},
 	resolve: {
 		extensions: ['.js', '.jsx', '.css', '.scss', '.ts', '.tsx'],
 	},
-	plugins: [
-		new HtmlWebpackPlugin({
-			filename: path.resolve(outDir) + '/' + pluginName + '.html',
-			template: 'src/' + pluginName + '.html',
-			chunks: [pluginName + 'Style'],
-			chunksSortMode: 'manual',
-			minify: false,
-			publicPath: './Scripts/plugins/' + pluginName
-		})
-	],
 	output: {
 		filename: '[name].js',
 		path: path.resolve(outDir),
-		devtoolLineToLine: true,
+		// devtoolLineToLine: true,
 		pathinfo: true,
 		sourceMapFilename: '[name].js.map'
 	},
