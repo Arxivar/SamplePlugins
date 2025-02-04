@@ -1,7 +1,7 @@
 const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 //don't touch the code below for your sake
@@ -89,14 +89,6 @@ module.exports = {
 	},
 	plugins: [
 		new MiniCssExtractPlugin({ filename: '[name].css' }),
-		new CopyWebpackPlugin({
-			patterns: [
-				{
-					from: './src\\' + pluginName + '.html',
-					to: './' + pluginName + '.html',
-					toType: 'file',
-				}]
-		})
 	],
 	optimization: {
 		minimize: true,
@@ -111,6 +103,14 @@ module.exports = {
 					},
 					compress: { inline: false }
 				}
+			}),
+			new HtmlWebpackPlugin({
+				filename: path.resolve(outDir) + '/' + pluginName + '.html',
+				template: 'src/' + pluginName + '.html',
+				chunks: [pluginName + 'Style'],
+				chunksSortMode: 'manual',
+				minify: false,
+				publicPath: './Scripts/plugins/' + pluginName
 			})
 		]
 	},
