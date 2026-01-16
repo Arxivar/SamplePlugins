@@ -36,6 +36,16 @@
     flex-grow: 1
 }
 
+.RssFeedReader__repeater {
+    display: flex
+}
+
+.RssFeedReader__badge {
+    margin: 1em;
+    height: 24px;
+    width: 90px;
+}
+
 .erase-feed{
     border-radius: 0px 4px 4px 0px !important;
     border-left: 0px;

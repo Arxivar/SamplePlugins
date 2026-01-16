@@ -138,18 +138,25 @@ angular.module('arxivar.plugins').factory('feedService',
             document.head.appendChild(jQueryScript);
 
             const _parseFeeds = function (url) {
-                const CORS_PROXY = 'https://thingproxy.freeboard.io/fetch/';
+                const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
                 const parser = new RSSParser();
                 const defer = $q.defer();
-                parser.parseURL(CORS_PROXY + url, function (err, feed) {
-                    defer.resolve(feed.items);
-                    if (err) { throw err; }
+
+                const proxiedUrl = CORS_PROXY + encodeURIComponent(url);
+
+                parser.parseURL(proxiedUrl, function (err, feed) {
+                    if (err) {
+                        defer.reject(err);
+                        return;
+                    }
+                    defer.resolve(feed.items || []);
                 });
+
                 return defer.promise;
             };
-            return {
-                parseFeeds: _parseFeeds
-            };
+
+            return { parseFeeds: _parseFeeds };
         }
     ]);
+
 
