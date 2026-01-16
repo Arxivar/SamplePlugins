@@ -67,21 +67,14 @@ module.exports = {
 				]
 			},
 			{
-				test: /\.scss$/,
-				use: [
-					MiniCssExtractPlugin.loader,
-					{
-						loader: 'css-loader',
-						options: {
-							importLoaders: 2, // 0 => no loaders (default); 1 => postcss-loader; 2 => postcss-loader, sass-loader
-						}
-					}, {
-						loader: 'postcss-loader'
-					}, {
-						loader: 'sass-loader'
-					},
-				],
-			}
+			  test: /\.scss$/,
+			  use: [
+				MiniCssExtractPlugin.loader,
+				{ loader: 'css-loader', options: { importLoaders: 2 } },
+				{ loader: 'postcss-loader' },
+				{ loader: 'sass-loader', options: { implementation: require('sass') } },
+			  ],
+			},
 		],
 	},
 	plugins: [new MiniCssExtractPlugin({ filename: '[name].css' }),
