@@ -81,6 +81,30 @@ This repository contains these link Workflow V2 plugins:
 
 You can either download the .zip file or clone the repo.
 
+## ArxAI
+
+> Some sample AI plugins for ARXivar Next
+
+## Repository content
+This repository contains these ArxAI plugins:
+  - [OpenMeteo](AI/OpenMeteo/README.md)
+
+## Installation
+
+- use the `arxai-plugin` CLI to upload the plugin:
+
+```bash
+  arxai-plugin.exe upload -p [PATH]Abletech.Arxivar.ArxAI.Plugins.OpenMeteo.zip
+```
+
+- to update an already installed plugin, use `update` instead of `upload`:
+
+```bash
+  arxai-plugin.exe update -p [PATH]Abletech.Arxivar.ArxAI.Plugins.OpenMeteo.zip
+```
+
+You can either download the .zip file or clone the repo.
+
 ## License
 
 _Note: These plugins are provided as a support for learning activities, it's not recommended their use in production environment. Use them as a 'draft' for creating your plugins._
